@@ -13823,11 +13823,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\an3y_\\Desktop\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+      "projectUniqueName": "C:\\Users\\an3y_\\Desktop\\Licenta2018\\New-repository\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
       "projectName": "WebApplication1",
-      "projectPath": "C:\\Users\\an3y_\\Desktop\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+      "projectPath": "C:\\Users\\an3y_\\Desktop\\Licenta2018\\New-repository\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
       "packagesPath": "C:\\Users\\an3y_\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\an3y_\\Desktop\\WebApplication1\\WebApplication1\\obj\\",
+      "outputPath": "C:\\Users\\an3y_\\Desktop\\Licenta2018\\New-repository\\WebApplication1\\WebApplication1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\an3y_\\AppData\\Roaming\\NuGet\\NuGet.Config",
