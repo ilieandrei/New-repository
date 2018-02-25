@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="~/js/AngularJS/Controllers/userController.js"></script>
+    <link rel="stylesheet" href="~/css/myStyleSheet.css">
+</head>
+<body>
+    <div ng-app="myApp" ng-controller="userController">
+
+        <h1 id="logoStyle">FII Activ</h1>
+        <hr />
+        <br />
+        <div class="form-group">
+            <input type="text" placeholder="Utilizator" ng-model="username" required />
+        </div>
+        <br />
+        <div class="form-group">
+            <input type="password" placeholder="Parolă" ng-model="password" required />
+        </div>
+        <hr />
+        <input type="button" value="Intră" class="btn btn-default" ng-click="loginUser(username, password)" />
+        <br />
+        <a href="">Nu ai cont? Înregistrează-te</a>
+        <br />
+        <p>{{successLoginMessage}}</p>
+
+    </div>
+</body>
+</html>
