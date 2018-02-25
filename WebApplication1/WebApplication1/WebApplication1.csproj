@@ -8,11 +8,60 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0-preview2-final" />
+    <Compile Include="obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs" />
+    <Compile Include="obj\Debug\netcoreapp2.0\WebApplication1.AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="bin\Debug\netcoreapp2.0\WebApplication1.deps.json" />
+    <Content Include="bin\Debug\netcoreapp2.0\WebApplication1.runtimeconfig.dev.json" />
+    <Content Include="bin\Debug\netcoreapp2.0\WebApplication1.runtimeconfig.json" />
+    <Content Include="obj\Debug\netcoreapp2.0\WebApplication1.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\project.assets.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="angularjs" Version="1.6.6" />
+    <PackageReference Include="BuildBundlerMinifier" Version="2.6.362" />
+    <PackageReference Include="BundlerMinifier.Core" Version="2.6.362" />
+    <PackageReference Include="EntityFramework" Version="6.2.0" />
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.4" />
+    <PackageReference Include="Microsoft.AspNet.Web.Optimization" Version="1.1.3" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.4" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0-preview2-final" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="bin\Debug\netcoreapp2.0\x64\" />
+    <Folder Include="bin\Debug\netcoreapp2.0\x86\" />
+    <Folder Include="Data\" />
+    <Folder Include="Views\Shared\" />
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bin\Debug\netcoreapp2.0\WebApplication1.dll" />
+    <None Include="bin\Debug\netcoreapp2.0\WebApplication1.pdb" />
+    <None Include="obj\Debug\netcoreapp2.0\WebApplication1.AssemblyInfoInputs.cache" />
+    <None Include="obj\Debug\netcoreapp2.0\WebApplication1.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\netcoreapp2.0\WebApplication1.csprojResolveAssemblyReference.cache" />
+    <None Include="obj\Debug\netcoreapp2.0\WebApplication1.dll" />
+    <None Include="obj\Debug\netcoreapp2.0\WebApplication1.pdb" />
+    <None Include="obj\WebApplication1.csproj.nuget.cache" />
+    <None Include="obj\WebApplication1.csproj.nuget.g.props" />
+    <None Include="obj\WebApplication1.csproj.nuget.g.targets" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataLayer\DataLayer.csproj" />
   </ItemGroup>
 
 </Project>
