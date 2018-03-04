@@ -1,0 +1,21 @@
+﻿
+<div>
+
+    <h1 id="logoStyle">FII Activ</h1>
+    <hr />
+    <br />
+    <div class="form-group">
+        <input type="text" placeholder="Utilizator" ng-model="userCredentials.username" required />
+    </div>
+    <br />
+    <div class="form-group">
+        <input type="password" placeholder="Parolă" ng-model="userCredentials.password" required />
+    </div>
+    <hr />
+    <input type="button" value="Intră" class="btn btn-default" ng-click="loginUser(userCredentials)" />
+    <br />
+    <a href="#!register">Nu ai cont? Înregistrează-te</a>
+    <br />
+    <p>{{successLoginMessage}}</p>
+
+</div>

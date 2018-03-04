@@ -1,0 +1,21 @@
+{
+  "name": "angularjs-md5",
+  "description": "Angularjs MD5的实现",
+  "main": "./src/angularjs-md5.js",
+  "authors": [
+    "milk"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "angularjs",
+    "md5"
+  ],
+  "homepage": "https://github.com/my-milk/angularjs-md5",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

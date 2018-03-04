@@ -3,11 +3,16 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - WebApplication1</title>
+    <title>@ViewData["Title"] - FII Activ</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <script src="~/lib/angular/angular.js"></script>
+        <script src="~/lib/angular/angular.min.js"></script>
+        <script src="~/lib/angular-route/angular-route.js"></script>
+        <script src="~/lib/angularjs-md5/src/angularjs-md5.js"></script>
+        <script src="~/js/AngularJS/Controllers/routeController.js"></script>
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -16,7 +21,7 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 </head>
-<body>
+<body ng-app="myApp"><!--
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -36,20 +41,19 @@
                 </ul>
             </div>
         </div>
-    </nav>
+    </nav>-->
     <div class="container body-content">
         @RenderBody()
-        <hr />
+        <!--<hr />
         <footer>
             <p>&copy; 2018 - WebApplication1</p>
-        </footer>
+        </footer>-->
     </div>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
-        <script src="~/lib/angular/angular.js"></script>
     </environment>
     <environment exclude="Development">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"

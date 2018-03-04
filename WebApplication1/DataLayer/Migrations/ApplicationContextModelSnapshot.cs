@@ -25,8 +25,6 @@ namespace DataLayer.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Email");
-
                     b.Property<string>("Password");
 
                     b.Property<string>("Username");

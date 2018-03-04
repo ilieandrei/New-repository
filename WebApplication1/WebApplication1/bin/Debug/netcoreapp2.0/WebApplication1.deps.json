@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "f9ce9eabf696a72b6ceaa2d64b4709a17c9d821d"
+    "signature": "0b2fee0cb6d30e347d98985eeba535a5741b6d73"
   },
   "compilationOptions": {
     "defines": [
@@ -23,10 +23,12 @@
     ".NETCoreApp,Version=v2.0": {
       "WebApplication1/1.0.0": {
         "dependencies": {
+          "AngularJS.Route": "1.6.8",
           "BuildBundlerMinifier": "2.6.362",
           "BundlerMinifier.Core": "2.6.362",
           "DataLayer": "1.0.0",
           "EntityFramework": "6.2.0",
+          "MailKit": "2.0.1",
           "Microsoft.AspNet.Mvc": "5.2.4",
           "Microsoft.AspNet.Web.Optimization": "1.1.3",
           "Microsoft.AspNet.WebApi.Core": "5.2.4",
@@ -46,6 +48,12 @@
         }
       },
       "angularjs/1.6.6": {},
+      "AngularJS.Core/1.6.8": {},
+      "AngularJS.Route/1.6.8": {
+        "dependencies": {
+          "AngularJS.Core": "1.6.8"
+        }
+      },
       "Antlr/3.4.1.9004": {
         "runtime": {
           "lib/Antlr3.Runtime.dll": {}
@@ -115,6 +123,28 @@
             "rid": "win-x86",
             "assetType": "native"
           }
+        }
+      },
+      "MailKit/2.0.1": {
+        "dependencies": {
+          "MimeKit": "2.0.1",
+          "NETStandard.Library": "2.0.0",
+          "Portable.BouncyCastle": "1.8.1.3",
+          "System.Data.Common": "4.3.0",
+          "System.Globalization.Extensions": "4.3.0",
+          "System.Net.Http": "4.3.0",
+          "System.Net.NameResolution": "4.3.0",
+          "System.Net.NetworkInformation": "4.3.0",
+          "System.Net.Security": "4.3.0",
+          "System.Reflection.TypeExtensions": "4.3.0",
+          "System.Runtime.Serialization.Primitives": "4.3.0",
+          "System.Text.Encoding.CodePages": "4.4.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/MailKit.dll": {}
+        },
+        "compile": {
+          "lib/netstandard2.0/MailKit.dll": {}
         }
       },
       "Microsoft.ApplicationInsights/2.4.0": {
@@ -2568,6 +2598,26 @@
           "ref/netstandard2.0/Microsoft.Win32.Registry.dll": {}
         }
       },
+      "MimeKit/2.0.1": {
+        "dependencies": {
+          "NETStandard.Library": "2.0.0",
+          "Portable.BouncyCastle": "1.8.1.3",
+          "System.Data.Common": "4.3.0",
+          "System.Globalization.Extensions": "4.3.0",
+          "System.Net.Http": "4.3.0",
+          "System.Net.NameResolution": "4.3.0",
+          "System.Net.NetworkInformation": "4.3.0",
+          "System.Reflection.TypeExtensions": "4.3.0",
+          "System.Runtime.Serialization.Primitives": "4.3.0",
+          "System.Text.Encoding.CodePages": "4.4.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/MimeKit.dll": {}
+        },
+        "compile": {
+          "lib/netstandard2.0/MimeKit.dll": {}
+        }
+      },
       "Newtonsoft.Json/10.0.1": {
         "dependencies": {
           "Microsoft.CSharp": "4.4.0",
@@ -2637,6 +2687,14 @@
         },
         "compile": {
           "lib/netstandard1.3/NUglify.dll": {}
+        }
+      },
+      "Portable.BouncyCastle/1.8.1.3": {
+        "runtime": {
+          "lib/netstandard2.0/BouncyCastle.Crypto.dll": {}
+        },
+        "compile": {
+          "lib/netstandard2.0/BouncyCastle.Crypto.dll": {}
         }
       },
       "Remotion.Linq/2.1.1": {
@@ -3125,6 +3183,18 @@
           "System.Text.Encoding": "4.3.0"
         }
       },
+      "System.Data.Common/4.3.0": {
+        "dependencies": {
+          "System.Collections": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.IO": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Text.RegularExpressions": "4.3.0",
+          "System.Threading.Tasks": "4.3.0"
+        }
+      },
       "System.Data.SqlClient/4.4.0": {
         "dependencies": {
           "Microsoft.Win32.Registry": "4.4.0",
@@ -3453,6 +3523,47 @@
         "runtimeTargets": {
           "runtime/unix/lib/_._": {
             "rid": "unix",
+            "assetType": "runtime"
+          },
+          "runtime/win/lib/_._": {
+            "rid": "win",
+            "assetType": "runtime"
+          }
+        }
+      },
+      "System.Net.NetworkInformation/4.3.0": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "2.0.0",
+          "Microsoft.Win32.Primitives": "4.3.0",
+          "System.Collections": "4.3.0",
+          "System.Diagnostics.Tracing": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.IO": "4.3.0",
+          "System.IO.FileSystem": "4.3.0",
+          "System.IO.FileSystem.Primitives": "4.3.0",
+          "System.Linq": "4.3.0",
+          "System.Net.Primitives": "4.3.0",
+          "System.Net.Sockets": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Runtime.Handles": "4.3.0",
+          "System.Runtime.InteropServices": "4.3.0",
+          "System.Security.Principal.Windows": "4.4.0",
+          "System.Threading": "4.3.0",
+          "System.Threading.Overlapped": "4.3.0",
+          "System.Threading.Tasks": "4.3.0",
+          "System.Threading.Thread": "4.3.0",
+          "System.Threading.ThreadPool": "4.3.0",
+          "runtime.native.System": "4.3.0"
+        },
+        "runtimeTargets": {
+          "runtime/linux/lib/_._": {
+            "rid": "linux",
+            "assetType": "runtime"
+          },
+          "runtime/osx/lib/_._": {
+            "rid": "osx",
             "assetType": "runtime"
           },
           "runtime/win/lib/_._": {
@@ -4012,6 +4123,9 @@
             "rid": "win",
             "assetType": "runtime"
           }
+        },
+        "compile": {
+          "ref/netstandard2.0/System.Text.Encoding.CodePages.dll": {}
         }
       },
       "System.Text.Encoding.Extensions/4.3.0": {
@@ -4039,6 +4153,24 @@
         "dependencies": {
           "System.Runtime": "4.3.0",
           "System.Threading.Tasks": "4.3.0"
+        }
+      },
+      "System.Threading.Overlapped/4.3.0": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "2.0.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Handles": "4.3.0"
+        },
+        "runtimeTargets": {
+          "runtime/unix/lib/_._": {
+            "rid": "unix",
+            "assetType": "runtime"
+          },
+          "runtime/win/lib/_._": {
+            "rid": "win",
+            "assetType": "runtime"
+          }
         }
       },
       "System.Threading.Tasks/4.3.0": {
@@ -4204,10 +4336,13 @@
       },
       "DataLayer/1.0.0": {
         "dependencies": {
+          "AngularJS.Route": "1.6.8",
+          "MailKit": "2.0.1",
           "Microsoft.AspNet.WebApi.Client": "5.2.4",
           "Microsoft.EntityFrameworkCore": "2.0.1",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.0.1",
-          "Microsoft.EntityFrameworkCore.Tools": "2.0.1"
+          "Microsoft.EntityFrameworkCore.Tools": "2.0.1",
+          "angularjs": "1.6.6"
         },
         "runtime": {
           "DataLayer.dll": {}
@@ -4407,6 +4542,20 @@
       "path": "angularjs/1.6.6",
       "hashPath": "angularjs.1.6.6.nupkg.sha512"
     },
+    "AngularJS.Core/1.6.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-FPbo+j7DIlbBfhtcreJtu/sKEzLZ/DxTroxWSjzuT4nfvnYf42SPKlmU1J29OhqrEELyxj/yyq578Yo5AIb1Kw==",
+      "path": "angularjs.core/1.6.8",
+      "hashPath": "angularjs.core.1.6.8.nupkg.sha512"
+    },
+    "AngularJS.Route/1.6.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Y4ds6PjUBwK7ZQ4IM775DM41aAQr9sgDPyAXlKMJ6bXAzacg3FMK9qnTZsdqZoYXczeQUih2Upzn81UP83TL7Q==",
+      "path": "angularjs.route/1.6.8",
+      "hashPath": "angularjs.route.1.6.8.nupkg.sha512"
+    },
     "Antlr/3.4.1.9004": {
       "type": "package",
       "serviceable": true,
@@ -4441,6 +4590,13 @@
       "sha512": "sha512-GsCf4q+eyaI49rCPlgYxdxa1SQCysXFFdSJWdstrwxytg4+VPYLYrXD4AT2rjHVJ+UF7SSWX9CapWEYaU4ejVQ==",
       "path": "libuv/1.10.0",
       "hashPath": "libuv.1.10.0.nupkg.sha512"
+    },
+    "MailKit/2.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-eRzHd5EN+ST3hGUED4QH44nINxnALQbFozPDVlZODydIWgYO19+m6/txvbV69qF4cpjXwlxO7ivpIcB+/97X2A==",
+      "path": "mailkit/2.0.1",
+      "hashPath": "mailkit.2.0.1.nupkg.sha512"
     },
     "Microsoft.ApplicationInsights/2.4.0": {
       "type": "package",
@@ -5688,6 +5844,13 @@
       "path": "microsoft.win32.registry/4.4.0",
       "hashPath": "microsoft.win32.registry.4.4.0.nupkg.sha512"
     },
+    "MimeKit/2.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-b71yNg43rxCjg9YJyHdHIYLLken8cwg05AcqzM+paLkqD6hbWCJ8zfcb7b0g0kCLfcIqvv9meHzUWJpEciyC9Q==",
+      "path": "mimekit/2.0.1",
+      "hashPath": "mimekit.2.0.1.nupkg.sha512"
+    },
     "Newtonsoft.Json/10.0.1": {
       "type": "package",
       "serviceable": true,
@@ -5715,6 +5878,13 @@
       "sha512": "sha512-XguQgUPUHMOmfOGlSgVRHIMVBJYz86cViTP8kiD1Oa4EKKUrvfL4a4BhWUxdg5rZBLrIAcoYu/V43F5iH/PucA==",
       "path": "nuglify/1.5.5",
       "hashPath": "nuglify.1.5.5.nupkg.sha512"
+    },
+    "Portable.BouncyCastle/1.8.1.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-1jUpszv0ETm+hl78HKnYgY3wPzt6qRtjxaPENNrGCuB8nondbR/j75WAKdd6sxXzOzBcX07WMZhZEYc4s5jVWg==",
+      "path": "portable.bouncycastle/1.8.1.3",
+      "hashPath": "portable.bouncycastle.1.8.1.3.nupkg.sha512"
     },
     "Remotion.Linq/2.1.1": {
       "type": "package",
@@ -6045,6 +6215,13 @@
       "path": "system.console/4.3.0",
       "hashPath": "system.console.4.3.0.nupkg.sha512"
     },
+    "System.Data.Common/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lm6E3T5u7BOuEH0u18JpbJHxBfOJPuCyl4Kg1RH10ktYLp5uEEE1xKrHW56/We4SnZpGAuCc9N0MJpSDhTHZGQ==",
+      "path": "system.data.common/4.3.0",
+      "hashPath": "system.data.common.4.3.0.nupkg.sha512"
+    },
     "System.Data.SqlClient/4.4.0": {
       "type": "package",
       "serviceable": true,
@@ -6212,6 +6389,13 @@
       "sha512": "sha512-gj6gNPbTS81LkygTzI/cLynsULkjwm/PTSaZObL3kQqWr84OVlZp3KmYA38RJlXnuGp83zthiWZoXr3uJ6kQng==",
       "path": "system.net.nameresolution/4.3.0",
       "hashPath": "system.net.nameresolution.4.3.0.nupkg.sha512"
+    },
+    "System.Net.NetworkInformation/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-zNVmWVry0pAu7lcrRBhwwU96WUdbsrGL3azyzsbXmVNptae1+Za+UgOe9Z6s8iaWhPn7/l4wQqhC56HZWq7tkg==",
+      "path": "system.net.networkinformation/4.3.0",
+      "hashPath": "system.net.networkinformation.4.3.0.nupkg.sha512"
     },
     "System.Net.Primitives/4.3.0": {
       "type": "package",
@@ -6520,6 +6704,13 @@
       "sha512": "sha512-mzk6ClX4Ov0nWlV5BvZGuG+XdjaNRvc95JReZOtnPqFupm9jzS0x+/E5p8kDPXfoxNTLD+UsmAAVynKESn1IwQ==",
       "path": "system.threading/4.3.0",
       "hashPath": "system.threading.4.3.0.nupkg.sha512"
+    },
+    "System.Threading.Overlapped/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-aicwfA413ajYxb4E1vibNcIXZOZMkhRgFBLMfxVy6bdFMKYyFaby6/n/MKxiR7uYrb1n9sTGEQMo3VtcxlmJrg==",
+      "path": "system.threading.overlapped/4.3.0",
+      "hashPath": "system.threading.overlapped.4.3.0.nupkg.sha512"
     },
     "System.Threading.Tasks/4.3.0": {
       "type": "package",

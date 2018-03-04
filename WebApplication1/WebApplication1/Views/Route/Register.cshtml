@@ -1,0 +1,16 @@
+﻿<h1 id="logoStyle">FII Activ</h1>
+<hr />
+<br />
+<div class="form-group">
+    <input type="text" placeholder="Utilizator" ng-model="userCredentials.username" required />
+</div>
+<br />
+<div class="form-group">
+    <input type="password" placeholder="Parolă" ng-model="userCredentials.password" required />
+</div>
+<hr />
+<input type="button" value="Înregistează-te" class="btn btn-default" ng-click="registerUser(userCredentials)" />
+<br />
+<a href="#/!">Înapoi la pagina de autentificare</a>
+<br />
+<p>{{regMessage}}</p>

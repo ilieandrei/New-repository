@@ -16,67 +16,57 @@ namespace WebApplication1.api
     
     public class AuthenticationController : ApiController
     {
-        // Get All The Users
-        [HttpGet]
-        public List<User> GetAll()
-        {
-            List<User> list = new List<User>();
-            UserRepository userRepository = new UserRepository();
-            var results = userRepository.GetAll().ToList();
-            return results;
-        }
-
-        //Get User By Username
+        //User Login
         [Route("/{username}/{password}")]
-        public bool Get(string username, string password)
+        public HttpStatusCode LoginUser(string username, string password)
         {
             UserRepository userRepository = new UserRepository();
             var user = userRepository.GetAll().Where(x => x.Username == username).FirstOrDefault();
-            if (user == null || user.Password != password)
+            if (user == null)
             {
-                return false;
-                //throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.Unauthorized));
+                return HttpStatusCode.NotFound;
             }
-            return true;
-        }
-
-        //User Login
-        public bool Login(string username, string password)
-        {
-            using (var db = new ApplicationContext())
+            else if(user.Password != password)
             {
-                User user = db.Users.Find(username);
-                if(user == null)
-                {
-                    return false;
-                }
-                else
-                {
-                    if(user.Password != password)
-                    {
-                        return false;
-                    }
-                    return true;
-                }
+                return HttpStatusCode.Unauthorized;
             }
+            return HttpStatusCode.Found;
         }
         
-        //Insert User
-        public HttpResponseMessage Post(User user)
+        //Check if User exists
+        [Route("/{username}")]
+        public bool UserExists(string username)
+        {
+            UserRepository userRepository = new UserRepository();
+            var user = userRepository.GetAll().Where(x => x.Username == username).FirstOrDefault();
+            if (user != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        //Register User
+        [HttpPost]
+        [Route("/{username}/{password}")]
+        public HttpStatusCode RegisterUser(string username, string password)
         {
             if (ModelState.IsValid)
             {
-                using (var db = new ApplicationContext())
+                UserRepository userRepository = new UserRepository();
+                User user = new User
                 {
-                    UserRepository userRepository = new UserRepository();
-                    userRepository.Add(user);
-                    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created);
-                    return response;
-                }
+                    Id = Guid.NewGuid(),
+                    Username = username,
+                    Password = password
+                };
+                userRepository.Add(user);
+                userRepository.Save();
+                return HttpStatusCode.Created;
             }
             else
             {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                return HttpStatusCode.NotFound;
             }
         }
     }

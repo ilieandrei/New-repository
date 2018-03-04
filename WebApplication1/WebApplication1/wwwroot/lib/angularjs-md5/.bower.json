@@ -1,0 +1,31 @@
+{
+  "name": "angularjs-md5",
+  "description": "Angularjs MD5的实现",
+  "main": "./src/angularjs-md5.js",
+  "authors": [
+    "milk"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "angularjs",
+    "md5"
+  ],
+  "homepage": "https://github.com/my-milk/angularjs-md5",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "version": "0.1.0",
+  "_release": "0.1.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.1.0",
+    "commit": "987e7927b1058e45c6c2241d3b7c7a3503224d85"
+  },
+  "_source": "https://github.com/my-milk/angularjs-md5.git",
+  "_target": "0.1.0",
+  "_originalSource": "angularjs-md5"
+}

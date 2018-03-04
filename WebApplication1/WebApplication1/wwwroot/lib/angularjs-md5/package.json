@@ -1,0 +1,16 @@
+{
+  "name": "angularjs-md5",
+  "version": "1.0.0",
+  "description": "Angularjs MD5的实现",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/wudada/angularjs-md5.git"
+  },
+  "keywords": [
+    "angularjs",
+    "md5"
+  ],
+  "author": "milk",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/wudada/angularjs-md5#readme"
+}
