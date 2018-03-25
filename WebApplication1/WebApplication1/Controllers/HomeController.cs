@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using DataLayer.Repositories;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
+    [Authorize(AuthenticationSchemes = AuthSchemes)]
     public class HomeController : Controller
     {
+        private const string AuthSchemes = CookieAuthenticationDefaults.AuthenticationScheme;
         public IActionResult Index()
         {
             return View();

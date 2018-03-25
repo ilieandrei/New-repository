@@ -11,8 +11,9 @@
     <div class="form-group">
         <input type="password" placeholder="Parolă" ng-model="userCredentials.password" required />
     </div>
-    <hr />
-    <input type="button" value="Intră" class="btn btn-default" ng-click="loginUser(userCredentials)" />
+    <hr /><!----
+    <input type="button" value="Intră" class="btn btn-default" ng-click="loginUser(userCredentials)" />-->
+    <a asp-area="" asp-controller="Route" asp-action="HomeSession">Log in</a>
     <br />
     <a href="#!register">Nu ai cont? Înregistrează-te</a>
     <br />

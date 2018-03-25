@@ -4,10 +4,10 @@ using System.Text;
 
 namespace DataLayer.Users
 {
-    public class User
+    public class User : Entity<Guid>
     {
-        public Guid Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public string Role { get; set; }
     }
 }

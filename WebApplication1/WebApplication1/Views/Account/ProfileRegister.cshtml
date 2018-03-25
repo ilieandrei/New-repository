@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewData["Title"] = "ProfileRegister";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <br /><br /><br />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">FII Activ</h3>
+                        <hr /><br />
+                        <h5>Completează-ţi profilul</h5>
+                    </div>
+
+                    <div class="panel-body">
+                        <label class="btn btn-outline-info">
+                            <input type="radio" name="options" ng-model="choose" value="student" hidden ng-checked="true" /> Student
+                        </label>
+                        <label class="btn btn-outline-info">
+                            <input type="radio" name="options" ng-model="choose" value="teacher" hidden /> Profesor
+                        </label>
+                        <br />
+
+                        <div ng-switch="choose">
+                            <div ng-switch-when="student">
+                                <form role="form" asp-controller="Account" asp-action="StudentRegister" method="post">
+                                    <fieldset>
+                                        <input type="text" name="username" value="@User.Identity.Name" hidden="hidden" />
+                                        <div class="form-group">
+                                            <input class="form-group" type="text" name="completeName" placeholder="Nume complet" autofocus required />
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-group" type="text" name="email" placeholder="E-mail" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-group" type="text" name="studyYear" placeholder="An studiu" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-group" type="text" name="studentGroup" placeholder="Grupa" required />
+                                        </div>
+                                        <hr />
+                                        <input type="submit" value="Salvează" class="btn btn-outline-primary" />
+                                        <br />
+                                    </fieldset>
+                                </form>
+                            </div>
+
+                            <div ng-switch-when="teacher">
+                                <form role="form" asp-controller="Account" asp-action="TeacherRegister" method="post">
+                                    <fieldset>
+                                        <input type="text" name="username" value="@User.Identity.Name" hidden="hidden" />
+                                        <div class="form-group">
+                                            <input class="form-group" type="text" name="title" placeholder="Funcţie" autofocus required />
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-group" type="text" name="completeName" placeholder="Nume complet" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-group" type="text" name="email" placeholder="E-mail" required />
+                                        </div>
+                                        <hr />
+                                        <input type="submit" value="Salvează" class="btn btn-outline-primary" />
+                                        <br />
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                    <p style="color:red">@Html.ValidationMessage("ProfileRegisterError")</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>

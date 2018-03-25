@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <br /><br /><br />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">FII Activ</h3>
+                        <hr /><br />
+                        <h5>Cont nou</h5>
+                    </div>
+                    <div class="panel-body">
+
+                        <form role="form" asp-controller="Account" asp-action="Register" method="post">
+                            <fieldset>
+                                <div class="form-group">
+                                    <!--modified 29.01-->
+                                    <input class="form-group" placeholder="Utilizator" name="username" type="text" required autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-group" placeholder="Parolă" name="password" type="password" required>
+                                </div>
+                                <!-- Change this to a button or input when using this as a form -->
+                                <div class="form-group">
+                                    <input type="submit" value="Înregistrare" class="btn btn-outline-primary" />
+                                </div>
+                                <div class="form-group">
+                                    <a asp-area="" asp-action="Login" asp-controller="Account">Înapoi la pagina de autentificare</a>
+                                </div>
+                            </fieldset>
+                        </form>
+                        <p style="color:red">@Html.ValidationMessage("RegisterError")</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>

@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace DataLayer.Repositories
 {
-    public interface IGenericRepository<T> where T : class
+    public interface IGenericRepository<T, TKey> where T : BaseEntity
     {
 
         IQueryable<T> GetAll();

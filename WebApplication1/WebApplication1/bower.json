@@ -2,12 +2,12 @@
   "name": "asp.net",
   "private": true,
   "dependencies": {
-    "bootstrap": "3.3.7",
     "jquery": "2.2.0",
     "jquery-validation": "1.14.0",
     "jquery-validation-unobtrusive": "3.2.6",
     "angular": "1.6.9",
     "angular-route": "1.6.9",
-    "angularjs-md5": "0.1.0"
+    "angularjs-md5": "0.1.0",
+    "bootstrap": "v4.0.0"
   }
 }

@@ -1,0 +1,90 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <script src="~/lib/angular/angular.js"></script>
+        <script src="~/lib/angular/angular.min.js"></script>
+        <script src="~/lib/angular-route/angular-route.js"></script>
+        <script src="~/lib/angularjs-md5/src/angularjs-md5.js"></script>
+        <script src="~/js/AngularJS/Controllers/routeController.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+
+
+</head>
+
+<body ng-app="myApp" ng-controller="userController">
+    <div id="container">
+        <div id="header" class="w-100 border-primary border-bottom">
+            <a asp-area="" asp-controller="Account" asp-action="Index" class="w-100">
+                <h3 class="float-left">FII Activ</h3>
+            </a>
+            <a asp-area="" asp-controller="Account" asp-action="Logout" class="w-100">
+                <h3 class="float-right">Deconectare</h3>
+            </a>
+            <br />
+            @*<div ng-switch="choose" class="w-100">
+            <div ng-switch-when="profile">
+                <p style="color:wheat">Profil</p>
+            </div>
+            <div ng-switch-when="timetable">
+                <p style="color:wheat">Orar</p>
+            </div>
+        </div>*@
+
+            <div ng-model="userRole" ng-init="userPar='@User.Identity.Name'" value="{{userRoleValue(userPar)}}"></div>
+            <div ng-switch="usrRole">
+                <div ng-switch-when="Student">
+                    <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
+                        <label class="btn btn-outline-primary border-0 rounded-0 w-50">
+                            <a href="#!studentProfile" style="color:black" ng-click="getStudentProfile(userPar)">Profil</a>
+                        </label>
+                        <label class="btn btn-outline-primary border-0 rounded-0 w-50">
+                            <a href="#!studentTimetable" style="color:black">Orar</a>
+                        </label>
+                    </div>
+                </div>
+                <div ng-switch-when="Teacher">
+                    <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
+                        <label class="btn btn-outline-primary border-0 rounded-0 w-50">
+                            <a href="#!teacherProfile" style="color:black" ng-click="getTeacherProfile(userPar)">Profil</a>
+                        </label>
+                        <label class="btn btn-outline-primary border-0 rounded-0 w-50">
+                            <a href="#!teacherTimetable" style="color:black">Orar</a>
+                        </label><label class="btn btn-outline-primary border-0 rounded-0 w-50">
+                            <a href="#!teacherStatus" style="color:black">Status</a>
+                        </label>
+                        <!----<label class="btn btn-outline-primary border-0 rounded-0 w-50 active">
+        <input type="radio" name="options" ng-model="chooseTeacher" value="profile" hidden /> Profil
+    </label>
+    <label class="btn btn-outline-primary border-0 rounded-0 w-50">
+        <input type="radio" name="options" ng-model="chooseTeacher" value="timetable" hidden /> Orar
+    </label>
+    <label class="btn btn-outline-primary border-0 rounded-0 w-50">
+        <input type="radio" name="options" ng-model="chooseTeacher" value="state" hidden /> Status
+    </label>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="main">
+            @RenderBody()
+        </div>
+        <div id="footer">
+            &copy; @DateTime.Now.Year My Movie Site
+        </div>
+    </div>
+
+</body>
+</html>

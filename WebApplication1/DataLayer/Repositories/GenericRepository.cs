@@ -5,27 +5,31 @@ using System.Data;
 
 namespace DataLayer.Repositories
 {
-    public abstract class GenericRepository<C, T> :
-        IGenericRepository<T> where T : class where C : DbContext, new()
+    public class GenericRepository<T, TKey> :
+        IGenericRepository<T, TKey> where T : BaseEntity, IEntityKey<TKey>
     {
 
-        private C _entities = new C();
-        public C Context
+        protected readonly IUnitOfWork _uow;
+        public GenericRepository(IUnitOfWork uow)
         {
-            get => _entities;
-            set => _entities = value;
+            _uow = uow;
         }
 
-        public virtual IQueryable<T> GetAll() => _entities.Set<T>();
+        private ApplicationContext CurrentContext()
+        {
+            return _uow.CurrentContext();
+        }
 
-        public IQueryable<T> FindBy(System.Linq.Expressions.Expression<Func<T, bool>> predicate) => _entities.Set<T>().Where(predicate);
+        public virtual IQueryable<T> GetAll() => CurrentContext().Set<T>();
 
-        public virtual void Add(T entity) => _entities.Set<T>().Add(entity);
+        public IQueryable<T> FindBy(System.Linq.Expressions.Expression<Func<T, bool>> predicate) => CurrentContext().Set<T>().Where(predicate);
 
-        public virtual void Delete(T entity) => _entities.Set<T>().Remove(entity);
+        public virtual void Add(T entity) => CurrentContext().Set<T>().Add(entity);
 
-        public virtual void Edit(T entity) => _entities.Entry(entity).State = EntityState.Modified;
+        public virtual void Delete(T entity) => CurrentContext().Set<T>().Remove(entity);
 
-        public virtual void Save() => _entities.SaveChanges();
+        public virtual void Edit(T entity) => CurrentContext().Entry(entity).State = EntityState.Modified;
+
+        public virtual void Save() => CurrentContext().SaveChanges();
     }
 }

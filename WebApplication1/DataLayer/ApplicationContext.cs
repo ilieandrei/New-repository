@@ -14,8 +14,8 @@ namespace DataLayer
         {
         }
         public DbSet<User> Users { get; set; }
-        //public DbSet<Student> Students { get; set; }
-        //public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Licenta2018DB;Trusted_Connection=True;MultipleActiveResultSets=true");

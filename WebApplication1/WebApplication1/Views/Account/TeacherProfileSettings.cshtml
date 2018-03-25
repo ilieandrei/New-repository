@@ -1,0 +1,17 @@
+﻿<form>
+    <div class="form-group">
+        <b>Funcţie: </b><input class="form-group" value="{{teacherTitle}}" ng-model="teacherTitle" name="teacherTitle" type="text" required autofocus>
+    </div>
+    <div class="form-group">
+        <b>Nume: </b><input class="form-group" value="{{teacherFullName}}" ng-model="teacherFullName" name="teacherFullName" type="text" required>
+    </div>
+    <div class="form-group">
+        <b>E-mail: </b><input class="form-group" value="{{teacherMail}}" ng-model="teacherMail" name="teacherMail" type="text" required>
+    </div>
+    <div class="form-group">
+        <input type="button" value="Salvează" class="btn btn-outline-primary" ng-click="editTeacherProfile(userPar)" />
+    </div>
+    <div class="form-group">
+        <input type="button" value="Anulează" class="btn btn-outline-primary float-right" ng-click="backToTeacherProfile()" />
+    </div>
+</form>

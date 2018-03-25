@@ -4,7 +4,11 @@ using System.Text;
 
 namespace DataLayer.Users
 {
-    public class Teacher
+    public class Teacher : Entity<Guid>
     {
+        public string Email { get; set; }
+        public string Function { get; set; }
+        public string FullName { get; set; }
+        public User User { get; set; }
     }
 }

@@ -1,0 +1,54 @@
+﻿<h1 id="logoStyle">FII Activ</h1>
+<hr />
+<br />
+<h3>Completare profil [{{userCredentials.username}}]</h3>
+<br />
+<form>
+    <label class="btn btn-outline-info">
+        <input type="radio" name="options" ng-model="choose" value="student" hidden ng-checked="true" /> Student
+    </label>
+    <label class="btn btn-outline-info">
+        <input type="radio" name="options" ng-model="choose" value="teacher" hidden /> Profesor
+    </label>
+</form>
+<br />
+<div ng-switch="choose">
+    <div ng-switch-when="student">
+        <div class="form-group">
+            <input type="text" placeholder="Nume complet" ng-model="student.fullname" required />
+        </div>
+        <br />
+        <div class="form-group">
+            <input type="text" placeholder="E-mail" ng-model="student.email" required />
+        </div>
+        <br />
+        <div class="form-group">
+            <input type="text" placeholder="An studiu" ng-model="student.year" required />
+        </div>
+        <br />
+        <div class="form-group">
+            <input type="text" placeholder="Grupa" ng-model="student.group" required />
+        </div>
+        <br />
+        <hr />
+        <input type="button" value="Salvează" class="btn btn-default" ng-click="registerStudentProfile(student)" />
+        <br />
+    </div>
+    <div ng-switch-when="teacher">
+        <div class="form-group">
+            <input type="text" placeholder="Funcţie" ng-model="teacher.title" required />
+        </div>
+        <br />
+        <div class="form-group">
+            <input type="text" placeholder="Nume complet" ng-model="teacher.fullname" required />
+        </div>
+        <br />
+        <div class="form-group">
+            <input type="text" placeholder="E-mail" ng-model="teacher.email" required />
+        </div>
+        <hr />
+        <input type="button" value="Salvează" class="btn btn-default" ng-click="registerTeacherProfile(teacher)" />
+        <br />
+    </div>
+</div>
+<p>{{userRegSuccess}}</p>
