@@ -1,4 +1,5 @@
-﻿using DataLayer.Repositories;
+﻿using DataLayer.Entities;
+using DataLayer.Repositories;
 using DataLayer.Users;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,17 @@ namespace WebApplication1.Controllers.api
     {
         private readonly IGenericRepository<Teacher, Guid> _teacherRepository;
         private readonly IGenericRepository<User, Guid> _userRepository;
-        public TeacherController(IGenericRepository<Teacher, Guid> teacherRepository, IGenericRepository<User, Guid> userRepository)
+        private readonly IGenericRepository<Timetable, Guid> _timetableRepository;
+        public TeacherController
+            (
+            IGenericRepository<Teacher, Guid> teacherRepository,
+            IGenericRepository<User, Guid> userRepository,
+            IGenericRepository<Timetable, Guid> timetableRepository
+            )
         {
             _teacherRepository = teacherRepository;
             _userRepository = userRepository;
+            _timetableRepository = timetableRepository;
         }
 
         [Route("/{username}")]
@@ -45,6 +53,17 @@ namespace WebApplication1.Controllers.api
                 return HttpStatusCode.OK;
             }
             return HttpStatusCode.NotFound;
+        }
+
+        //Get teacher timetable
+        [Route("/{username}")]
+        public List<Timetable> GetTeacherTimetable(string username)
+        {
+            var user = _userRepository.GetAll().Where(x => x.Username == username).FirstOrDefault();
+            var teacher = _teacherRepository.GetAll().FirstOrDefault(x => x.User == user);
+            List<Timetable> teacherTimetable = _timetableRepository.GetAll()
+                .Where(x => x.Teacher.Contains(teacher.FullName)).ToList();
+            return teacherTimetable;
         }
     }
 }

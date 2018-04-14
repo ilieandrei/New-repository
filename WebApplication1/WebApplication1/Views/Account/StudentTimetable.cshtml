@@ -1,2 +1,4 @@
 ﻿
-<p>Aici va aparea orarul studentului</p>
+<p>Aici va aparea orarul studentului @User.Identity.Name</p>
+<button ng-click="getStudentTimetable('@User.Identity.Name')">Afiseaza orar</button>
+<p>{{studentTimetable}}</p>

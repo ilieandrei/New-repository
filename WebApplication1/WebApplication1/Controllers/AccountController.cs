@@ -88,6 +88,11 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        public IActionResult Administrator()
+        {
+            return View();
+        }
+
         public AccountController(IGenericRepository<User, Guid> userRepository, IGenericRepository<Student, Guid> studentRepository, IGenericRepository<Teacher, Guid> teacherRepository)
         {
             _userRepository = userRepository;
@@ -145,6 +150,8 @@ namespace WebApplication1.Controllers
             };
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+            if (username == "admin")
+                return RedirectToAction("Administrator", "Account");
             return RedirectToAction("Index", "Account");
         }
 

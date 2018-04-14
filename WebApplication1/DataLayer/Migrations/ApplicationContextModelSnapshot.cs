@@ -20,6 +20,34 @@ namespace DataLayer.Migrations
                 .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("DataLayer.Entities.Timetable", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Day");
+
+                    b.Property<string>("From");
+
+                    b.Property<string>("Group");
+
+                    b.Property<string>("Hall");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Pack");
+
+                    b.Property<string>("Teacher");
+
+                    b.Property<string>("To");
+
+                    b.Property<string>("Week");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Timetables");
+                });
+
             modelBuilder.Entity("DataLayer.Users.Student", b =>
                 {
                     b.Property<Guid>("Id")

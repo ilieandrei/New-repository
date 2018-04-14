@@ -2,98 +2,98 @@
 app.config(function ($routeProvider) {
     $routeProvider
         .when("/", {
-            templateUrl: "Account/StudentProfile",
-            controller: "userController"
+            templateUrl: "/Account/StudentProfile",
+            controller: "routeController"
         })
         .when("/studentTimetable", {
-            templateUrl: "Account/StudentTimetable",
-            controller: "userController"
+            templateUrl: "/Account/StudentTimetable",
+            controller: "routeController"
+        })
+        .when("/teacherTimetable", {
+            templateUrl: "/Account/TeacherTimetable",
+            controller: "routeController"
         })
         .when("/studentProfile", {
-            templateUrl: "Account/StudentProfile",
-            controller: "userController"
+            templateUrl: "/Account/StudentProfile",
+            controller: "routeController"
         })
         .when("/studentProfileSettings", {
-            templateUrl: "Account/StudentProfileSettings",
-            controller: "userController"
+            templateUrl: "/Account/StudentProfileSettings",
+            controller: "routeController"
         })
         .when("/teacherProfile", {
-            templateUrl: "Account/TeacherProfile",
-            controller: "userController"
+            templateUrl: "/Account/TeacherProfile",
+            controller: "routeController"
         })
         .when("/teacherProfileSettings", {
-            templateUrl: "Account/TeacherProfileSettings",
-            controller: "userController"
+            templateUrl: "/Account/TeacherProfileSettings",
+            controller: "routeController"
         });
 });
-app.directive("htmlPage", function () {
-    return {
-        templateUrl: "Account/StudentLayout"
-    };
-});
-app.controller("userController", ['$scope', '$http', '$md5', '$location', userController]);
-function userController($scope, $http, $md5, $location) {
-    var currentUsername;
-    $scope.loginUser = function (userCredentials) {
-        userCredentials.password = $md5.md5(userCredentials.password);
-        $http.get('/Authentication/LoginUser?username=' + userCredentials.username + '&password=' + userCredentials.password)
-            .then(successCallback, errorCallback);
-        function successCallback(response) {
-            if (response.data === 404) {
-                $scope.successLoginMessage = "Utilizatorul \"" + userCredentials.username + "\" nu există!";
-                userCredentials.username = '';
-                userCredentials.password = '';
-            }
-            else if (response.data === 401) {
-                userCredentials.password = '';
-                $scope.successLoginMessage = "Parolă incorectă!";
-            }
-            else {
-            $scope.successLoginMessage = userCredentials.username + " logged successfully!";
-                currentUsername = userCredentials.username;
-                $http.get('/Route/HomeSession?username=' + userCredentials.username + '&password=' + userCredentials.password);
+app.controller("routeController", ['$scope', '$http', '$md5', '$location', routeController]);
+function routeController($scope, $http, $md5, $location) {
+    //$scope.clickRes = "abcd";
+    //var currentUsername;
+    //$scope.loginUser = function (userCredentials) {
+    //    userCredentials.password = $md5.md5(userCredentials.password);
+    //    $http.get('/Authentication/LoginUser?username=' + userCredentials.username + '&password=' + userCredentials.password)
+    //        .then(successCallback, errorCallback);
+    //    function successCallback(response) {
+    //        if (response.data === 404) {
+    //            $scope.successLoginMessage = "Utilizatorul \"" + userCredentials.username + "\" nu există!";
+    //            userCredentials.username = '';
+    //            userCredentials.password = '';
+    //        }
+    //        else if (response.data === 401) {
+    //            userCredentials.password = '';
+    //            $scope.successLoginMessage = "Parolă incorectă!";
+    //        }
+    //        else {
+    //        $scope.successLoginMessage = userCredentials.username + " logged successfully!";
+    //            currentUsername = userCredentials.username;
+    //            $http.get('/Route/HomeSession?username=' + userCredentials.username + '&password=' + userCredentials.password);
                 
-            }
-        }
-        function errorCallback(response) {
-            alert("[Server error] An error occured when trying to check the credentials");
-        }
-    };
-    addUser = function (userCredentials) {
-        var userPassword = userCredentials.password;
-        userPassword = $md5.md5(userPassword);
-        $http.post('Authentication/RegisterUser?username=' + userCredentials.username + '&password=' + userPassword)
-            .then(successCallback, errorCallback);
-        function successCallback(response) {
-            if (response.data === 201) {
-                currentUsername = userCredentials.username;
-                userCredentials.username = '';
-                userCredentials.password = '';
-                $scope.regMessage = "Register successfull!";
-                $location.path('registerForm'); 
-            }
-            else {
-                $scope.regMessage = "A apărut o eroare. Cod status: " + response.data;
-            }
-        }
-        function errorCallback(response) {
-            alert("[Server error] An error occured when trying to post the credentials");
-        }
-    };
-    $scope.registerUser = function (userCredentials) {
-        $http.get('Authentication/UserExists?username=' + userCredentials.username)
-            .then(successCallback, errorCallback);
-        function successCallback(response) {
-            if (response.data === true)
-                $scope.regMessage = "\"" + userCredentials.username + "\" există deja!";
-            else {
-                addUser(userCredentials);
-            }
-        }
-        function errorCallback(response) {
-            alert("[Server error] An error occured when trying to check the credentials");
-        }
-    };
+    //        }
+    //    }
+    //    function errorCallback(response) {
+    //        alert("[Server error] An error occured when trying to check the credentials");
+    //    }
+    //};
+    //addUser = function (userCredentials) {
+    //    var userPassword = userCredentials.password;
+    //    userPassword = $md5.md5(userPassword);
+    //    $http.post('Authentication/RegisterUser?username=' + userCredentials.username + '&password=' + userPassword)
+    //        .then(successCallback, errorCallback);
+    //    function successCallback(response) {
+    //        if (response.data === 201) {
+    //            currentUsername = userCredentials.username;
+    //            userCredentials.username = '';
+    //            userCredentials.password = '';
+    //            $scope.regMessage = "Register successfull!";
+    //            $location.path('registerForm'); 
+    //        }
+    //        else {
+    //            $scope.regMessage = "A apărut o eroare. Cod status: " + response.data;
+    //        }
+    //    }
+    //    function errorCallback(response) {
+    //        alert("[Server error] An error occured when trying to post the credentials");
+    //    }
+    //};
+    //$scope.registerUser = function (userCredentials) {
+    //    $http.get('Authentication/UserExists?username=' + userCredentials.username)
+    //        .then(successCallback, errorCallback);
+    //    function successCallback(response) {
+    //        if (response.data === true)
+    //            $scope.regMessage = "\"" + userCredentials.username + "\" există deja!";
+    //        else {
+    //            addUser(userCredentials);
+    //        }
+    //    }
+    //    function errorCallback(response) {
+    //        alert("[Server error] An error occured when trying to check the credentials");
+    //    }
+    //};
     $scope.registerStudentProfile = function (student) {
         $scope.userRegSuccess = student.fullname + '\n' + student.email + '\n' + student.year +
             '\n' + student.group + '\n<' + currentUsername + '>';
@@ -113,10 +113,6 @@ function userController($scope, $http, $md5, $location) {
         function errorCallback(response) {
             alert("[Server error] An error occured when trying to add student profile");
         }
-    };
-
-    $scope.userMenu = function () {
-        $scope.mess = "CLICK";
     };
 
     $scope.userRoleValue = function (username) {
@@ -206,4 +202,32 @@ function userController($scope, $http, $md5, $location) {
     $scope.backToTeacherProfile = function () {
         $location.path('teacherProfile');
     };
+
+    $scope.getTimetable = function () {
+        $http.get('/Admin/GetTimetable').then(successCallback, errorCallback);
+        function successCallback(response) {
+            $scope.timetableMessage = response.data;
+        }
+        function errorCallback(response) {
+            $scope.timetableMessage = response.data;
+        }
+    };
+
+    $scope.getStudentTimetable = function (username) {
+        $http.get('Student/GetStudentTimetable?username=' + username).then(successCallback, errorCallback);
+        function successCallback(response) {
+            $scope.studentTimetable = response.data;
+        }
+        function errorCallback(response) {
+        }
+    }
+
+    $scope.getTeacherTimetable = function (username) {
+        $http.get('Teacher/GetTeacherTimetable?username=' + username).then(successCallback, errorCallback);
+        function successCallback(response) {
+            $scope.teacherTimetable = response.data;
+        }
+        function errorCallback(response) {
+        }
+    }
 }

@@ -1,4 +1,5 @@
-﻿using DataLayer.Repositories;
+﻿using DataLayer.Entities;
+using DataLayer.Repositories;
 using DataLayer.Users;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,17 @@ namespace WebApplication1.Controllers.api
     {
         private readonly IGenericRepository<Student, Guid> _studentRepository;
         private readonly IGenericRepository<User, Guid> _userRepository;
-        public StudentController(IGenericRepository<Student, Guid> studentRepository, IGenericRepository<User, Guid> userRepository)
+        private readonly IGenericRepository<Timetable, Guid> _timetableRepository;
+        public StudentController
+            (
+            IGenericRepository<Student, Guid> studentRepository, 
+            IGenericRepository<User, Guid> userRepository,
+            IGenericRepository<Timetable, Guid> timetableRepository
+            )
         {
             _studentRepository = studentRepository;
             _userRepository = userRepository;
+            _timetableRepository = timetableRepository;
         }
 
         [Route("/{username}")]
@@ -70,6 +78,17 @@ namespace WebApplication1.Controllers.api
                 return HttpStatusCode.Created;
             }
             return HttpStatusCode.NotFound;
+        }
+
+        //Get student timetable
+        [Route("/{username}")]
+        public List<Timetable> GetStudentTimetable(string username)
+        {
+            var user = _userRepository.GetAll().Where(x => x.Username == username).FirstOrDefault();
+            var student = _studentRepository.GetAll().FirstOrDefault(x => x.User == user);
+            List<Timetable> studentTimetable = _timetableRepository.GetAll()
+                .Where(x => (x.Group == ("I" + student.Year) || x.Group == ("I" + student.Year + student.Group[0]))).ToList();
+            return studentTimetable;
         }
     }
 }
