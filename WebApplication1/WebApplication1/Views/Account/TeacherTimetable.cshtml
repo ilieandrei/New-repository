@@ -1,4 +1,26 @@
-﻿
+﻿@{
+    Layout = null;
+}
+
 <p>Aici va aparea orarul profesorului</p>
 <button ng-click="getTeacherTimetable('@User.Identity.Name')">Afiseaza orar</button>
 <p>{{teacherTimetable}}</p>
+<p>{{teacherDailyTimetable}}</p>
+
+<hr />
+@*<p>Daily Timetable: {{teacherDailyTimetable}}</p>
+    <p>From: {{startDate}}</p>
+    <p>To: {{endDate}}</p>
+    <p>Session is open: {{sessionIsOpen}}</p>
+    <p>Current course: {{currentCourseName}}</p>
+    <p>Current course ID: {{timetableId}}</p>*@
+<p>Called for {{time1}} milliseconds</p>
+<div ng-show="showChat">
+    <input type="text" ng-model="chatMessage" />
+    <button ng-click="postChatMessage('@User.Identity.Name')">Post message</button>
+    <p>{{chatPostResponse}}</p>
+    <ul>
+        <li ng-repeat="message in chatMessages">->{{message}}</li>
+    </ul>
+</div>
+<p ng-show="!showChat">Nu exista sesiuni active</p>

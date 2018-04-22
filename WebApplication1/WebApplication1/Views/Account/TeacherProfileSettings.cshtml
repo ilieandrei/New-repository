@@ -9,7 +9,7 @@
         <b>E-mail: </b><input class="form-group" value="{{teacherMail}}" ng-model="teacherMail" name="teacherMail" type="text" required>
     </div>
     <div class="form-group">
-        <input type="button" value="Salvează" class="btn btn-outline-primary" ng-click="editTeacherProfile(userPar)" />
+        <input type="button" value="Salvează" class="btn btn-outline-primary" ng-click="editTeacherProfile('@User.Identity.Name')" />
     </div>
     <div class="form-group">
         <input type="button" value="Anulează" class="btn btn-outline-primary float-right" ng-click="backToTeacherProfile()" />

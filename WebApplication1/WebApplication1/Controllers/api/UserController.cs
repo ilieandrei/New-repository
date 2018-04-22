@@ -1,5 +1,5 @@
-﻿using DataLayer.Repositories;
-using DataLayer.Users;
+﻿using DataLayer.Entities;
+using DataLayer.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;

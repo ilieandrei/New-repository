@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataLayer.Users
+namespace DataLayer.Entities
 {
     public class Student : Entity<Guid>
     {

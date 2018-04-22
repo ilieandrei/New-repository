@@ -41,13 +41,12 @@
                         <p style="color:wheat">Orar</p>
                     </div>
                 </div>*@
-
-            <div ng-model="userRole" ng-init="userPar='@User.Identity.Name'" value="{{userRoleValue(userPar)}}"></div>
+            <div ng-model="userRole" ng-init="userRoleValue('@User.Identity.Name')"></div>
             <div ng-switch="usrRole">
                 <div ng-switch-when="Student">
                     <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
                         <label class="btn btn-outline-primary border-0 rounded-0 w-50">
-                            <a href="#!studentProfile" style="color:black" ng-click="getStudentProfile(userPar)">Profil</a>
+                            <a href="#!studentProfile" style="color:black" ng-click="getStudentProfile('@User.Identity.Name')">Profil</a>
                         </label>
                         <label class="btn btn-outline-primary border-0 rounded-0 w-50">
                             <a href="#!studentTimetable" style="color:black">Orar</a>
@@ -57,7 +56,7 @@
                 <div ng-switch-when="Teacher">
                     <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
                         <label class="btn btn-outline-primary border-0 rounded-0 w-50">
-                            <a href="#!teacherProfile" style="color:black" ng-click="getTeacherProfile(userPar)">Profil</a>
+                            <a href="#!teacherProfile" style="color:black" ng-click="getTeacherProfile('@User.Identity.Name')">Profil</a>
                         </label>
                         <label class="btn btn-outline-primary border-0 rounded-0 w-50">
                             <a href="#!teacherTimetable" style="color:black">Orar</a>

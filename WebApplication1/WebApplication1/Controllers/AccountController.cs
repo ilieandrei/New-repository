@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using DataLayer.Users;
 using System.Linq;
 using System.Threading.Tasks;
 using System;
@@ -10,6 +9,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Cryptography;
 using System.Text;
+using DataLayer.Entities;
 
 namespace WebApplication1.Controllers
 {

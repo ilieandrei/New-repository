@@ -30,8 +30,8 @@ app.config(function ($routeProvider) {
             controller: "routeController"
         });
 });
-app.controller("routeController", ['$scope', '$http', '$md5', '$location', routeController]);
-function routeController($scope, $http, $md5, $location) {
+app.controller("routeController", ['$scope', '$http', '$md5', '$location', '$timeout', routeController]);
+function routeController($scope, $http, $md5, $location, $timeout) {
     //$scope.clickRes = "abcd";
     //var currentUsername;
     //$scope.loginUser = function (userCredentials) {
@@ -52,7 +52,7 @@ function routeController($scope, $http, $md5, $location) {
     //        $scope.successLoginMessage = userCredentials.username + " logged successfully!";
     //            currentUsername = userCredentials.username;
     //            $http.get('/Route/HomeSession?username=' + userCredentials.username + '&password=' + userCredentials.password);
-                
+
     //        }
     //    }
     //    function errorCallback(response) {
@@ -116,7 +116,7 @@ function routeController($scope, $http, $md5, $location) {
     };
 
     $scope.userRoleValue = function (username) {
-        if ($scope.usrRole == null) {
+        if ($scope.usrRole === undefined) {
             $http.get('User/GetUserRole?username=' + username)
                 .then(successCallback, errorCallback);
             function successCallback(response) {
@@ -217,6 +217,14 @@ function routeController($scope, $http, $md5, $location) {
         $http.get('Student/GetStudentTimetable?username=' + username).then(successCallback, errorCallback);
         function successCallback(response) {
             $scope.studentTimetable = response.data;
+            //$scope.studentTimetable[0].day = "Duminica";
+            $scope.studentDailyTimetable = [];
+            var days = ["Duminica", "Luni", "Marti", "Miercuri", "Joi", "Vineri", "Sambata"];
+            for (var i = 0; i < $scope.studentTimetable.length; i++) {
+                if ($scope.studentTimetable[i].day === days[new Date().getDay()]) {
+                    $scope.studentDailyTimetable.push($scope.studentTimetable[i]);
+                }
+            }
         }
         function errorCallback(response) {
         }
@@ -226,8 +234,135 @@ function routeController($scope, $http, $md5, $location) {
         $http.get('Teacher/GetTeacherTimetable?username=' + username).then(successCallback, errorCallback);
         function successCallback(response) {
             $scope.teacherTimetable = response.data;
+            //$scope.teacherTimetable[0].day = "Duminica";
+            $scope.teacherDailyTimetable = [];
+            var days = ["Duminica", "Luni", "Marti", "Miercuri", "Joi", "Vineri", "Sambata"];
+            for (var i = 0; i < $scope.teacherTimetable.length; i++) {
+                if ($scope.teacherTimetable[i].day === days[new Date().getDay()]) {
+                    $scope.teacherDailyTimetable.push($scope.teacherTimetable[i]);
+                }
+            }
         }
         function errorCallback(response) {
         }
     }
+
+    $scope.postChatMessage = function (username) {
+        $http.post('Chat/PostMessage?username=' + username + '&timetableId=' + $scope.timetableId + '&message=' + $scope.chatMessage)
+            .then(successCallback, errorCallback);
+        function successCallback(response) {
+            $scope.chatPostResponse = response.data;
+        }
+        function errorCallback(response) {
+            $scope.chatPostResponse = response.data;
+        }
+    }
+
+    //use time1 for requests every X times
+    $scope.time1 = 0;
+    $scope.chatMessages = [];
+    //timer1 is called every X times
+    var timer1 = function () {
+        //dateToShow is current date, updated every X times
+        var dateToShow = new Date();
+        //student daily timetable - setup startDate and endDate according to from-to from current course
+        if ($scope.studentDailyTimetable)
+            for (var i = 0; i < $scope.studentDailyTimetable.length; i++) {
+                //start setup student session original code
+                /*if (parseInt($scope.studentDailyTimetable[i].from) < new Date().getHours()
+                    && parseInt($scope.studentDailyTimetable[i].to) > new Date().getHours()) {
+                $scope.startDate = new Date(new Date().getFullYear(),
+                    new Date().getMonth(),
+                    new Date().getDate(),
+                    parseInt($scope.studentDailyTimetable[i].from));
+                $scope.endDate = new Date(new Date().getFullYear(),
+                    new Date().getMonth(),
+                    new Date().getDate(),
+                    parseInt($scope.studentDailyTimetable[i].to));
+                $scope.currentCourseName = $scope.studentDailyTimetable[i].name;
+                }*/
+                //end original code
+                //start setup student session temp code
+                $scope.startDate = new Date(new Date().getFullYear(),
+                    new Date().getMonth(),
+                    new Date().getDate(),
+                    new Date().getHours()/*parseInt($scope.studentDailyTimetable[i].from)*/);
+                $scope.endDate = new Date(new Date().getFullYear(),
+                    new Date().getMonth(),
+                    new Date().getDate(),
+                    new Date().getHours() + 1/*parseInt($scope.studentDailyTimetable[i].to)*/);
+                $scope.currentCourseName = $scope.studentDailyTimetable[i].name;
+                //end temp code
+                $scope.timetableId = $scope.studentDailyTimetable[i].id;
+            }
+        //teacher daily timetable - setup startDate and endDate according to from-to from current course
+        if ($scope.teacherDailyTimetable)
+            for (var i = 0; i < $scope.teacherDailyTimetable.length; i++) {
+                //start setup teacher session original code
+                /*if (parseInt($scope.teacherDailyTimetable[i].from) < new Date().getHours()
+                    && parseInt($scope.teacherDailyTimetable[i].to) > new Date().getHours()) {
+                $scope.startDate = new Date(new Date().getFullYear(),
+                    new Date().getMonth(),
+                    new Date().getDate(),
+                    parseInt($scope.teacherDailyTimetable[i].from));
+                $scope.endDate = new Date(new Date().getFullYear(),
+                    new Date().getMonth(),
+                    new Date().getDate(),
+                    parseInt($scope.teacherDailyTimetable[i].to));
+                $scope.currentCourseName = $scope.teacherDailyTimetable[i].name;
+                }*/
+                //end original code
+                //start setup teacher session temp code
+                $scope.startDate = new Date(new Date().getFullYear(),
+                    new Date().getMonth(),
+                    new Date().getDate(),
+                    new Date().getHours()/*parseInt($scope.teacherDailyTimetable[i].from)*/);
+                $scope.endDate = new Date(new Date().getFullYear(),
+                    new Date().getMonth(),
+                    new Date().getDate(),
+                    new Date().getHours() + 1/*parseInt($scope.teacherDailyTimetable[i].to)*/);
+                $scope.currentCourseName = $scope.teacherDailyTimetable[i].name;
+                //end temp code
+                $scope.timetableId = $scope.teacherDailyTimetable[i].id;
+            }
+        //open session and show chat during the course
+        if (dateToShow > $scope.startDate && dateToShow < $scope.endDate) {
+            $scope.sessionIsOpen = true;
+            $scope.showChat = true;
+        }
+        else {
+            $scope.sessionIsOpen = false;
+            $scope.showChat = false;
+        }
+        //increment time1 every 5 sec (function timer1 is called every 5 sec)
+        $scope.time1 += 5000;
+        //take time of the last posted message (if is not exists, take current time)
+        var lastMessageTime = ($scope.chatMessages.length === 0)
+            ? (new Date().toISOString())
+            : (new Date($scope.chatMessages[$scope.chatMessages.length - 1].postTime).toISOString());
+        //check if is not exists any messages in current chat
+        var isEmpty = ($scope.chatMessages.length === 0) ? true : false;
+        //get messages from last visible in chat to last posted in database (for current course)
+        $http.get('Chat/GetMessages?isEmpty=' + isEmpty + '&lastMessageTime=' + lastMessageTime + '&timetableId=' + $scope.timetableId)
+            .then(successCallback, errorCallback);
+        function successCallback(response) {
+            for (var i = 0; i < response.data.length; i++)
+                $scope.chatMessages.push(response.data[i]);
+        }
+        function errorCallback(response) {
+
+        }
+        $timeout(timer1, 5000);
+    }
+    //infinite calling of timer1 function
+    $timeout(timer1, 100);
+
+    /*var init = function () {
+        var lastMessageTime = ($scope.chatMessages.length == 0)
+            ? (new Date())
+            : $scope.chatMessages[$scope.chatMessages.length - 1].PostTime;
+        $http.get('Chat/GetMessages?lastMessageTime=' + lastMessageTime + '&timetableId=08d59d56ff3d')
+            .then(successCallback, errorCallback);
+        $scope.chatMessages
+    }*/
 }
