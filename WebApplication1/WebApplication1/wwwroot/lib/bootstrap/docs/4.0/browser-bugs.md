@@ -18,10 +18,10 @@ See also:
 <table class="bd-browser-bugs table table-bordered table-hover">
   <thead>
     <tr>
-      <th>Browser(s)</th>
-      <th>Summary of bug</th>
-      <th>Upstream bug(s)</th>
-      <th>Bootstrap issue(s)</th>
+      <tr>Browser(s)</th>
+      <tr>Summary of bug</th>
+      <tr>Upstream bug(s)</th>
+      <tr>Bootstrap issue(s)</th>
     </tr>
   </thead>
   <tbody>
@@ -45,10 +45,10 @@ We publicly list these "most wanted" feature requests here, in the hopes of expe
 <table class="bd-browser-bugs table table-bordered table-hover">
   <thead>
     <tr>
-      <th>Browser(s)</th>
-      <th>Summary of feature</th>
-      <th>Upstream issue(s)</th>
-      <th>Bootstrap issue(s)</th>
+      <tr>Browser(s)</th>
+      <tr>Summary of feature</th>
+      <tr>Upstream issue(s)</th>
+      <tr>Bootstrap issue(s)</th>
     </tr>
   </thead>
   <tbody>

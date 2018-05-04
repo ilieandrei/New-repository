@@ -8,6 +8,7 @@
     "angular": "1.6.9",
     "angular-route": "1.6.9",
     "angularjs-md5": "0.1.0",
-    "bootstrap": "v4.0.0"
+    "bootstrap": "v4.0.0",
+    "components-font-awesome": "^5.0.6"
   }
 }

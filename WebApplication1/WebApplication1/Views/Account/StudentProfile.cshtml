@@ -1,21 +1,21 @@
-﻿@{
-    Layout = null;
-}
-<ul class="list-group list-group-flush">
-    <li class="list-group-item">
-        <p><b>Nume: </b>{{studentFullName}}</p>
-    </li>
-    <li class="list-group-item">
-        <p><b>An studiu: </b>{{studyYear}}</p>
-    </li>
-    <li class="list-group-item">
-        <p><b>Grupa: </b>{{studentGroup}}</p>
-    </li>
-    <li class="list-group-item">
-        <p><b>E-mail: </b>{{studentMail}}</p>
-    </li>
-</ul>
-<hr />
-<div class="form-group">
-    <input type="button" value="Editează" class="btn btn-outline-primary" ng-click="editStudentProfilePage()" />
+﻿
+<div ng-init="studentProfileValue('@User.Identity.Name')">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <p>Nume: <b class="text-primary">{{studentDetails.studentFullName}}</b></p>
+        </li>
+        <li class="list-group-item">
+            <p>An studiu: <b class="text-primary">{{studentDetails.studyYear}}</b></p>
+        </li>
+        <li class="list-group-item">
+            <p>Grupa: <b class="text-primary">{{studentDetails.studentHalfyear + studentDetails.studentGroup}}</b></p>
+        </li>
+        <li class="list-group-item">
+            <p>E-mail: <b class="text-primary">{{studentDetails.studentMail}}</b></p>
+        </li>
+    </ul>
+    <br />
+    <div class="form-group">
+        <input type="button" value="Editează" class="btn btn-outline-primary" ng-click="editStudentProfilePage()" />
+    </div>
 </div>

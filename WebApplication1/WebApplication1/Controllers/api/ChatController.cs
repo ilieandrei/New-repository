@@ -7,6 +7,7 @@ using System.Web.Http;
 using DataLayer.Entities;
 using DataLayer.Repositories;
 using Microsoft.EntityFrameworkCore;
+using WebApplication1.Models;
 
 namespace WebApplication1.Controllers.api
 {
@@ -35,38 +36,39 @@ namespace WebApplication1.Controllers.api
         }
 
         [HttpPost]
-        [Route("/{username}/{timetableId}/{message}")]
-        public HttpStatusCode PostMessage(string username, string timetableId, string message)
+        public HttpStatusCode PostMessage([FromBody]NewMessageModel chatModel)
         {
-            var user = _userRepository.GetAll().FirstOrDefault(x => x.Username == username);
-            var timetable = _timetableRepository.GetAll().FirstOrDefault(x => x.Id == Guid.Parse(timetableId));
+            var user = _userRepository.GetAll().FirstOrDefault(x => x.Username == chatModel.Username);
+            var timetable = _timetableRepository.GetAll().FirstOrDefault(x => x.Id == Guid.Parse(chatModel.TimetableId));
             _chatRepository.Add(new Chat
             {
                 User = user,
                 Timetable = timetable,
-                Message = message,
+                Message = chatModel.Message,
                 PostTime = DateTime.Now
             });
             _chatRepository.Save();
             return HttpStatusCode.OK;
         }
-
-        [Route("/{isEmpty}/{lastMessageTime}/{timetableId}")]
-        public List<Chat> GetMessages(bool isEmpty, DateTime lastMessageTime, Guid timetableId)
+        
+        public ChatMessagesModel GetMessages([FromBody]MessageQueryModel messageQueryModel)
         {
-            var timetable = _timetableRepository.GetAll().FirstOrDefault(x => x.Id == timetableId);
-            if (timetable == null)
+            try
+            {
+                var timetable = _timetableRepository.GetAll().FirstOrDefault(x => x.Id == Guid.Parse(messageQueryModel.TimetableId));
+                messageQueryModel.LastMessageTime = messageQueryModel.LastMessageTime.AddMilliseconds(1);
+                var messages = _chatRepository.GetAll().Where(x => x.PostTime > messageQueryModel.LastMessageTime && x.Timetable == timetable)
+                    .Include(y => y.User).ToList();
+                if (messageQueryModel.IsEmpty)
+                    messages = _chatRepository.GetAll().Where(x => x.Timetable == timetable)
+                        .Include(y => y.User).ToList();
+                ChatMessagesModel chatMessagesModel = new ChatMessagesModel(messages);
+                return chatMessagesModel;
+            }
+            catch(Exception ex)
+            {
                 return null;
-            var xx = _chatRepository.GetAll().Where(x => x.Timetable == timetable).FirstOrDefault();
-            if (xx == null)
-                return null;
-            lastMessageTime = lastMessageTime.AddMilliseconds(1);
-            var messages = _chatRepository.GetAll().Where(x => x.PostTime > lastMessageTime && x.Timetable == timetable)
-                .Include(y=>y.User).ToList();
-            if (isEmpty)
-                messages = _chatRepository.GetAll().Where(x => x.Timetable == timetable)
-                    .Include(y=>y.User).ToList();
-            return messages;
+            }
         }
     }
 }

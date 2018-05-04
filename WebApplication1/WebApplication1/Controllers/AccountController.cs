@@ -93,6 +93,16 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        public IActionResult TeacherFullTimetable()
+        {
+            return View();
+        }
+
+        public IActionResult StudentFullTimetable()
+        {
+            return View();
+        }
+
         public AccountController(IGenericRepository<User, Guid> userRepository, IGenericRepository<Student, Guid> studentRepository, IGenericRepository<Teacher, Guid> teacherRepository)
         {
             _userRepository = userRepository;
@@ -106,7 +116,7 @@ namespace WebApplication1.Controllers
             MD5 md5Hash = MD5.Create();
             string hashPassword = GetMd5Hash(md5Hash, password);
             var user = _userRepository.GetAll().FirstOrDefault(x => x.Username == username);
-            if(user != null)
+            if (user != null)
             {
                 ModelState.AddModelError("RegisterError", "Utilizatorul există deja!");
                 return View();
@@ -134,12 +144,12 @@ namespace WebApplication1.Controllers
             MD5 md5Hash = MD5.Create();
             string hashPassword = GetMd5Hash(md5Hash, password);
             var user = _userRepository.GetAll().FirstOrDefault(x => x.Username == username);
-            if(user == null)
+            if (user == null)
             {
                 ModelState.AddModelError("LoginError", "Utilizatorul nu există!");
                 return View();
             }
-            if(user.Password != hashPassword)
+            if (user.Password != hashPassword)
             {
                 ModelState.AddModelError("LoginError", "Parolă incorectă!");
                 return View();

@@ -56,8 +56,8 @@ All heading elements—e.g., `<h1>`—and `<p>` are reset to have their `margin-
 <table>
   <thead>
     <tr>
-      <th>Heading</th>
-      <th>Example</th>
+      <tr>Heading</th>
+      <tr>Example</th>
     </tr>
   </thead>
   <tbody>
@@ -171,10 +171,10 @@ Tables are slightly adjusted to style `<caption>`s, collapse borders, and ensure
     </caption>
     <thead>
       <tr>
-        <th>Table heading</th>
-        <th>Table heading</th>
-        <th>Table heading</th>
-        <th>Table heading</th>
+        <tr>Table heading</th>
+        <tr>Table heading</th>
+        <tr>Table heading</th>
+        <tr>Table heading</th>
       </tr>
     </thead>
     <tbody>

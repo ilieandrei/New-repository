@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
+using WebApplication1.Models;
 
 namespace WebApplication1.Controllers.api
 {
@@ -27,42 +28,54 @@ namespace WebApplication1.Controllers.api
         }
 
         [Route("/{username}")]
-        public Teacher GetTeacherProfile(string username)
+        public TeacherModel GetTeacherProfile(string username)
         {
             var user = _userRepository.GetAll().FirstOrDefault(x => x.Username == username);
             var teacher = _teacherRepository.GetAll().FirstOrDefault(x => x.User == user);
-            if (teacher != null)
-                return teacher;
-            return null;
+            TeacherModel teacherModel = new TeacherModel(teacher);
+            return teacherModel;
         }
 
         [HttpPost]
-        [Route("/{username}/{teacherFullName}/{teacherTitle}/{teacherMail}")]
-        public HttpStatusCode EditTeacherProfile(string username, string teacherFullName, string teacherTitle, string teacherMail)
+        public HttpStatusCode EditTeacherProfile([FromBody]TeacherModel teacherModel)
         {
-            var user = _userRepository.GetAll().FirstOrDefault(x => x.Username == username);
+            var user = _userRepository.GetAll().FirstOrDefault(x => x.Username == teacherModel.Username);
             var teacher = _teacherRepository.GetAll().FirstOrDefault(x => x.User == user);
-            if (teacher != null)
-            {
-                teacher.FullName = teacherFullName;
-                teacher.Function = teacherTitle;
-                teacher.Email = teacherMail;
-                _teacherRepository.Edit(teacher);
-                _teacherRepository.Save();
-                return HttpStatusCode.OK;
-            }
-            return HttpStatusCode.NotFound;
+
+            teacher.FullName = teacherModel.FullName;
+            teacher.Function = teacherModel.Function;
+            teacher.Email = teacherModel.Email;
+            _teacherRepository.Edit(teacher);
+            _teacherRepository.Save();
+            return HttpStatusCode.OK;
         }
 
-        //Get teacher timetable
+        [HttpPost]
+        public HttpStatusCode RegisterTeacher([FromBody]TeacherModel teacherModel)
+        {
+            var user = _userRepository.GetAll().Where(x => x.Username == teacherModel.Username).FirstOrDefault();
+            Teacher teacher = new Teacher
+            {
+                Id = Guid.NewGuid(),
+                FullName = teacherModel.FullName,
+                Email = teacherModel.Email,
+                Function = teacherModel.Function,
+                User = user
+            };
+            _teacherRepository.Add(teacher);
+            _teacherRepository.Save();
+            return HttpStatusCode.Created;
+        }
+
         [Route("/{username}")]
-        public List<Timetable> GetTeacherTimetable(string username)
+        public TeacherTimetableModel GetTeacherTimetable(string username)
         {
             var user = _userRepository.GetAll().Where(x => x.Username == username).FirstOrDefault();
             var teacher = _teacherRepository.GetAll().FirstOrDefault(x => x.User == user);
             List<Timetable> teacherTimetable = _timetableRepository.GetAll()
                 .Where(x => x.Teacher.Contains(teacher.FullName)).ToList();
-            return teacherTimetable;
+            TeacherTimetableModel teacherTimetableModel = new TeacherTimetableModel(teacherTimetable);
+            return teacherTimetableModel;
         }
     }
 }

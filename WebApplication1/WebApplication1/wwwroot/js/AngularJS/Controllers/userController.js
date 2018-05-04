@@ -1,21 +1,44 @@
-﻿//var app = angular.module('myApp', []);
+﻿var app = angular.module("myApp");
 
-//app.controller("userController", ['$scope', '$http', userController]);
-//function userController($scope, $http) {
-//    $scope.allUsers = "";
-//    var username = $scope.username;
-//    var password = $scope.password;
-//    $scope.loginUser = function (username, password) {
-//        $http.get('/Authentication/Get?username=' + username + '&password=' + password)
-//            .then(successCallback, errorCallback);
-//        function successCallback(response) {
-//            if (response.data == true)
-//                $scope.successLoginMessage = username + " logged successfully!";
-//            else
-//                $scope.successLoginMessage = "Login failed!";
-//        };
-//        function errorCallback(response) {
-//            alert("Error | " + username + " not found!");
-//        };
-//    };
-//};
+app.controller("userController", ['$scope', '$http', '$location', 'myService', userController]);
+function userController($scope, $http, $location, myService) {
+
+    $scope.userRoleValue = function (username) {
+        if ($scope.usrRole === undefined) {
+            myService.getUserRole(username).then(function (response) {
+                $scope.usrRole = response.data;
+                $scope.showBarItem = true;
+                myService.getCurrentTab("").then(function (response1) {
+                    if (response1.data != "No content") {
+                        document.getElementById(response1.data).classList.add("active");
+                        document.getElementById(response1.data).classList.add("text-primary");
+                    }
+                }, function (response1) {
+                });
+            }, function (response) {
+            });
+        }
+    };
+
+
+    $scope.teacherProfileTab = function () {
+        myService.setCurrentTab("teacherProfileTabId").then(function (response) {
+        }, function (response) {
+        });
+    };
+    $scope.teacherTimetableTab = function () {
+        myService.setCurrentTab("teacherTimetableTabId").then(function (response) {
+        }, function (response) {
+        });
+    };
+    $scope.studentProfileTab = function () {
+        myService.setCurrentTab("studentProfileTabId").then(function (response) {
+        }, function (response) {
+        });
+    };
+    $scope.studentTimetableTab = function () {
+        myService.setCurrentTab("studentTimetableTabId").then(function (response) {
+        }, function (response) {
+        });
+    };
+}

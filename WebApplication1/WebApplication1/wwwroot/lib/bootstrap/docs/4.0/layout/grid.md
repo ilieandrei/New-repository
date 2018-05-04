@@ -56,7 +56,7 @@ See how aspects of the Bootstrap grid system work across multiple devices with a
 <table class="table table-bordered table-striped">
   <thead>
     <tr>
-      <th></th>
+      <tr></th>
       <th class="text-center">
         Extra small<br>
         <small>&lt;576px</small>

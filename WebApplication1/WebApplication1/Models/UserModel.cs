@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using DataLayer.Entities;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +12,14 @@ namespace WebApplication1.Models
         public string Username { get; set; }
         public string Password { get; set; }
         public string Role { get; set; }
-        public UserModel(UserModel user)
+
+        public UserModel(User user)
         {
             Username = user.Username;
             Password = user.Password;
             Role = user.Role;
         }
+
         public UserModel()
         { }
     }

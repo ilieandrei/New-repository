@@ -25,8 +25,8 @@ All HTML headings, `<h1>` through `<h6>`, are available.
 <table>
   <thead>
     <tr>
-      <th>Heading</th>
-      <th>Example</th>
+      <tr>Heading</th>
+      <tr>Example</th>
     </tr>
   </thead>
   <tbody>

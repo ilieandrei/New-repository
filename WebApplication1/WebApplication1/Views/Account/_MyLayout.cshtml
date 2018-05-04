@@ -9,9 +9,16 @@
         <script src="~/lib/angular/angular.min.js"></script>
         <script src="~/lib/angular-route/angular-route.js"></script>
         <script src="~/lib/angularjs-md5/src/angularjs-md5.js"></script>
+        <script src="~/js/AngularJS/routing.js"></script>
+        <script src="~/js/AngularJS/services.js"></script>
+        <script src="~/js/AngularJS/Controllers/userController.js"></script>
+        <script src="~/js/AngularJS/Controllers/adminController.js"></script>
+        <script src="~/js/AngularJS/Controllers/studentController.js"></script>
+        <script src="~/js/AngularJS/Controllers/teacherController.js"></script>
         <script src="~/js/AngularJS/Controllers/routeController.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <link href="~/lib/components-font-awesome/css/fontawesome-all.css" rel="stylesheet">
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -23,58 +30,51 @@
 
 </head>
 
-<body ng-controller="routeController">
-    <div id="container">
-        <div id="header" class="w-100 border-primary border-bottom">
-            <a asp-area="" asp-controller="Account" asp-action="Index" class="w-100">
+<body>
+    <div id="container" ng-controller="userController">
+        <div id="header" class="w-100 border-primary border-bottom" style="background-color:aliceblue">
+            <a asp-area="" asp-controller="Account" asp-action="Index" class="w-100" ng-show="showBarItem">
                 <h3 class="float-left">FII Activ</h3>
             </a>
-            <a asp-area="" asp-controller="Account" asp-action="Logout" class="w-100">
-                <h3 class="float-right">Deconectare</h3>
+            <a asp-area="" asp-controller="Account" asp-action="Logout" class="w-100" ng-show="showBarItem">
+                <input type="button" class="btn btn-outline-danger float-right" value="Deconectare"/>
             </a>
             <br />
             @*<div ng-switch="choose" class="w-100">
-                    <div ng-switch-when="profile">
-                        <p style="color:wheat">Profil</p>
-                    </div>
-                    <div ng-switch-when="timetable">
-                        <p style="color:wheat">Orar</p>
-                    </div>
-                </div>*@
+            <div ng-switch-when="profile">
+                <p style="color:wheat">Profil</p>
+            </div>
+            <div ng-switch-when="timetable">
+                <p style="color:wheat">Orar</p>
+            </div>
+        </div>*@
             <div ng-model="userRole" ng-init="userRoleValue('@User.Identity.Name')"></div>
             <div ng-switch="usrRole">
                 <div ng-switch-when="Student">
-                    <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
-                        <label class="btn btn-outline-primary border-0 rounded-0 w-50">
-                            <a href="#!studentProfile" style="color:black" ng-click="getStudentProfile('@User.Identity.Name')">Profil</a>
-                        </label>
-                        <label class="btn btn-outline-primary border-0 rounded-0 w-50">
-                            <a href="#!studentTimetable" style="color:black">Orar</a>
-                        </label>
-                    </div>
+                    <ul class="nav nav-tabs nav-fill w-100" data-toggle="buttons">
+                        <li class="nav-item">
+                            <a id="studentProfileTabId" class="nav-link" href="#!studentProfile" style="color:black" ng-click="studentProfileTab()">Profil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="studentTimetableTabId" class="nav-link" href="#!studentTimetable" style="color:black" ng-click="studentTimetableTab()">Orar</a>
+                        </li>
+                    </ul>
                 </div>
                 <div ng-switch-when="Teacher">
-                    <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
-                        <label class="btn btn-outline-primary border-0 rounded-0 w-50">
-                            <a href="#!teacherProfile" style="color:black" ng-click="getTeacherProfile('@User.Identity.Name')">Profil</a>
-                        </label>
-                        <label class="btn btn-outline-primary border-0 rounded-0 w-50">
-                            <a href="#!teacherTimetable" style="color:black">Orar</a>
-                        </label><label class="btn btn-outline-primary border-0 rounded-0 w-50">
-                            <a href="#!teacherStatus" style="color:black">Status</a>
-                        </label>
-                        <!----<label class="btn btn-outline-primary border-0 rounded-0 w-50 active">
-                            <input type="radio" name="options" ng-model="chooseTeacher" value="profile" hidden /> Profil
-                        </label>
-                        <label class="btn btn-outline-primary border-0 rounded-0 w-50">
-                            <input type="radio" name="options" ng-model="chooseTeacher" value="timetable" hidden /> Orar
-                        </label>
-                        <label class="btn btn-outline-primary border-0 rounded-0 w-50">
-                            <input type="radio" name="options" ng-model="chooseTeacher" value="state" hidden /> Status
-                        </label>-->
-                    </div>
+                    <ul class="nav nav-tabs nav-fill w-100" data-toggle="buttons">
+                        <li class="nav-item">
+                            <a id="teacherProfileTabId" class="nav-link" href="#!teacherProfile" style="color:black" ng-click="teacherProfileTab()">Profil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="teacherTimetableTabId" class="nav-link" href="#!teacherTimetable" style="color:black" ng-click="teacherTimetableTab()">Orar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="href3" class="nav-link" href="#!teacherStatus" style="color:black">Status</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
+
         </div>
         <div>
             @RenderBody()

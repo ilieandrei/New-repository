@@ -1,17 +1,23 @@
-﻿<form>
-    <div class="form-group">
-        <b>Funcţie: </b><input class="form-group" value="{{teacherTitle}}" ng-model="teacherTitle" name="teacherTitle" type="text" required autofocus>
+﻿<div ng-init="teacherProfileValue('@User.Identity.Name')">
+    <br />
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Funcţie</span>
+        </div>
+        <select class="custom-select" ng-model="teacherDetails.teacherTitle" ng-options="x for x in teacherTitles"></select>
     </div>
-    <div class="form-group">
-        <b>Nume: </b><input class="form-group" value="{{teacherFullName}}" ng-model="teacherFullName" name="teacherFullName" type="text" required>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Nume</span>
+        </div>
+        <input type="text" class="form-control" ng-model="teacherDetails.teacherFullName" required />
     </div>
-    <div class="form-group">
-        <b>E-mail: </b><input class="form-group" value="{{teacherMail}}" ng-model="teacherMail" name="teacherMail" type="text" required>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">E-mail</span>
+        </div>
+        <input type="text" class="form-control" ng-model="teacherDetails.teacherMail" required />
     </div>
-    <div class="form-group">
-        <input type="button" value="Salvează" class="btn btn-outline-primary" ng-click="editTeacherProfile('@User.Identity.Name')" />
-    </div>
-    <div class="form-group">
-        <input type="button" value="Anulează" class="btn btn-outline-primary float-right" ng-click="backToTeacherProfile()" />
-    </div>
-</form>
+    <input type="button" value="Salvează" class="btn btn-outline-primary" ng-click="editTeacherProfile('@User.Identity.Name',teacherDetails)" />
+    <input type="button" value="Anulează" class="btn btn-outline-primary float-right" ng-click="backToTeacherProfile()" />
+</div>

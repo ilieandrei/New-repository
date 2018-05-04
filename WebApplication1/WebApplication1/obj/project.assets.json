@@ -46,6 +46,9 @@
           "lib/netcoreapp2.0/dotnet-bundle.dll": {}
         }
       },
+      "FontAwesome/4.7.0": {
+        "type": "package"
+      },
       "HtmlAgilityPack/1.7.2": {
         "type": "package",
         "dependencies": {
@@ -6393,6 +6396,24 @@
         "lib/netcoreapp2.0/dotnet-bundle.dll",
         "lib/netcoreapp2.0/dotnet-bundle.runtimeconfig.json",
         "prefercliruntime"
+      ]
+    },
+    "FontAwesome/4.7.0": {
+      "sha512": "n4H/brfszElyoZ4kmGh8E75uqvLzLvFr3h2PFVdPH1LwUmWIpeqdaW2pcC4oZAhg7sESyObh0IZpAI8COCNeUg==",
+      "type": "package",
+      "path": "fontawesome/4.7.0",
+      "files": [
+        "Content/Content/font-awesome.css",
+        "Content/Content/font-awesome.min.css",
+        "Content/fonts/FontAwesome.otf",
+        "Content/fonts/fontawesome-webfont.eot",
+        "Content/fonts/fontawesome-webfont.svg",
+        "Content/fonts/fontawesome-webfont.ttf",
+        "Content/fonts/fontawesome-webfont.woff",
+        "Content/fonts/fontawesome-webfont.woff2",
+        "fontawesome.4.7.0.nupkg.sha512",
+        "fontawesome.nuspec",
+        "tools/install.ps1"
       ]
     },
     "HtmlAgilityPack/1.7.2": {
@@ -15019,6 +15040,7 @@
       "BuildBundlerMinifier >= 2.6.362",
       "BundlerMinifier.Core >= 2.6.362",
       "DataLayer >= 1.0.0",
+      "FontAwesome >= 4.7.0",
       "HtmlAgilityPack >= 1.7.2",
       "JWT >= 3.1.1",
       "MailKit >= 2.0.1",
@@ -15028,6 +15050,7 @@
       "Microsoft.AspNetCore.All >= 2.0.6",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 2.0.3",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 2.0.2",
+      "Microsoft.AspNetCore.Session >= 2.0.2",
       "Microsoft.EntityFrameworkCore >= 2.0.2",
       "Microsoft.EntityFrameworkCore.SqlServer >= 2.0.2",
       "Microsoft.EntityFrameworkCore.Tools >= 2.0.2",
@@ -15096,6 +15119,10 @@
             "target": "Package",
             "version": "[2.6.362, )"
           },
+          "FontAwesome": {
+            "target": "Package",
+            "version": "[4.7.0, )"
+          },
           "HtmlAgilityPack": {
             "target": "Package",
             "version": "[1.7.2, )"
@@ -15129,6 +15156,10 @@
             "version": "[2.0.3, )"
           },
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[2.0.2, )"
+          },
+          "Microsoft.AspNetCore.Session": {
             "target": "Package",
             "version": "[2.0.2, )"
           },

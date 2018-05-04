@@ -1,20 +1,30 @@
-﻿<form>
-    <div class="form-group">
-        <b>Nume: </b><input class="form-group" value="{{studentFullName}}" ng-model="studentFullName" name="studentFullName" type="text" required autofocus>
+﻿<div ng-init="studentProfileValue('@User.Identity.Name')">
+    <br />
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Nume</span>
+        </div>
+        <input type="text" class="form-control" ng-model="studentDetails.studentFullName" required />
     </div>
-    <div class="form-group">
-        <b>An studiu: </b><input class="form-group" value="{{studyYear}}" ng-model="studyYear" name="studyYear" type="text" required>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">An studiu</span>
+        </div>
+        <select class="custom-select" ng-model="studentDetails.studyYear" ng-options="x for x in studyYears"></select>
     </div>
-    <div class="form-group">
-        <b>Grupa: </b><input class="form-group" value="{{studentGroup}}" ng-model="studentGroup" name="studentGroup" type="text" required>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Grupa</span>
+        </div>
+        <select class="custom-select" ng-model="studentDetails.studentHalfyear" ng-options="x for x in studyHalfyears"></select>
+        <input type="text" class="form-control" ng-model="studentDetails.studentGroup" required />
     </div>
-    <div class="form-group">
-        <b>E-mail: </b><input class="form-group" value="{{studentMail}}" ng-model="studentMail" name="studentMail" type="text" required>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">E-mail</span>
+        </div>
+        <input type="text" class="form-control" ng-model="studentDetails.studentMail" required />
     </div>
-    <div class="form-group">
-        <input type="button" value="Salvează" class="btn btn-outline-primary" ng-click="editStudentProfile('@User.Identity.Name')" />
-    </div>
-    <div class="form-group">
-        <input type="button" value="Anulează" class="btn btn-outline-primary float-right" ng-click="backToStudentProfile()" />
-    </div>
-</form>
+    <input type="button" value="Salvează" class="btn btn-outline-primary" ng-click="editStudentProfile('@User.Identity.Name',studentDetails,selectedStudyYear)" />
+    <input type="button" value="Anulează" class="btn btn-outline-primary float-right" ng-click="backToStudentProfile()" />
+</div>

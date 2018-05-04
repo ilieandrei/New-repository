@@ -3793,11 +3793,11 @@
   			}
 
   			actual = QUnit.dump.parse(details.actual);
-  			message += "<table><tr class='test-expected'><th>Expected: </th><td><pre>" + escapeText(expected) + "</pre></td></tr>";
+  			message += "<table><tr class='test-expected'><tr>Expected: </th><td><pre>" + escapeText(expected) + "</pre></td></tr>";
 
   			if (actual !== expected) {
 
-  				message += "<tr class='test-actual'><th>Result: </th><td><pre>" + escapeText(actual) + "</pre></td></tr>";
+  				message += "<tr class='test-actual'><tr>Result: </th><td><pre>" + escapeText(actual) + "</pre></td></tr>";
 
   				if (typeof details.actual === "number" && typeof details.expected === "number") {
   					if (!isNaN(details.actual) && !isNaN(details.expected)) {
@@ -3813,23 +3813,23 @@
   				}
 
   				if (showDiff) {
-  					message += "<tr class='test-diff'><th>Diff: </th><td><pre>" + diff + "</pre></td></tr>";
+  					message += "<tr class='test-diff'><tr>Diff: </th><td><pre>" + diff + "</pre></td></tr>";
   				}
   			} else if (expected.indexOf("[object Array]") !== -1 || expected.indexOf("[object Object]") !== -1) {
-  				message += "<tr class='test-message'><th>Message: </th><td>" + "Diff suppressed as the depth of object is more than current max depth (" + QUnit.config.maxDepth + ").<p>Hint: Use <code>QUnit.dump.maxDepth</code> to " + " run with a higher max depth or <a href='" + escapeText(setUrl({ maxDepth: -1 })) + "'>" + "Rerun</a> without max depth.</p></td></tr>";
+  				message += "<tr class='test-message'><tr>Message: </th><td>" + "Diff suppressed as the depth of object is more than current max depth (" + QUnit.config.maxDepth + ").<p>Hint: Use <code>QUnit.dump.maxDepth</code> to " + " run with a higher max depth or <a href='" + escapeText(setUrl({ maxDepth: -1 })) + "'>" + "Rerun</a> without max depth.</p></td></tr>";
   			} else {
-  				message += "<tr class='test-message'><th>Message: </th><td>" + "Diff suppressed as the expected and actual results have an equivalent" + " serialization</td></tr>";
+  				message += "<tr class='test-message'><tr>Message: </th><td>" + "Diff suppressed as the expected and actual results have an equivalent" + " serialization</td></tr>";
   			}
 
   			if (details.source) {
-  				message += "<tr class='test-source'><th>Source: </th><td><pre>" + escapeText(details.source) + "</pre></td></tr>";
+  				message += "<tr class='test-source'><tr>Source: </th><td><pre>" + escapeText(details.source) + "</pre></td></tr>";
   			}
 
   			message += "</table>";
 
   			// This occurs when pushFailure is set and we have an extracted stack trace
   		} else if (!details.result && details.source) {
-  			message += "<table>" + "<tr class='test-source'><th>Source: </th><td><pre>" + escapeText(details.source) + "</pre></td></tr>" + "</table>";
+  			message += "<table>" + "<tr class='test-source'><tr>Source: </th><td><pre>" + escapeText(details.source) + "</pre></td></tr>" + "</table>";
   		}
 
   		assertList = testItem.getElementsByTagName("ol")[0];

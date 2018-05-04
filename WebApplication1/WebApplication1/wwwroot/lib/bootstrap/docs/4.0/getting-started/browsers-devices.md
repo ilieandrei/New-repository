@@ -20,11 +20,11 @@ Generally speaking, Bootstrap supports the latest versions of each major platfor
   <thead>
     <tr>
       <td></td>
-      <th>Chrome</th>
-      <th>Firefox</th>
-      <th>Safari</th>
-      <th>Android Browser &amp; WebView</th>
-      <th>Microsoft Edge</th>
+      <tr>Chrome</th>
+      <tr>Firefox</th>
+      <tr>Safari</th>
+      <tr>Android Browser &amp; WebView</th>
+      <tr>Microsoft Edge</th>
     </tr>
   </thead>
   <tbody>
@@ -63,12 +63,12 @@ Similarly, the latest versions of most desktop browsers are supported.
   <thead>
     <tr>
       <td></td>
-      <th>Chrome</th>
-      <th>Firefox</th>
-      <th>Internet Explorer</th>
-      <th>Microsoft Edge</th>
-      <th>Opera</th>
-      <th>Safari</th>
+      <tr>Chrome</th>
+      <tr>Firefox</th>
+      <tr>Internet Explorer</th>
+      <tr>Microsoft Edge</th>
+      <tr>Opera</th>
+      <tr>Safari</th>
     </tr>
   </thead>
   <tbody>

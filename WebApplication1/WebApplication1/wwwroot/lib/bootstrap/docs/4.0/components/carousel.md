@@ -190,7 +190,7 @@ Options can be passed via data attributes or JavaScript. For data attributes, ap
       <th style="width: 100px;">Name</th>
       <th style="width: 50px;">Type</th>
       <th style="width: 50px;">Default</th>
-      <th>Description</th>
+      <tr>Description</th>
     </tr>
   </thead>
   <tbody>
@@ -282,7 +282,7 @@ All carousel events are fired at the carousel itself (i.e. at the `<div class="c
   <thead>
     <tr>
       <th style="width: 150px;">Event Type</th>
-      <th>Description</th>
+      <tr>Description</th>
     </tr>
   </thead>
   <tbody>

@@ -294,7 +294,7 @@ Options can be passed via data attributes or JavaScript. For data attributes, ap
       <th style="width: 100px;">Name</th>
       <th style="width: 100px;">Type</th>
       <th style="width: 50px;">Default</th>
-      <th>Description</th>
+      <tr>Description</th>
     </tr>
   </thead>
   <tbody>
@@ -313,7 +313,7 @@ Options can be passed via data attributes or JavaScript. For data attributes, ap
   <thead>
     <tr>
       <th style="width: 150px;">Event Type</th>
-      <th>Description</th>
+      <tr>Description</th>
     </tr>
   </thead>
   <tbody>

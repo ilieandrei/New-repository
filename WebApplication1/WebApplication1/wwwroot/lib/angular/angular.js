@@ -21065,7 +21065,7 @@ function $FilterProvider($provide) {
 
        <label>Search: <input ng-model="searchText"></label>
        <table id="searchTextResults">
-         <tr><th>Name</th><th>Phone</th></tr>
+         <tr><tr>Name</th><tr>Phone</th></tr>
          <tr ng-repeat="friend in friends | filter:searchText">
            <td>{{friend.name}}</td>
            <td>{{friend.phone}}</td>
@@ -21077,7 +21077,7 @@ function $FilterProvider($provide) {
        <label>Phone only <input ng-model="search.phone"></label><br>
        <label>Equality <input type="checkbox" ng-model="strict"></label><br>
        <table id="searchObjResults">
-         <tr><th>Name</th><th>Phone</th></tr>
+         <tr><tr>Name</th><tr>Phone</th></tr>
          <tr ng-repeat="friendObj in friends | filter:search:strict">
            <td>{{friendObj.name}}</td>
            <td>{{friendObj.phone}}</td>
@@ -22254,9 +22254,9 @@ function sliceFn(input, begin, end) {
        <div ng-controller="ExampleController">
          <table class="friends">
            <tr>
-             <th>Name</th>
-             <th>Phone Number</th>
-             <th>Age</th>
+             <tr>Name</th>
+             <tr>Phone Number</th>
+             <tr>Age</th>
            </tr>
            <tr ng-repeat="friend in friends | orderBy:'-age'">
              <td>{{friend.name}}</td>
@@ -22324,15 +22324,15 @@ function sliceFn(input, begin, end) {
          <hr/>
          <table class="friends">
            <tr>
-             <th>
+             <tr>
                <button ng-click="sortBy('name')">Name</button>
                <span class="sortorder" ng-show="propertyName === 'name'" ng-class="{reverse: reverse}"></span>
              </th>
-             <th>
+             <tr>
                <button ng-click="sortBy('phone')">Phone Number</button>
                <span class="sortorder" ng-show="propertyName === 'phone'" ng-class="{reverse: reverse}"></span>
              </th>
-             <th>
+             <tr>
                <button ng-click="sortBy('age')">Age</button>
                <span class="sortorder" ng-show="propertyName === 'age'" ng-class="{reverse: reverse}"></span>
              </th>
@@ -22456,15 +22456,15 @@ function sliceFn(input, begin, end) {
          <hr/>
          <table class="friends">
            <tr>
-             <th>
+             <tr>
                <button ng-click="sortBy('name')">Name</button>
                <span class="sortorder" ng-show="propertyName === 'name'" ng-class="{reverse: reverse}"></span>
              </th>
-             <th>
+             <tr>
                <button ng-click="sortBy('phone')">Phone Number</button>
                <span class="sortorder" ng-show="propertyName === 'phone'" ng-class="{reverse: reverse}"></span>
              </th>
-             <th>
+             <tr>
                <button ng-click="sortBy('age')">Age</button>
                <span class="sortorder" ng-show="propertyName === 'age'" ng-class="{reverse: reverse}"></span>
              </th>
@@ -22589,8 +22589,8 @@ function sliceFn(input, begin, end) {
            <h3>Locale-sensitive Comparator</h3>
            <table class="friends">
              <tr>
-               <th>Name</th>
-               <th>Favorite Letter</th>
+               <tr>Name</th>
+               <tr>Favorite Letter</th>
              </tr>
              <tr ng-repeat="friend in friends | orderBy:'favoriteLetter':false:localeSensitiveComparator">
                <td>{{friend.name}}</td>
@@ -22602,8 +22602,8 @@ function sliceFn(input, begin, end) {
            <h3>Default Comparator</h3>
            <table class="friends">
              <tr>
-               <th>Name</th>
-               <th>Favorite Letter</th>
+               <tr>Name</th>
+               <tr>Favorite Letter</th>
              </tr>
              <tr ng-repeat="friend in friends | orderBy:'favoriteLetter'">
                <td>{{friend.name}}</td>
