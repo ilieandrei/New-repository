@@ -129,4 +129,140 @@ app.service('myService', function ($http, $q) {
     this.getCurrentTab = function (param) {
         return $http.get('User/GetCurrentTab');
     };
+
+    this.setCurrentTimetableId = function (currentTimetableId) {
+        return $http.post('QuestionAnswer/SetCurrentTimetableId?currentTimetableId=' + currentTimetableId);
+    };
+
+    this.getCurrentTimetableId = function (param) {
+        return $http.get('QuestionAnswer/GetCurrentTimetableId');
+    };
+
+    this.getTeacherCourses = function (username, timetableId) {
+        return $http.get('QuestionAnswer/GetTeacherCourses?username=' + username + '&timetableId=' + timetableId);
+    };
+
+    this.addTeacherCourse = function (courseModel) {
+        return $.ajax({
+            type: "POST",
+            data: courseModel,
+            url: "QuestionAnswer/AddTeacherCourse",
+            contentType: 'application/x-www-form-urlencoded',
+            dataType: 'json'
+        });
+    };
+
+    this.setCurrentCourseId = function (currentCourseId) {
+        return $http.post('QuestionAnswer/SetCurrentCourseId?currentCourseId=' + currentCourseId);
+    };
+
+    this.getCurrentCourseId = function (param) {
+        return $http.get('QuestionAnswer/GetCurrentCourseId');
+    };
+
+    this.addCourseQuestion = function (questionModel) {
+        return $.ajax({
+            type: "POST",
+            data: questionModel,
+            url: "QuestionAnswer/AddQuestion",
+            contentType: 'application/x-www-form-urlencoded',
+            dataType: 'json'
+        });
+    };
+
+    this.getCourseQuestions = function (courseId) {
+        return $http.get('QuestionAnswer/GetQuestions?courseId=' + courseId);
+    };
+
+    this.editTeacherCourse = function (courseId, courseName) {
+        return $http.post('QuestionAnswer/EditCourse?courseId=' + courseId + '&courseName=' + courseName);
+    };
+
+    this.deleteTeacherCourse = function (courseId) {
+        return $http.post('QuestionAnswer/DeleteCourse?courseId=' + courseId);
+    };
+
+    this.editCourseQuestion = function (questionModel) {
+        return $.ajax({
+            type: "POST",
+            data: questionModel,
+            url: "QuestionAnswer/EditQuestion",
+            contentType: 'application/x-www-form-urlencoded',
+            dataType: 'json'
+        });
+    };
+
+    this.deleteCourseQuestion = function (questionId) {
+        return $http.post('QuestionAnswer/DeleteQuestion?questionId=' + questionId);
+    };
+
+    this.getStudentCourses = function (timetableId, teacherName) {
+        return $http.get('QuestionAnswer/GetStudentCourses?timetableId=' + timetableId + '&teacherName=' + teacherName);
+    };
+
+    this.setCurrentStudentTimetable = function (currentTimetableId, currentTeacherName) {
+        return $http.post('QuestionAnswer/SetCurrentStudentTimetable?currentTimetableId=' + currentTimetableId + '&currentTeacherName=' + currentTeacherName);
+    };
+
+    this.getCurrentStudentTimetable = function (param) {
+        return $http.get('QuestionAnswer/GetCurrentStudentTimetable');
+    };
+
+    this.getStudentQuestion = function (courseId) {
+        return $http.get('QuestionAnswer/GetQuestion?courseId=' + courseId);
+    };
+
+    this.launchQuestion = function (questionId) {
+        return $http.post('QuestionAnswer/LaunchQuestion?questionId=' + questionId);
+    };
+
+    this.stopTime = function (questionId) {
+        return $http.post('QuestionAnswer/StopTime?questionId=' + questionId);
+    };
+
+    this.addCourseAnswer = function (answerModel) {
+        return $.ajax({
+            type: "POST",
+            data: answerModel,
+            url: "QuestionAnswer/AddAnswer",
+            contentType: 'application/x-www-form-urlencoded',
+            dataType: 'json'
+        });
+    };
+
+    this.getTeacherAnswers = function (questionId) {
+        return $http.get('QuestionAnswer/GetAnswers?questionId=' + questionId);
+    };
+
+    this.rateAnswer = function (answerId, answerRate) {
+        return $http.post('QuestionAnswer/RateAnswer?answerId=' + answerId + '&answerRate=' + answerRate);
+    };
+
+    this.deleteAnswer = function (answerId) {
+        return $http.post('QuestionAnswer/DeleteAnswer?answerId=' + answerId);
+    };
+
+    this.getStudentStatus = function (username, courseId) {
+        return $http.get('Student/GetStudentStatus?username=' + username + '&courseId=' + courseId);
+    };
+
+    this.getStatusTimetable = function (username) {
+        return $http.get('Student/GetStatusTimetable?username=' + username);
+    };
+
+    this.getStatusCourse = function (timetableId) {
+        return $http.get('Student/GetStatusCourse?timetableId=' + timetableId);
+    };
+
+    this.getTeacherStatus = function (username, courseId) {
+        return $http.get('Teacher/GetTeacherStatus?username=' + username + '&courseId=' + courseId);
+    };
+
+    this.getTeacherStatusTimetable = function (username) {
+        return $http.get('Teacher/GetStatusTimetable?username=' + username);
+    };
+
+    this.getTeacherStatusCourse = function (timetableId) {
+        return $http.get('Teacher/GetStatusCourse?timetableId=' + timetableId);
+    };
 });

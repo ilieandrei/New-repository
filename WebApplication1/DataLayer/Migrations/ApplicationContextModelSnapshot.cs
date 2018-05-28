@@ -20,6 +20,30 @@ namespace DataLayer.Migrations
                 .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("DataLayer.Entities.Answer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AnswerName");
+
+                    b.Property<DateTime>("AnswerTime");
+
+                    b.Property<Guid?>("QuestionId");
+
+                    b.Property<double>("Rating");
+
+                    b.Property<Guid?>("StudentId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuestionId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("Answers");
+                });
+
             modelBuilder.Entity("DataLayer.Entities.Chat", b =>
                 {
                     b.Property<Guid>("Id")
@@ -40,6 +64,28 @@ namespace DataLayer.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Chats");
+                });
+
+            modelBuilder.Entity("DataLayer.Entities.Question", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AnswerTime");
+
+                    b.Property<Guid?>("CourseId");
+
+                    b.Property<bool>("IsLaunched");
+
+                    b.Property<DateTime>("LaunchTime");
+
+                    b.Property<string>("QuestionName");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("Questions");
                 });
 
             modelBuilder.Entity("DataLayer.Entities.Student", b =>
@@ -82,6 +128,26 @@ namespace DataLayer.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Teachers");
+                });
+
+            modelBuilder.Entity("DataLayer.Entities.TeacherCourse", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("TeacherId");
+
+                    b.Property<Guid?>("TimetableId");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TeacherId");
+
+                    b.HasIndex("TimetableId");
+
+                    b.ToTable("TeacherCourses");
                 });
 
             modelBuilder.Entity("DataLayer.Entities.Timetable", b =>
@@ -128,6 +194,17 @@ namespace DataLayer.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("DataLayer.Entities.Answer", b =>
+                {
+                    b.HasOne("DataLayer.Entities.Question", "Question")
+                        .WithMany()
+                        .HasForeignKey("QuestionId");
+
+                    b.HasOne("DataLayer.Entities.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId");
+                });
+
             modelBuilder.Entity("DataLayer.Entities.Chat", b =>
                 {
                     b.HasOne("DataLayer.Entities.Timetable", "Timetable")
@@ -137,6 +214,13 @@ namespace DataLayer.Migrations
                     b.HasOne("DataLayer.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("DataLayer.Entities.Question", b =>
+                {
+                    b.HasOne("DataLayer.Entities.TeacherCourse", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId");
                 });
 
             modelBuilder.Entity("DataLayer.Entities.Student", b =>
@@ -151,6 +235,17 @@ namespace DataLayer.Migrations
                     b.HasOne("DataLayer.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("DataLayer.Entities.TeacherCourse", b =>
+                {
+                    b.HasOne("DataLayer.Entities.Teacher", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId");
+
+                    b.HasOne("DataLayer.Entities.Timetable", "Timetable")
+                        .WithMany()
+                        .HasForeignKey("TimetableId");
                 });
 #pragma warning restore 612, 618
         }

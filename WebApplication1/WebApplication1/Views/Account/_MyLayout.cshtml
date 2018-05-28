@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/myStyleSheet.css" />
         <script src="~/lib/angular/angular.min.js"></script>
         <script src="~/lib/angular-route/angular-route.js"></script>
         <script src="~/lib/angularjs-md5/src/angularjs-md5.js"></script>
@@ -19,6 +20,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <link href="~/lib/components-font-awesome/css/fontawesome-all.css" rel="stylesheet">
+        <link rel="stylesheet" href="~/lib/angular-rateit/dist/ng-rateit.css" />
+        <script src="~/lib/angular-rateit/dist/ng-rateit.js"></script>
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -58,6 +61,9 @@
                         <li class="nav-item">
                             <a id="studentTimetableTabId" class="nav-link" href="#!studentTimetable" style="color:black" ng-click="studentTimetableTab()">Orar</a>
                         </li>
+                        <li class="nav-item">
+                            <a id="studentStatusTabId" class="nav-link" href="#!studentStatus" style="color:black" ng-click="studentStatusTab()">Status</a>
+                        </li>
                     </ul>
                 </div>
                 <div ng-switch-when="Teacher">
@@ -69,7 +75,7 @@
                             <a id="teacherTimetableTabId" class="nav-link" href="#!teacherTimetable" style="color:black" ng-click="teacherTimetableTab()">Orar</a>
                         </li>
                         <li class="nav-item">
-                            <a id="href3" class="nav-link" href="#!teacherStatus" style="color:black">Status</a>
+                            <a id="teacherStatusTabId" class="nav-link" href="#!teacherStatus" style="color:black" ng-click="teacherStatusTab()">Status</a>
                         </li>
                     </ul>
                 </div>

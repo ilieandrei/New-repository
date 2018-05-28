@@ -10,7 +10,7 @@
             <div class="carousel-item active">
                 <div class="card text-center">
                     <div class="card-body table-primary">
-                        <h3 class="card-title text-primary">
+                        <h3 class="card-title text-primary courseTitle" ng-click="navigateToCourses(teacherDailyTimetable[0].id)">
                             {{teacherDailyTimetable[0].name}}
                         </h3>
                         <h5 class="card-subtitle">
@@ -26,7 +26,7 @@
             <div class="carousel-item" ng-repeat="item in teacherDailyTimetable" ng-if="$index>0">
                 <div class="card text-center">
                     <div class="card-body table-primary">
-                        <h3 class="card-title text-primary">
+                        <h3 class="card-title text-primary courseTitle" ng-click="navigateToCourses(item.id)">
                             {{item.name}}
                         </h3>
                         <h5 class="card-subtitle">
@@ -52,27 +52,4 @@
 
     <br />
     <input type="button" value="Orar complet" class="btn btn-outline-primary" ng-click="teacherCompleteTimetablePath()" />
-
-    @*<p>Aici va aparea orarul profesorului</p>
-        <button ng-click="teacherTimetableValue('@User.Identity.Name')">Afiseaza orar</button>
-        <p>{{teacherTimetable}}</p>
-        <p>{{teacherDailyTimetable}}</p>*@
-
-    <hr />
-    @*<p>Daily Timetable: {{teacherDailyTimetable}}</p>
-        <p>From: {{startDate}}</p>
-        <p>To: {{endDate}}</p>
-        <p>Session is open: {{sessionIsOpen}}</p>
-        <p>Current course: {{currentCourseName}}</p>
-        <p>Current course ID: {{timetableId}}</p>*@
-    <p>Called for {{time1}} milliseconds</p>
-    <div ng-show="showChat">
-        <input type="text" ng-model="chatMessage" />
-        <button ng-click="postChatMessage('@User.Identity.Name')">Post message</button>
-        <p>{{chatPostResponse}}</p>
-        <ul>
-            <li ng-repeat="message in chatMessages">->{{message}}</li>
-        </ul>
-    </div>
-    <p ng-show="!showChat">Nu exista sesiuni active</p>
 </div>

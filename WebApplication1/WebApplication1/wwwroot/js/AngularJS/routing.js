@@ -1,4 +1,4 @@
-﻿var app = angular.module("myApp", ['ngRoute', 'angularjs-md5']);
+﻿var app = angular.module("myApp", ['ngRoute', 'angularjs-md5', 'ngRateIt']);
 app.config(function ($routeProvider) {
     $routeProvider
         .when("/", {
@@ -36,5 +36,29 @@ app.config(function ($routeProvider) {
         .when("/studentFullTimetable", {
             templateUrl: "/Account/StudentFullTimetable",
             controller: "studentController"
+        })
+        .when("/teacherCourses", {
+            templateUrl: "/Account/TeacherCourses",
+            controller: "teacherController"
+        })
+        .when("/studentAnswer", {
+            templateUrl: "/Account/StudentAnswer",
+            controller: "studentController"
+        })
+        .when("/studentCourses", {
+            templateUrl: "/Account/StudentCourses",
+            controller: "studentController"
+        })
+        .when("/teacherAnswers", {
+            templateUrl: "/Account/TeacherAnswers",
+            controller: "teacherController"
+        })
+        .when("/studentStatus", {
+            templateUrl: "/Account/StudentStatus",
+            controller: "studentController"
+        })
+        .when("/teacherStatus", {
+            templateUrl: "/Account/TeacherStatus",
+            controller: "teacherController"
         });
 });

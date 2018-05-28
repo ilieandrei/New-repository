@@ -7,9 +7,9 @@ C:\Users\Andrei G\Desktop\Documente Licenta\Licenta2018\New-repository\WebApplic
 C:\Users\Andrei G\Desktop\Documente Licenta\Licenta2018\New-repository\WebApplication1\WebApplication1\bin\Debug\netcoreapp2.0\DataLayer.pdb
 C:\Users\Andrei G\Desktop\Documente Licenta\Licenta2018\New-repository\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.0\WebApplication1.csprojResolveAssemblyReference.cache
 C:\Users\Andrei G\Desktop\Documente Licenta\Licenta2018\New-repository\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.0\WebApplication1.csproj.CoreCompileInputs.cache
+C:\Users\Andrei G\Desktop\Documente Licenta\Licenta2018\New-repository\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
 C:\Users\Andrei G\Desktop\Documente Licenta\Licenta2018\New-repository\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.0\WebApplication1.AssemblyInfoInputs.cache
 C:\Users\Andrei G\Desktop\Documente Licenta\Licenta2018\New-repository\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.0\WebApplication1.AssemblyInfo.cs
 C:\Users\Andrei G\Desktop\Documente Licenta\Licenta2018\New-repository\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.0\WebApplication1.csproj.CopyComplete
 C:\Users\Andrei G\Desktop\Documente Licenta\Licenta2018\New-repository\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.0\WebApplication1.dll
 C:\Users\Andrei G\Desktop\Documente Licenta\Licenta2018\New-repository\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.0\WebApplication1.pdb
-C:\Users\Andrei G\Desktop\Documente Licenta\Licenta2018\New-repository\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs

@@ -1,0 +1,88 @@
+﻿
+<div ng-init="studentStatusDetails('@User.Identity.Name')">
+    <br />
+    <div class="accordion" id="accordionTimetable">
+        <div class="card" ng-repeat="timetable in studentStatusTimetable">
+            <div class="card-header" id="headingT{{$index}}">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseT{{$index}}"
+                            aria-expanded="true" aria-controls="collapseT{{$index}}" ng-click="showTimetableCourses(timetable.id)">
+                        {{timetable.timetable}}
+                    </button>
+                    <span class="badge badge-primary">
+                        {{timetable.points}}
+                    </span>
+                </h5>
+            </div>
+            <div id="collapseT{{$index}}" class="collapse" aria-labelledby="headingT{{$index}}" data-parent="#accordionTimetable">
+                <div class="card-body">
+
+                    <p class="text-danger" ng-hide="existsStatusCourses">
+                        {{noStatusCourses}}
+                    </p>
+                    <div class="accordion" id="accordionCourses" ng-show="existsStatusCourses">
+                        <div class="card" ng-repeat="course in studentStatusCourses">
+                            <div class="card-header" id="headingC{{$index}}">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link text-success" type="button" data-toggle="collapse" data-target="#collapseC{{$index}}"
+                                            aria-expanded="true" aria-controls="collapseC{{$index}}" ng-click="showCourseStatus(course.id, '@User.Identity.Name')">
+                                        {{course.course}}
+                                    </button>
+                                    <span class="badge badge-dark">
+                                        {{course.points}}
+                                    </span>
+                                </h5>
+                            </div>
+                            <div id="collapseC{{$index}}" class="collapse" aria-labelledby="headingC{{$index}}" data-parent="#accordionCourses">
+                                <div class="card-body">
+
+                                    <p class="text-danger" ng-hide="existsStatus">
+                                        {{noStatus}}
+                                    </p>
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-bordered" ng-show="existsStatus">
+                                            <thead class="alert-primary text-center">
+                                                <tr>
+                                                    <th>
+                                                        Întrebare
+                                                    </th>
+                                                    <th>
+                                                        Profesor
+                                                    </th>
+                                                    <th>
+                                                        Răpuns
+                                                    </th>
+                                                    <th>
+                                                        Puncte
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="text-center">
+                                                <tr ng-repeat="item in studentStatus">
+                                                    <td>
+                                                        {{item.question}}
+                                                    </td>
+                                                    <td>
+                                                        {{item.teacher}}
+                                                    </td>
+                                                    <td>
+                                                        {{item.answer}}
+                                                    </td>
+                                                    <td>
+                                                        <ng-rate-it ng-model="item.rating" read-only="true"></ng-rate-it>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

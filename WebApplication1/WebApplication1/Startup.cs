@@ -49,7 +49,7 @@ namespace WebApplication1
             services.AddDistributedMemoryCache();
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.IdleTimeout = TimeSpan.FromHours(5);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.Name = ".FiiActiv.Session";
             });

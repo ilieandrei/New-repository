@@ -103,6 +103,31 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        public IActionResult TeacherCourses()
+        {
+            return View();
+        }
+
+        public IActionResult StudentAnswer()
+        {
+            return View();
+        }
+
+        public IActionResult StudentCourses()
+        {
+            return View();
+        }
+
+        public IActionResult TeacherAnswers()
+        {
+            return View();
+        }
+
+        public IActionResult StudentStatus()
+        {
+            return View();
+        }
+
         public AccountController(IGenericRepository<User, Guid> userRepository, IGenericRepository<Student, Guid> studentRepository, IGenericRepository<Teacher, Guid> teacherRepository)
         {
             _userRepository = userRepository;

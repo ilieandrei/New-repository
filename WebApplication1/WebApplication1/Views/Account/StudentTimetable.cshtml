@@ -20,10 +20,12 @@
                         <p class="card-text text-info">
                             Profesor:
                             <span ng-repeat="teacherItem in studentDailyTimetable[0].teacher" ng-hide="$last">
-                                <b>{{teacherItem}} | </b>
+                                <b class="courseTitle" ng-click="navigateToCourses(studentDailyTimetable[0].id, teacherItem)">{{teacherItem}} | </b>
                             </span>
                             <span>
-                                <b>{{studentDailyTimetable[0].teacher[studentDailyTimetable[0].teacher.length-1]}}</b>
+                                <b class="courseTitle" ng-click="navigateToCourses(studentDailyTimetable[0].id, studentDailyTimetable[0].teacher[studentDailyTimetable[0].teacher.length-1])">
+                                    {{studentDailyTimetable[0].teacher[studentDailyTimetable[0].teacher.length-1]}}
+                                </b>
                             </span>
                         </p>
                         <p class="card-text text-info">
@@ -46,10 +48,10 @@
                         <p class="card-text text-info">
                             Profesor:
                             <span ng-repeat="teacherItem in item.teacher" ng-hide="$last">
-                                <b>{{teacherItem}} | </b>
+                                <b class="courseTitle" ng-click="navigateToCourses(item.id, teacherItem)">{{teacherItem}} | </b>
                             </span>
                             <span>
-                                <b>{{item.teacher[item.teacher.length-1]}}</b>
+                                <b class="courseTitle" ng-click="navigateToCourses(item.id, item.teacher[item.teacher.length-1])">{{item.teacher[item.teacher.length-1]}}</b>
                             </span>
                         </p>
                         <p class="card-text text-info">
@@ -73,25 +75,3 @@
     <br />
     <input type="button" value="Orar complet" class="btn btn-outline-primary" ng-click="studentCompleteTimetablePath()" />
 </div>
-@*<p>Aici va aparea orarul studentului</p>
-<button ng-click="studentTimetableValue('@User.Identity.Name')">Afiseaza orar</button>
-<p>{{studentTimetable}}</p>
-<p>{{studentDailyTimetable}}</p>
-
-<hr />
-<p>Daily Timetable: {{studentDailyTimetable}}</p>
-    <p>From: {{startDate}}</p>
-    <p>To: {{endDate}}</p>
-    <p>Session is open: {{sessionIsOpen}}</p>
-    <p>Current course: {{currentCourseName}}</p>
-    <p>Current course ID: {{timetableId}}</p>
-<p>Called for {{time1}} milliseconds</p>
-<div ng-show="showChat">
-    <input type="text" ng-model="chatMessage" />
-    <button ng-click="postChatMessage('@User.Identity.Name')">Post message</button>
-    <p>{{chatPostResponse}}</p>
-    <ul>
-        <li ng-repeat="message in chatMessages">->{{message}}</li>
-    </ul>
-</div>
-<p ng-show="!showChat">Nu exista sesiuni active</p>*@

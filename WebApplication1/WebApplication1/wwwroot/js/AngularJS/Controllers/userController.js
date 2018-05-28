@@ -9,7 +9,7 @@ function userController($scope, $http, $location, myService) {
                 $scope.usrRole = response.data;
                 $scope.showBarItem = true;
                 myService.getCurrentTab("").then(function (response1) {
-                    if (response1.data != "No content") {
+                    if (response1.data !== "No content") {
                         document.getElementById(response1.data).classList.add("active");
                         document.getElementById(response1.data).classList.add("text-primary");
                     }
@@ -38,6 +38,16 @@ function userController($scope, $http, $location, myService) {
     };
     $scope.studentTimetableTab = function () {
         myService.setCurrentTab("studentTimetableTabId").then(function (response) {
+        }, function (response) {
+        });
+    };
+    $scope.studentStatusTab = function () {
+        myService.setCurrentTab("studentStatusTabId").then(function (response) {
+        }, function (response) {
+        });
+    };
+    $scope.teacherStatusTab = function () {
+        myService.setCurrentTab("teacherStatusTabId").then(function (response) {
         }, function (response) {
         });
     };
