@@ -1,9 +1,11 @@
 ﻿using DataLayer.Entities;
 using DataLayer.Repositories;
 using HtmlAgilityPack;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
 using WebApplication1.Models;
@@ -14,102 +16,142 @@ namespace WebApplication1.Controllers.api
     public class AdminController : ApiController
     {
         private readonly IGenericRepository<Timetable, Guid> _timetableRepository;
+        private readonly IGenericRepository<TeacherCourse, Guid> _courseRepository;
+        private readonly IGenericRepository<Question, Guid> _questionRepository;
+        private readonly IGenericRepository<Answer, Guid> _answerRepository;
+        private readonly IGenericRepository<User, Guid> _userRepository;
+        private readonly IGenericRepository<Student, Guid> _studentRepository;
+        private readonly IGenericRepository<Teacher, Guid> _teacherRepository;
 
-        public AdminController(IGenericRepository<Timetable, Guid> timetableRepository)
+        public AdminController
+            (
+            IGenericRepository<Timetable, Guid> timetableRepository,
+            IGenericRepository<TeacherCourse, Guid> courseRepository,
+            IGenericRepository<Question, Guid> questionRepository,
+            IGenericRepository<Answer, Guid> answerRepository,
+            IGenericRepository<User, Guid> userRepository,
+            IGenericRepository<Student, Guid> studentRepository,
+            IGenericRepository<Teacher, Guid> teacherRepository
+            )
         {
             _timetableRepository = timetableRepository;
+            _courseRepository = courseRepository;
+            _questionRepository = questionRepository;
+            _answerRepository = answerRepository;
+            _userRepository = userRepository;
+            _studentRepository = studentRepository;
+            _teacherRepository = teacherRepository;
         }
 
-        public AdminTimetableModel GetTimetable()
+        public AdminTimetableModel UpdateTimetable()
         {
-            /*var orar1 = getTimetableByYear("https://profs.info.uaic.ro/~orar/participanti/orar_I1.html");
-            var orar2 = getTimetableByYear("https://profs.info.uaic.ro/~orar/participanti/orar_I2.html");
-            var orar3 = getTimetableByYear("https://profs.info.uaic.ro/~orar/participanti/orar_I3.html");
-            string result = "Orar an 1\n";*/
-            /*for (int i = 0; i < orar1.GetLength(0); i++)
-            {
-                if (orar1[i, 5] != "Curs" || orar1[i, 6] == "&nbsp;;")
-                    continue;
-                Timetable timetable = new Timetable
-                {
-                    Id = new Guid(),
-                    Day = orar1[i, 0],
-                    From = orar1[i, 1],
-                    To = orar1[i, 2],
-                    Group = orar1[i, 3],
-                    Name = orar1[i, 4],
-                    Teacher = orar1[i, 6],
-                    Hall = orar1[i, 7],
-                    Week = orar1[i, 8],
-                    Pack = orar1[i, 9]
-                };
-                _timetableRepository.Add(timetable);
-                _timetableRepository.Save();
-                result += timetable.Day + " | " + timetable.From + " | " + timetable.To + " | " + timetable.Group
-                    + " | " + timetable.Name + " | " + timetable.Teacher + " | " + timetable.Hall + " | " + timetable.Week + " | "
-                    + " | " + timetable.Pack + "\n";
-            }
-            for (int i = 0; i < orar2.GetLength(0); i++)
-            {
-                if (orar2[i, 5] != "Curs" || orar2[i, 6] == "&nbsp;;")
-                    continue;
-                Timetable timetable = new Timetable
-                {
-                    Id = new Guid(),
-                    Day = orar2[i, 0],
-                    From = orar2[i, 1],
-                    To = orar2[i, 2],
-                    Group = orar2[i, 3],
-                    Name = orar2[i, 4],
-                    Teacher = orar2[i, 6],
-                    Hall = orar2[i, 7],
-                    Week = orar2[i, 8],
-                    Pack = orar2[i, 9]
-                };
-                _timetableRepository.Add(timetable);
-                _timetableRepository.Save();
-                result += timetable.Day + " | " + timetable.From + " | " + timetable.To + " | " + timetable.Group
-                    + " | " + timetable.Name + " | " + timetable.Teacher + " | " + timetable.Hall + " | " + timetable.Week + " | "
-                    + " | " + timetable.Pack + "\n";
-            }
-            for (int i = 0; i < orar3.GetLength(0); i++)
-            {
-                if (orar3[i, 5] != "Curs" || orar3[i, 6] == "&nbsp;;")
-                    continue;
-                Timetable timetable = new Timetable
-                {
-                    Id = new Guid(),
-                    Day = orar3[i, 0],
-                    From = orar3[i, 1],
-                    To = orar3[i, 2],
-                    Group = orar3[i, 3],
-                    Name = orar3[i, 4],
-                    Teacher = orar3[i, 6],
-                    Hall = orar3[i, 7],
-                    Week = orar3[i, 8],
-                    Pack = orar3[i, 9]
-                };
-                _timetableRepository.Add(timetable);
-                _timetableRepository.Save();
-                result += timetable.Day + " | " + timetable.From + " | " + timetable.To + " | " + timetable.Group
-                    + " | " + timetable.Name + " | " + timetable.Teacher + " | " + timetable.Hall + " | " + timetable.Week + " | "
-                    + " | " + timetable.Pack + "\n";
-            }*/
-            var timetaleEntries = _timetableRepository.GetAll().ToList();
-            if (timetaleEntries.Count != 0)
-                foreach (var item in timetaleEntries)
-                {
-                    _timetableRepository.Delete(item);
-                    _timetableRepository.Save();
-                }
             TimetableService timetableService = new TimetableService();
-            foreach(var item in timetableService.timetables)
+            foreach (var item in timetableService.timetables)
             {
                 _timetableRepository.Add(item);
                 _timetableRepository.Save();
             }
             AdminTimetableModel adminTimetableModel = new AdminTimetableModel(timetableService.timetables);
             return adminTimetableModel;
+        }
+
+        public AdminTimetableModel GetTimetable()
+        {
+            var timetable = _timetableRepository.GetAll().ToList();
+            return new AdminTimetableModel(timetable);
+        }
+
+        public AdminTimetableModel RefreshTimetable()
+        {
+            var timetableEntries = _timetableRepository.GetAllNoTracking().ToList();
+            TimetableService timetableService = new TimetableService();
+            foreach (var item in timetableEntries)
+            {
+                var timetableToRefresh = timetableService.timetables.FirstOrDefault(x =>
+                x.Group == item.Group && x.Name == item.Name && x.Teacher == item.Teacher);
+                timetableToRefresh.Id = item.Id;
+                _timetableRepository.Edit(timetableToRefresh);
+                _timetableRepository.Save();
+            }
+            AdminTimetableModel adminTimetableModel = new AdminTimetableModel(timetableService.timetables);
+            return adminTimetableModel;
+        }
+
+        [HttpPost]
+        public HttpStatusCode DeleteAnswers()
+        {
+            var answers = _answerRepository.GetAll().ToList();
+            foreach (var item in answers)
+            {
+                _answerRepository.Delete(item);
+                _answerRepository.Save();
+            }
+            return HttpStatusCode.OK;
+        }
+
+        [HttpPost]
+        public HttpStatusCode DeleteQuestions()
+        {
+            var questions = _questionRepository.GetAll().ToList();
+            foreach (var item in questions)
+            {
+                _questionRepository.Delete(item);
+                _questionRepository.Save();
+            }
+            return HttpStatusCode.OK;
+        }
+
+        [HttpPost]
+        public HttpStatusCode DeleteCourses()
+        {
+            var courses = _courseRepository.GetAll().ToList();
+            foreach (var item in courses)
+            {
+                _courseRepository.Delete(item);
+                _courseRepository.Save();
+            }
+            return HttpStatusCode.OK;
+        }
+
+        [HttpPost]
+        public HttpStatusCode DeleteTimetables()
+        {
+            var timetables = _timetableRepository.GetAll().ToList();
+            foreach (var item in timetables)
+            {
+                _timetableRepository.Delete(item);
+                _timetableRepository.Save();
+            }
+            return HttpStatusCode.OK;
+        }
+
+        public List<AdminUsersModel> GetUsers()
+        {
+            var students = _studentRepository.GetAll().Include(x => x.User).ToList();
+            var teachers = _teacherRepository.GetAll().Include(x => x.User).ToList();
+            return _userRepository.GetAll().Where(x => x.Role != "Administrator").Select(x => new AdminUsersModel(x, students, teachers)).ToList();
+        }
+
+        [HttpPost]
+        [Route("/{username}")]
+        public HttpStatusCode BlockUser(string username)
+        {
+            var user = _userRepository.GetAll().FirstOrDefault(x => x.Username == username);
+            user.IsBlocked = true;
+            _userRepository.Edit(user);
+            _userRepository.Save();
+            return HttpStatusCode.OK;
+        }
+
+        [HttpPost]
+        [Route("/{username}")]
+        public HttpStatusCode UnlockUser(string username)
+        {
+            var user = _userRepository.GetAll().FirstOrDefault(x => x.Username == username);
+            user.IsBlocked = false;
+            _userRepository.Edit(user);
+            _userRepository.Save();
+            return HttpStatusCode.OK;
         }
     }
 }

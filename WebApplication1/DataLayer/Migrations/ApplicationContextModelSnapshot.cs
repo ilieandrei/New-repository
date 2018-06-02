@@ -44,28 +44,6 @@ namespace DataLayer.Migrations
                     b.ToTable("Answers");
                 });
 
-            modelBuilder.Entity("DataLayer.Entities.Chat", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Message");
-
-                    b.Property<DateTime>("PostTime");
-
-                    b.Property<Guid?>("TimetableId");
-
-                    b.Property<Guid?>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TimetableId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Chats");
-                });
-
             modelBuilder.Entity("DataLayer.Entities.Question", b =>
                 {
                     b.Property<Guid>("Id")
@@ -93,8 +71,6 @@ namespace DataLayer.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Email");
-
                     b.Property<string>("FullName");
 
                     b.Property<string>("Group");
@@ -114,8 +90,6 @@ namespace DataLayer.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Email");
 
                     b.Property<string>("FullName");
 
@@ -183,6 +157,8 @@ namespace DataLayer.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<bool>("IsBlocked");
+
                     b.Property<string>("Password");
 
                     b.Property<string>("Role");
@@ -203,17 +179,6 @@ namespace DataLayer.Migrations
                     b.HasOne("DataLayer.Entities.Student", "Student")
                         .WithMany()
                         .HasForeignKey("StudentId");
-                });
-
-            modelBuilder.Entity("DataLayer.Entities.Chat", b =>
-                {
-                    b.HasOne("DataLayer.Entities.Timetable", "Timetable")
-                        .WithMany()
-                        .HasForeignKey("TimetableId");
-
-                    b.HasOne("DataLayer.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("DataLayer.Entities.Question", b =>

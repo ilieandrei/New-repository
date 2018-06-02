@@ -1,0 +1,51 @@
+﻿
+<div ng-init="studentTimetableValue('@User.Identity.Name')">
+    <br />
+    <div class="table-responsive">
+        <table class="table table-sm table-bordered">
+            <thead class="alert-primary text-center">
+                <tr>
+                    <th>
+                        Ziua
+                    </th>
+                    <th>
+                        Interval orar
+                    </th>
+                    <th>
+                        Profesor
+                    </th>
+                    <th>
+                        Titlu curs
+                    </th>
+                    <th>
+                        Sala
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                <tr ng-repeat="item in studentTimetable">
+                    <td>
+                        {{item.day}}
+                    </td>
+                    <td>
+                        {{item.from}} {{item.to}}
+                    </td>
+                    <td>
+                        <p ng-repeat="teacherItem in item.teacher">
+                            {{teacherItem}}
+                        </p>
+                    </td>
+                    <td>
+                        {{item.name}}
+                    </td>
+                    <td>
+                        {{item.hall}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<br />
+<input type="button" value="Înapoi" class="btn btn-outline-primary" ng-click="backToStudentDailyTimetable()" />

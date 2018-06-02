@@ -58,7 +58,6 @@ namespace WebApplication1.Controllers.api
             student.FullName = studentModel.FullName;
             student.Year = studentModel.Year;
             student.Group = studentModel.Group;
-            student.Email = studentModel.Email;
             _studentRepository.Edit(student);
             _studentRepository.Save();
             return HttpStatusCode.OK;
@@ -72,7 +71,6 @@ namespace WebApplication1.Controllers.api
             {
                 Id = Guid.NewGuid(),
                 FullName = studentModel.FullName,
-                Email = studentModel.Email,
                 Year = studentModel.Year,
                 Group = studentModel.Group,
                 User = user
@@ -102,17 +100,19 @@ namespace WebApplication1.Controllers.api
             var studentTimetable = _timetableRepository.GetAll()
                 .Where(x => (x.Group == ("I" + student.Year) || x.Group == ("I" + student.Year + student.Group[0])));
             List<StudentStatusTimetableModel> studentStatusTimetables = studentTimetable
-                .Select(x => new StudentStatusTimetableModel(x, answers)).ToList();
+                .Select(x => new StudentStatusTimetableModel(x, student, answers)).ToList();
             return studentStatusTimetables;
         }
 
-        [Route("/{timetableId}")]
-        public List<StudentStatusCourseModel> GetStatusCourse(string timetableId)
+        [Route("/{timetableId}/{username}")]
+        public List<StudentStatusCourseModel> GetStatusCourse(string timetableId, string username)
         {
+            var user = _userRepository.GetAll().FirstOrDefault(x => x.Username == username);
+            var student = _studentRepository.GetAll().Include(x => x.User).FirstOrDefault(x => x.User == user);
             var timetable = _timetableRepository.GetAll().FirstOrDefault(x => x.Id == Guid.Parse(timetableId));
             var answers = _answerRepository.GetAll().Include(x => x.Question).ThenInclude(x => x.Course).ToList();
             List<StudentStatusCourseModel> studentStatusCourses = _courseRepository.GetAll()
-                .Where(x => x.Timetable == timetable).Select(x => new StudentStatusCourseModel(x, answers)).ToList();
+                .Where(x => x.Timetable == timetable).Select(x => new StudentStatusCourseModel(x, student, answers)).ToList();
             return studentStatusCourses;
         }
 
@@ -120,7 +120,7 @@ namespace WebApplication1.Controllers.api
         public List<StudentStatusModel> GetStudentStatus(string username, string courseId)
         {
             var user = _userRepository.GetAll().Where(x => x.Username == username).FirstOrDefault();
-            var student = _studentRepository.GetAll().FirstOrDefault(x => x.User == user);
+            var student = _studentRepository.GetAll().Include(x => x.User).FirstOrDefault(x => x.User == user);
             var course = _courseRepository.GetAll().FirstOrDefault(x => x.Id == Guid.Parse(courseId));
             /*var result = _answerRepository.GetAll()
                 .Include(x => x.Question).ThenInclude(x => x.Course).ThenInclude(x => x.Timetable)

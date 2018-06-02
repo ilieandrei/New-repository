@@ -1,0 +1,61 @@
+﻿<div ng-init="getUsersValue()">
+    <br />
+
+    <p ng-hide="isInUpdate">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Caută în tabel" ng-model="searchPattern"
+                   aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2">Caută</span>
+            </div>
+        </div>
+    </p>
+
+    <div class="table-responsive">
+        <table class="table table-sm table-bordered">
+            <thead class="alert-primary text-center">
+                <tr>
+                    <th>
+                        Nume utilizator
+                    </th>
+                    <th>
+                        Nume complet
+                    </th>
+                    <th>
+                        Tip utilizator
+                    </th>
+                    <th>
+                        Fără acces
+                    </th>
+                    <th>
+                        Blochează
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                <tr ng-repeat="item in users | filter:searchPattern">
+                    <td>
+                        {{item.username}}
+                    </td>
+                    <td>
+                        {{item.fullName}}
+                    </td>
+                    <td>
+                        {{item.role}}
+                    </td>
+                    <td>
+                        {{item.isBlocked}}
+                    </td>
+                    <td>
+                        <button class="btn btn-link" type="button" ng-show="item.isBlocked===false" ng-click="blockUser(item.username)">
+                            Blochează
+                        </button>
+                        <button class="btn btn-link" type="button" ng-hide="item.isBlocked===false" ng-click="unlockUser(item.username)">
+                            Deblochează
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

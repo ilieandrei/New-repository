@@ -127,6 +127,7 @@ namespace WebApplication1.Models
 
         public AdminTimetableModel(List<Timetable> timetables)
         {
+            timetableModels = new List<TimetableModel>();
             foreach (var item in timetables)
             {
                 timetableModels.Add(new TimetableModel

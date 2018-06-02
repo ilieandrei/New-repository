@@ -1,0 +1,15 @@
+﻿
+<div ng-init="teacherProfileValue('@User.Identity.Name')">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <p>Funcţie: <b class="text-primary">{{teacherDetails.teacherTitle}}</b></p>
+        </li>
+        <li class="list-group-item">
+            <p>Nume: <b class="text-primary">{{teacherDetails.teacherFullName}}</b></p>
+        </li>
+    </ul>
+    <hr />
+    <div class="form-group">
+        <input type="button" value="Editează" class="btn btn-outline-primary" ng-click="editTeacherProfilePage()" />
+    </div>
+</div>

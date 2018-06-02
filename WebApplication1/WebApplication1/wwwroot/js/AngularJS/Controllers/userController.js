@@ -21,6 +21,7 @@ function userController($scope, $http, $location, myService) {
     };
 
 
+
     $scope.teacherProfileTab = function () {
         myService.setCurrentTab("teacherProfileTabId").then(function (response) {
         }, function (response) {
@@ -48,6 +49,16 @@ function userController($scope, $http, $location, myService) {
     };
     $scope.teacherStatusTab = function () {
         myService.setCurrentTab("teacherStatusTabId").then(function (response) {
+        }, function (response) {
+        });
+    };
+    $scope.adminTimetableTab = function () {
+        myService.setCurrentTab("adminTimetableTabId").then(function (response) {
+        }, function (response) {
+        });
+    };
+    $scope.adminUsersTab = function () {
+        myService.setCurrentTab("adminUsersTabId").then(function (response) {
         }, function (response) {
         });
     };

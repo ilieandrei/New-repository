@@ -1,0 +1,106 @@
+﻿
+<div ng-init="getTimetableValue()">
+    <br />
+    <input type="button" value="Reîmprospătează" class="btn btn-outline-primary" ng-click="refreshTimetable()"
+           ng-hide="isInUpdate" />
+    <input type="button" value="Actualizează" class="btn btn-outline-primary" ng-click="uptadeTimetable()"
+           ng-hide="isInUpdate" />
+    <p class="text-danger">
+        {{pleaseWait}}
+    </p>
+
+    <div ng-show="isInUpdate">
+        <p class="text-primary">
+            {{uptadeWarningMessage}}
+        </p>
+        <p class="text-danger">
+            {{deletingAnswersMessage}}
+        </p>
+        <p class="text-success">
+            {{answersDeletedMessage}}
+        </p>
+        <p class="text-danger">
+            {{deletingQuestionsMessage}}
+        </p>
+        <p class="text-success">
+            {{questionsDeletedMessage}}
+        </p>
+        <p class="text-danger">
+            {{deletingCoursesMessage}}
+        </p>
+        <p class="text-success">
+            {{coursesDeletedMessage}}
+        </p>
+        <p class="text-danger">
+            {{deletingTimetablesMessage}}
+        </p>
+        <p class="text-success">
+            {{timetablesDeletedMessage}}
+        </p>
+        <p class="text-danger">
+            {{updatingTimetableMessage}}
+        </p>
+        <p class="text-primary">
+            {{timetableUpdatedMessage}}
+        </p>
+    </div>
+
+    <p ng-hide="isInUpdate">
+        <div class="input-group mb-3" ng-hide="isInUpdate">
+            <input type="text" class="form-control" placeholder="Caută în tabel" ng-model="searchPattern"
+                   aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2">Caută</span>
+            </div>
+        </div>
+    </p>
+
+    <div class="table-responsive" ng-hide="isInUpdate">
+        <table class="table table-sm table-bordered">
+            <thead class="alert-primary text-center">
+                <tr>
+                    <th>
+                        Ziua
+                    </th>
+                    <th>
+                        Interval orar
+                    </th>
+                    <th>
+                        Grupa
+                    </th>
+                    <th>
+                        Titlu curs
+                    </th>
+                    <th>
+                        Profesor
+                    </th>
+                    <th>
+                        Sala
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                <tr ng-repeat="item in timetable.timetableModels | filter:searchPattern">
+                    <td>
+                        {{item.day}}
+                    </td>
+                    <td>
+                        {{item.from}} {{item.to}}
+                    </td>
+                    <td>
+                        {{item.group}}
+                    </td>
+                    <td>
+                        {{item.name}}
+                    </td>
+                    <td>
+                        {{item.teacher}}
+                    </td>
+                    <td>
+                        {{item.hall}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

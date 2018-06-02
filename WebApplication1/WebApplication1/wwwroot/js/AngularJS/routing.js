@@ -6,59 +6,71 @@ app.config(function ($routeProvider) {
             controller: "userController"
         })
         .when("/studentTimetable", {
-            templateUrl: "/Account/StudentTimetable",
+            templateUrl: "/Student/StudentTimetable",
             controller: "studentController"
         })
         .when("/teacherTimetable", {
-            templateUrl: "/Account/TeacherTimetable",
+            templateUrl: "/Teacher/TeacherTimetable",
             controller: "teacherController"
         })
         .when("/studentProfile", {
-            templateUrl: "/Account/StudentProfile",
+            templateUrl: "/Student/StudentProfile",
             controller: "studentController"
         })
         .when("/studentProfileSettings", {
-            templateUrl: "/Account/StudentProfileSettings",
+            templateUrl: "/Student/StudentProfileSettings",
             controller: "studentController"
         })
         .when("/teacherProfile", {
-            templateUrl: "/Account/TeacherProfile",
+            templateUrl: "/Teacher/TeacherProfile",
             controller: "teacherController"
         })
         .when("/teacherProfileSettings", {
-            templateUrl: "/Account/TeacherProfileSettings",
+            templateUrl: "/Teacher/TeacherProfileSettings",
             controller: "teacherController"
         })
         .when("/teacherFullTimetable", {
-            templateUrl: "/Account/TeacherFullTimetable",
+            templateUrl: "/Teacher/TeacherFullTimetable",
             controller: "teacherController"
         })
         .when("/studentFullTimetable", {
-            templateUrl: "/Account/StudentFullTimetable",
+            templateUrl: "/Student/StudentFullTimetable",
             controller: "studentController"
         })
         .when("/teacherCourses", {
-            templateUrl: "/Account/TeacherCourses",
+            templateUrl: "/Teacher/TeacherCourses",
             controller: "teacherController"
         })
         .when("/studentAnswer", {
-            templateUrl: "/Account/StudentAnswer",
+            templateUrl: "/Student/StudentAnswer",
             controller: "studentController"
         })
         .when("/studentCourses", {
-            templateUrl: "/Account/StudentCourses",
+            templateUrl: "/Student/StudentCourses",
             controller: "studentController"
         })
         .when("/teacherAnswers", {
-            templateUrl: "/Account/TeacherAnswers",
+            templateUrl: "/Teacher/TeacherAnswers",
             controller: "teacherController"
         })
         .when("/studentStatus", {
-            templateUrl: "/Account/StudentStatus",
+            templateUrl: "/Student/StudentStatus",
             controller: "studentController"
         })
         .when("/teacherStatus", {
-            templateUrl: "/Account/TeacherStatus",
+            templateUrl: "/Teacher/TeacherStatus",
+            controller: "teacherController"
+        })
+        .when("/adminTimetable", {
+            templateUrl: "/Administrator/AdminTimetable",
+            controller: "adminController"
+        })
+        .when("/adminUsers", {
+            templateUrl: "/Administrator/AdminUsers",
+            controller: "adminController"
+        })
+        .when("/studentsStatus", {
+            templateUrl: "/Teacher/StudentsStatus",
             controller: "teacherController"
         });
 });

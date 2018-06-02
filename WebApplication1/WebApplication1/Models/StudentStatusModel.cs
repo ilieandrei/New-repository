@@ -31,11 +31,11 @@ namespace WebApplication1.Models
         public string Timetable { get; set; }
         public double Points { get; set; }
 
-        public StudentStatusTimetableModel(Timetable timetable, List<Answer> answers)
+        public StudentStatusTimetableModel(Timetable timetable, Student student, List<Answer> answers)
         {
             Id = timetable.Id;
             Timetable = timetable.Name;
-            Points = answers.Where(x => x.Question.Course.Timetable == timetable).Sum(x => x.Rating);
+            Points = answers.Where(x => x.Question.Course.Timetable == timetable && x.Student == student).Sum(x => x.Rating);
         }
 
         public StudentStatusTimetableModel()
@@ -48,11 +48,11 @@ namespace WebApplication1.Models
         public string Course { get; set; }
         public double Points { get; set; }
 
-        public StudentStatusCourseModel(TeacherCourse course, List<Answer> answers)
+        public StudentStatusCourseModel(TeacherCourse course, Student student, List<Answer> answers)
         {
             Id = course.Id;
             Course = course.Title;
-            Points = answers.Where(x => x.Question.Course == course).Sum(x => x.Rating);
+            Points = answers.Where(x => x.Question.Course == course && x.Student == student).Sum(x => x.Rating);
         }
 
         public StudentStatusCourseModel()

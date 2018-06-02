@@ -8,7 +8,6 @@ namespace WebApplication1.Models
 {
     public class StudentModel
     {
-        public string Email { get; set; }
         public string FullName { get; set; }
         public string Year { get; set; }
         public string Group { get; set; }
@@ -16,7 +15,6 @@ namespace WebApplication1.Models
 
         public StudentModel(Student student)
         {
-            Email = student.Email;
             FullName = student.FullName;
             Year = student.Year;
             Group = student.Group;

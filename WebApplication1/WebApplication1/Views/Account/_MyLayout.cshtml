@@ -16,7 +16,6 @@
         <script src="~/js/AngularJS/Controllers/adminController.js"></script>
         <script src="~/js/AngularJS/Controllers/studentController.js"></script>
         <script src="~/js/AngularJS/Controllers/teacherController.js"></script>
-        <script src="~/js/AngularJS/Controllers/routeController.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <link href="~/lib/components-font-awesome/css/fontawesome-all.css" rel="stylesheet">
@@ -76,6 +75,16 @@
                         </li>
                         <li class="nav-item">
                             <a id="teacherStatusTabId" class="nav-link" href="#!teacherStatus" style="color:black" ng-click="teacherStatusTab()">Status</a>
+                        </li>
+                    </ul>
+                </div>
+                <div ng-switch-when="Administrator">
+                    <ul class="nav nav-tabs nav-fill w-100" data-toggle="buttons">
+                        <li class="nav-item">
+                            <a id="adminTimetableTabId" class="nav-link" href="#!adminTimetable" style="color:black" ng-click="adminTimetableTab()">Orar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="adminUsersTabId" class="nav-link" href="#!adminUsers" style="color:black" ng-click="adminUsersTab()">Utilizatori</a>
                         </li>
                     </ul>
                 </div>

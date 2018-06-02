@@ -3,11 +3,21 @@
     ViewData["Title"] = "ProfileRegister";
     Layout = null;
 }
+<!DOCTYPE html>
+<html ng-app="myApp">
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="~/lib/angular/angular.js"></script>
+    <script src="~/lib/angular-route/angular-route.js"></script>
+    <script src="~/lib/angularjs-md5/src/angularjs-md5.js"></script>
+    <script src="~/js/AngularJS/routing.js"></script>
+    <script src="~/js/AngularJS/services.js"></script>
+    <script src="~/js/AngularJS/Controllers/userController.js"></script>
+    <link rel="stylesheet" href="~/lib/angular-rateit/dist/ng-rateit.css" />
+    <script src="~/lib/angular-rateit/dist/ng-rateit.js"></script>
 </head>
 
-<body>
+<body ng-controller="userController">
 
     <br /><br /><br />
     <div class="container">
@@ -39,9 +49,6 @@
                                             <input class="form-group" type="text" name="completeName" placeholder="Nume complet" autofocus required />
                                         </div>
                                         <div class="form-group">
-                                            <input class="form-group" type="text" name="email" placeholder="E-mail" required />
-                                        </div>
-                                        <div class="form-group">
                                             <input class="form-group" type="text" name="studyYear" placeholder="An studiu" required />
                                         </div>
                                         <div class="form-group">
@@ -64,9 +71,6 @@
                                         <div class="form-group">
                                             <input class="form-group" type="text" name="completeName" placeholder="Nume complet" required />
                                         </div>
-                                        <div class="form-group">
-                                            <input class="form-group" type="text" name="email" placeholder="E-mail" required />
-                                        </div>
                                         <hr />
                                         <input type="submit" value="Salvează" class="btn btn-outline-primary" />
                                         <br />
@@ -83,3 +87,4 @@
     </div>
 
 </body>
+</html>

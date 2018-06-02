@@ -53,81 +53,6 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Login", "Account");
         }
 
-        public IActionResult StudentProfile()
-        {
-            return View();
-        }
-
-        public IActionResult StudentProfileSettings()
-        {
-            return View();
-        }
-
-        public IActionResult StudentTimetable()
-        {
-            return View();
-        }
-
-        public IActionResult TeacherProfile()
-        {
-            return View();
-        }
-
-        public IActionResult TeacherProfileSettings()
-        {
-            return View();
-        }
-
-        public IActionResult TeacherTimetable()
-        {
-            return View();
-        }
-
-        public IActionResult TeacherStatus()
-        {
-            return View();
-        }
-
-        public IActionResult Administrator()
-        {
-            return View();
-        }
-
-        public IActionResult TeacherFullTimetable()
-        {
-            return View();
-        }
-
-        public IActionResult StudentFullTimetable()
-        {
-            return View();
-        }
-
-        public IActionResult TeacherCourses()
-        {
-            return View();
-        }
-
-        public IActionResult StudentAnswer()
-        {
-            return View();
-        }
-
-        public IActionResult StudentCourses()
-        {
-            return View();
-        }
-
-        public IActionResult TeacherAnswers()
-        {
-            return View();
-        }
-
-        public IActionResult StudentStatus()
-        {
-            return View();
-        }
-
         public AccountController(IGenericRepository<User, Guid> userRepository, IGenericRepository<Student, Guid> studentRepository, IGenericRepository<Teacher, Guid> teacherRepository)
         {
             _userRepository = userRepository;
@@ -169,14 +94,14 @@ namespace WebApplication1.Controllers
             MD5 md5Hash = MD5.Create();
             string hashPassword = GetMd5Hash(md5Hash, password);
             var user = _userRepository.GetAll().FirstOrDefault(x => x.Username == username);
-            if (user == null)
+            if (user == null || user.Password != hashPassword)
             {
-                ModelState.AddModelError("LoginError", "Utilizatorul nu există!");
+                ModelState.AddModelError("LoginError", "Numele de utilizator sau parola sunt incorecte!");
                 return View();
             }
-            if (user.Password != hashPassword)
+            if (user.IsBlocked == true)
             {
-                ModelState.AddModelError("LoginError", "Parolă incorectă!");
+                ModelState.AddModelError("LoginError", "Nu aveți permisiuni pentru a accesa aplicația!");
                 return View();
             }
             var claims = new List<Claim>
@@ -185,8 +110,6 @@ namespace WebApplication1.Controllers
             };
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-            if (username == "admin")
-                return RedirectToAction("Administrator", "Account");
             return RedirectToAction("Index", "Account");
         }
 
@@ -197,14 +120,13 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public IActionResult StudentRegister(string username, string completeName, string email, string studyYear, string studentGroup)
+        public IActionResult StudentRegister(string username, string completeName, string studyYear, string studentGroup)
         {
             var studentProfile = new Student()
             {
                 Id = new Guid(),
                 User = _userRepository.GetAll().FirstOrDefault(x => x.Username == username),
                 FullName = completeName,
-                Email = email,
                 Year = studyYear,
                 Group = studentGroup
             };
@@ -218,15 +140,14 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public IActionResult TeacherRegister(string username, string title, string completeName, string email)
+        public IActionResult TeacherRegister(string username, string title, string completeName)
         {
             var teacherProfile = new Teacher()
             {
                 Id = new Guid(),
                 User = _userRepository.GetAll().FirstOrDefault(x => x.Username == username),
                 Function = title,
-                FullName = completeName,
-                Email = email
+                FullName = completeName
             };
             var user = _userRepository.GetAll().FirstOrDefault(x => x.Username == username);
             if (user != null)

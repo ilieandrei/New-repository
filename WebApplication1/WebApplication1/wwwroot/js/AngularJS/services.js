@@ -250,8 +250,8 @@ app.service('myService', function ($http, $q) {
         return $http.get('Student/GetStatusTimetable?username=' + username);
     };
 
-    this.getStatusCourse = function (timetableId) {
-        return $http.get('Student/GetStatusCourse?timetableId=' + timetableId);
+    this.getStatusCourse = function (timetableId, username) {
+        return $http.get('Student/GetStatusCourse?timetableId=' + timetableId + '&username=' + username);
     };
 
     this.getTeacherStatus = function (username, courseId) {
@@ -264,5 +264,45 @@ app.service('myService', function ($http, $q) {
 
     this.getTeacherStatusCourse = function (timetableId) {
         return $http.get('Teacher/GetStatusCourse?timetableId=' + timetableId);
+    };
+
+    this.refreshFullTimetale = function () {
+        return $http.get('/Admin/RefreshTimetable');
+    };
+
+    this.deleteAnswers = function () {
+        return $http.get('/Admin/DeleteAnswers');
+    };
+
+    this.deleteQuestions = function () {
+        return $http.get('/Admin/DeleteQuestions');
+    };
+
+    this.deleteCourses = function () {
+        return $http.get('/Admin/DeleteCourses');
+    };
+
+    this.deleteTimetables = function () {
+        return $http.get('/Admin/DeleteTimetables');
+    };
+
+    this.updateTimetable = function () {
+        return $http.get('/Admin/UpdateTimetable');
+    };
+
+    this.getUsers = function () {
+        return $http.get('/Admin/GetUsers');
+    };
+
+    this.blockUser = function (username) {
+        return $http.get('/Admin/BlockUser?username=' + username);
+    };
+
+    this.unlockUser = function (username) {
+        return $http.get('/Admin/UnlockUser?username=' + username);
+    };
+
+    this.getStudentsStatus = function (timetableId) {
+        return $http.get('/Teacher/GetStudentsStatus?timetableId=' + timetableId);
     };
 });

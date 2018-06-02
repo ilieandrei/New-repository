@@ -22,6 +22,8 @@ namespace DataLayer.Repositories
 
         public virtual IQueryable<T> GetAll() => CurrentContext().Set<T>();
 
+        public virtual IQueryable<T> GetAllNoTracking() => CurrentContext().Set<T>().AsNoTracking();
+
         public IQueryable<T> FindBy(System.Linq.Expressions.Expression<Func<T, bool>> predicate) => CurrentContext().Set<T>().Where(predicate);
 
         public virtual void Add(T entity) => CurrentContext().Set<T>().Add(entity);

@@ -17,7 +17,6 @@ namespace DataLayer
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Timetable> Timetables { get; set; }
-        public DbSet<Chat> Chats { get; set; }
         public DbSet<TeacherCourse> TeacherCourses { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }

@@ -29,11 +29,13 @@ namespace WebApplication1.Models
     {
         public Guid Id { get; set; }
         public string Timetable { get; set; }
+        public string Group { get; set; }
 
         public TeacherStatusTimetableModel(Timetable timetable)
         {
             Id = timetable.Id;
             Timetable = timetable.Name;
+            Group = timetable.Group;
         }
 
         public TeacherStatusTimetableModel()
@@ -53,5 +55,19 @@ namespace WebApplication1.Models
 
         public TeacherStatusCourseModel()
         { }
+    }
+
+    public class TeacherStatusStudentsModel
+    {
+        public string Student { get; set; }
+        public double Points { get; set; }
+        public int TotalAnswers { get; set; }
+
+        public TeacherStatusStudentsModel(Student student, List<Answer> answers, Timetable timetable)
+        {
+            Student = student.FullName;
+            Points = answers.Where(x => x.Student == student && x.Question.Course.Timetable == timetable).Sum(x => x.Rating);
+            TotalAnswers = answers.Where(x => x.Student == student && x.Question.Course.Timetable == timetable).Count();
+        }
     }
 }

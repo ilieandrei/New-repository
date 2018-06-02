@@ -139,6 +139,7 @@ namespace WebApplication1.Services
 
         public TimetableService()
         {
+            timetables = new List<Timetable>();
             var timetable1 = GetTimetableByYear("https://profs.info.uaic.ro/~orar/participanti/orar_I1.html");
             var timetable2 = GetTimetableByYear("https://profs.info.uaic.ro/~orar/participanti/orar_I2.html");
             var timetable3 = GetTimetableByYear("https://profs.info.uaic.ro/~orar/participanti/orar_I3.html");

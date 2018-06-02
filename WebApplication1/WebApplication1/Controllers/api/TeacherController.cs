@@ -55,7 +55,6 @@ namespace WebApplication1.Controllers.api
 
             teacher.FullName = teacherModel.FullName;
             teacher.Function = teacherModel.Function;
-            teacher.Email = teacherModel.Email;
             _teacherRepository.Edit(teacher);
             _teacherRepository.Save();
             return HttpStatusCode.OK;
@@ -69,7 +68,6 @@ namespace WebApplication1.Controllers.api
             {
                 Id = Guid.NewGuid(),
                 FullName = teacherModel.FullName,
-                Email = teacherModel.Email,
                 Function = teacherModel.Function,
                 User = user
             };
@@ -116,12 +114,24 @@ namespace WebApplication1.Controllers.api
             var user = _userRepository.GetAll().Where(x => x.Username == username).FirstOrDefault();
             var course = _courseRepository.GetAll().FirstOrDefault(x => x.Id == Guid.Parse(courseId));
             var result = _answerRepository.GetAll()
-                .Include(x=>x.Question).ThenInclude(x=>x.Course)
-                .Include(x => x.Question).Include(x=>x.Student)
+                .Include(x => x.Question).ThenInclude(x => x.Course)
+                .Include(x => x.Question).Include(x => x.Student)
                 .Where(x => x.Question.Course == course)
                 .Select(x => new TeacherStatusModel(x))
                 .ToList();
             return result;
+        }
+
+        [Route("/{timetableId}")]
+        public List<TeacherStatusStudentsModel> GetStudentsStatus(string timetableId)
+        {
+            var timetable = _timetableRepository.GetAll().FirstOrDefault(x => x.Id == Guid.Parse(timetableId));
+            var answers = _answerRepository.GetAll().Include(x => x.Question).ThenInclude(x => x.Course).ThenInclude(x => x.Timetable).ToList();
+            var students = _studentRepository.GetAll().Where(x => timetable.Group.Contains(x.Year) && timetable.Group.Contains(x.Group[0])).ToList();
+            List<TeacherStatusStudentsModel> teacherStatusStudents = new List<TeacherStatusStudentsModel>();
+            foreach (var item in students)
+                teacherStatusStudents.Add(new TeacherStatusStudentsModel(item, answers, timetable));
+            return teacherStatusStudents;
         }
     }
 }

@@ -22,8 +22,7 @@ function teacherController($scope, $http, $location, $timeout, myService) {
         myService.getTeacherProfile(username).then(function (response) {
             $scope.teacherDetails = {
                 teacherTitle: response.data.function,
-                teacherFullName: response.data.fullName,
-                teacherMail: response.data.email
+                teacherFullName: response.data.fullName
             };
         }, function (response) {
         });
@@ -35,7 +34,6 @@ function teacherController($scope, $http, $location, $timeout, myService) {
 
     $scope.editTeacherProfile = function (username, teacherDetails) {
         var data = {
-            Email: $scope.teacherDetails.teacherMail,
             FullName: $scope.teacherDetails.teacherFullName,
             Function: $scope.teacherDetails.teacherTitle,
             Username: username
@@ -55,7 +53,7 @@ function teacherController($scope, $http, $location, $timeout, myService) {
     $scope.teacherTimetableValue = function (username) {
         myService.getTeacherTimetable(username).then(function (response) {
             $scope.teacherTimetable = response.data.timetables;
-            $scope.teacherTimetable[0].day = "Luni";
+            //$scope.teacherTimetable[0].day = "Sambata";
             $scope.teacherDailyTimetable = [];
             var days = ["Duminica", "Luni", "Marti", "Miercuri", "Joi", "Vineri", "Sambata"];
             for (var i = 0; i < $scope.teacherTimetable.length; i++) {
@@ -200,7 +198,7 @@ function teacherController($scope, $http, $location, $timeout, myService) {
     $scope.launchQuestion = function (question, username) {
         myService.launchQuestion(question.id).then(function (response) {
             console.log("question is launched!");
-            $scope.time = question.answerTime * 1000;
+            $scope.time = question.answerTime * 1000 * 60;
             var timer = function () {
                 if ($scope.time > 0) {
                     $scope.questionIsLaunched = true;
@@ -319,6 +317,23 @@ function teacherController($scope, $http, $location, $timeout, myService) {
         }, function (response) {
             $scope.existsStatus = false;
             $scope.noStatus = "Nu există întrebări";
+        });
+    };
+
+    $scope.navigateToStudentsStatus = function () {
+        $location.path('studentsStatus');
+    };
+
+    $scope.navigateToTeacherStatus = function () {
+        $location.path('teacherStatus');
+    };
+
+    $scope.showTimetableStudents = function (timetableId) {
+        myService.getStudentsStatus(timetableId).then(function (response) {
+            $scope.existsStatusCourses = true;
+            $scope.studentsStatus = response.data;
+        }, function (response) {
+            $scope.existsStatusCourses = false;
         });
     };
 }

@@ -19,10 +19,6 @@
         </div>
         <br />
         <div class="form-group">
-            <input type="text" placeholder="E-mail" ng-model="student.email" required />
-        </div>
-        <br />
-        <div class="form-group">
             <input type="text" placeholder="An studiu" ng-model="student.year" required />
         </div>
         <br />
@@ -31,7 +27,7 @@
         </div>
         <br />
         <hr />
-        <input type="button" value="Salvează" class="btn btn-default" ng-click="registerStudentProfile(student)" />
+        <input type="button" value="Salvează" class="btn btn-default" ng-click="registerStudentProfile(student, '@User.Identity.Name')" />
         <br />
     </div>
     <div ng-switch-when="teacher">
@@ -42,12 +38,8 @@
         <div class="form-group">
             <input type="text" placeholder="Nume complet" ng-model="teacher.fullname" required />
         </div>
-        <br />
-        <div class="form-group">
-            <input type="text" placeholder="E-mail" ng-model="teacher.email" required />
-        </div>
         <hr />
-        <input type="button" value="Salvează" class="btn btn-default" ng-click="registerTeacherProfile(teacher)" />
+        <input type="button" value="Salvează" class="btn btn-default" ng-click="registerTeacherProfile(teacher, '@User.Identity.Name')" />
         <br />
     </div>
 </div>

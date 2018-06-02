@@ -11,8 +11,7 @@ function studentController($scope, $http, $location, $timeout, myService) {
                 studentFullName: response.data.fullName,
                 studyYear: response.data.year,
                 studentHalfyear: response.data.group[0],
-                studentGroup: response.data.group[1],
-                studentMail: response.data.email
+                studentGroup: response.data.group[1]
             };
         }, function (response) {
         });
@@ -24,7 +23,6 @@ function studentController($scope, $http, $location, $timeout, myService) {
 
     $scope.editStudentProfile = function (username, studentDetails) {
         var data = {
-            Email: studentDetails.studentMail,
             FullName: studentDetails.studentFullName,
             Year: studentDetails.studyYear,
             Group: studentDetails.studentHalfyear + studentDetails.studentGroup,
@@ -51,11 +49,11 @@ function studentController($scope, $http, $location, $timeout, myService) {
     $scope.studentTimetableValue = function (username) {
         myService.getStudentTimetable(username).then(function (response) {
             $scope.studentTimetable = response.data.timetables;
-            $scope.studentTimetable[0].day = "Luni";
-            $scope.studentTimetable[1].day = "Luni";
-            $scope.studentTimetable[2].day = "Luni";
-            $scope.studentTimetable[3].day = "Luni";
-            $scope.studentTimetable[4].day = "Luni";
+            //$scope.studentTimetable[0].day = "Sambata";
+            //$scope.studentTimetable[1].day = "Sambata";
+            //$scope.studentTimetable[2].day = "Sambata";
+            //$scope.studentTimetable[3].day = "Sambata";
+            //$scope.studentTimetable[4].day = "Sambata";
             for (let i = 0; i < $scope.studentTimetable.length; i++) {
                 $scope.studentTimetable[i].teacher = $scope.studentTimetable[i].teacher.split(';');//replace(/;/g, " | ");
                 $scope.studentTimetable[i].teacher.pop();
@@ -121,7 +119,7 @@ function studentController($scope, $http, $location, $timeout, myService) {
                 } else {
                     $scope.courseQuestion = response1.data;
                     $scope.difTime = new Date().getTime() - new Date($scope.courseQuestion.launchTime).getTime();
-                    $scope.time = $scope.courseQuestion.answerTime * 1000 - $scope.difTime;
+                    $scope.time = $scope.courseQuestion.answerTime * 1000 * 60 - $scope.difTime;
                     var timer = function () {
                         if ($scope.time > 0) {
                             $scope.questionIsLaunched = true;
@@ -164,8 +162,8 @@ function studentController($scope, $http, $location, $timeout, myService) {
         }, function (response) { });
     };
 
-    $scope.showTimetableCourses = function (timetableId) {
-        myService.getStatusCourse(timetableId).then(function (response) {
+    $scope.showTimetableCourses = function (timetableId, username) {
+        myService.getStatusCourse(timetableId, username).then(function (response) {
             if (response.data.length === 0) {
                 $scope.existsStatusCourses = false;
                 $scope.noStatusCourses = "Nu există cursuri";
