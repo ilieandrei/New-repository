@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication1", "WebAppli
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLayer", "DataLayer\DataLayer.csproj", "{E117969B-1CB7-4D67-837A-1A6E09FEFE4E}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Licenta2018DB", "Licenta2018DB\Licenta2018DB.sqlproj", "{E18FDB38-967A-4633-93E4-C441656A2166}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,12 +21,6 @@ Global
 		{E117969B-1CB7-4D67-837A-1A6E09FEFE4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E117969B-1CB7-4D67-837A-1A6E09FEFE4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E117969B-1CB7-4D67-837A-1A6E09FEFE4E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E18FDB38-967A-4633-93E4-C441656A2166}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E18FDB38-967A-4633-93E4-C441656A2166}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E18FDB38-967A-4633-93E4-C441656A2166}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{E18FDB38-967A-4633-93E4-C441656A2166}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E18FDB38-967A-4633-93E4-C441656A2166}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E18FDB38-967A-4633-93E4-C441656A2166}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

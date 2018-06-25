@@ -22,7 +22,7 @@
 
     <div class="table-responsive">
         <table class="table table-sm table-bordered">
-            <thead class="alert-primary text-center">
+            <thead class="alert-primary">
                 <tr>
                     <th>
                         Numele studentului
@@ -41,22 +41,25 @@
                     </th>
                 </tr>
             </thead>
-            <tbody class="text-center">
+            <tbody>
                 <tr ng-repeat="item in teacherAnswers | filter:searchPattern">
                     <td>
-                        {{item.studentName}}
+                        {{item.studentName}} [{{item.studentYear}}, {{item.studentGroup}}]
                     </td>
                     <td>
                         {{item.answerName}}
                     </td>
                     <td>
-                        {{item.answerTime | date:'EEEE, dd MMMM, hh:mm:ss a'}}
+                        {{item.answerTime.toLocaleString() | date:'EEEE, dd MMMM, hh:mm:ss a'}}
                     </td>
                     <td>
                         <ng-rate-it ng-model="item.rating" rated="rateAnswer(item, rating)" reset="resetRate(item)"></ng-rate-it>
                     </td>
                     <td>
-                        <button class="btn btn-link" ng-click="deleteAnswer(item)">Șterge</button>
+                        <button type="button" class="btn btn-link" data-toggle="modal"
+                                data-target="#deleteAnswerModal" ng-click="navigateToDeleteAnswerModal(item)">
+                            Șterge
+                        </button>
                     </td>
                 </tr>
             </tbody>
@@ -64,4 +67,26 @@
     </div>
     <br />
     <input type="button" value="Înapoi" class="btn btn-outline-primary" ng-click="backToTeacherCourses()" />
+</div>
+
+<div class="modal fade" id="deleteAnswerModal" tabindex="-1" role="dialog" aria-labelledby="deleteAnswerModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger" id="deleteAnswerModalLabel">Confirmă</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card card-body text-secondary">
+                    Vrei să ștergi acest răspuns?
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Închide</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteAnswer(thisAnswer)">Șterge</button>
+            </div>
+        </div>
+    </div>
 </div>

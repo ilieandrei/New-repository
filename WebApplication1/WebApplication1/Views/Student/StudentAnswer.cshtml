@@ -1,5 +1,5 @@
 ﻿<div ng-init="loadAnswerData()">
-
+    <!-- Afisarea cronometrului -->
     <div ng-show="questionIsLaunched">
         <p class="text-warning">
             Timp de răspuns rămas:
@@ -25,7 +25,7 @@
             Înapoi
         </button>
     </div>
-
+    <!-- Afisarea mesajului de eroare -->
     <div ng-hide="questionIsLaunched" class="text-danger">
         <p>
             {{noAnswers}}

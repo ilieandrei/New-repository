@@ -13,6 +13,8 @@ namespace WebApplication1.Models
         public string QuestionName { get; set; }
         public string StudentUsername { get; set; }
         public string StudentName { get; set; }
+        public string StudentYear { get; set; }
+        public string StudentGroup { get; set; }
         public string AnswerName { get; set; }
         public DateTime AnswerTime { get; set; }
         public double Rating { get; set; }
@@ -24,6 +26,8 @@ namespace WebApplication1.Models
             QuestionName = answer.Question.QuestionName;
             StudentUsername = answer.Student.User.Username;
             StudentName = answer.Student.FullName;
+            StudentYear = answer.Student.Year;
+            StudentGroup = answer.Student.Group;
             AnswerName = answer.AnswerName;
             AnswerTime = answer.AnswerTime;
             Rating = answer.Rating;

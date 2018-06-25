@@ -14,12 +14,12 @@
             <div id="collapseT{{$index}}" class="collapse" aria-labelledby="headingT{{$index}}" data-parent="#accordionTimetable">
                 <div class="card-body">
 
-                    <p class="text-danger" ng-hide="existsStatusCourses">
+                    <p class="text-danger" ng-hide="existsStudentStatusCourses">
                         {{noStudentsStatus}}
                     </p>
 
                     <p>
-                        <div class="input-group mb-3" ng-show="existsStatusCourses">
+                        <div class="input-group mb-3" ng-show="existsStudentStatusCourses">
                             <input type="text" class="form-control" placeholder="Caută în tabel" ng-model="searchPattern"
                                    aria-describedby="basic-addon2">
                             <div class="input-group-append">
@@ -29,8 +29,8 @@
                     </p>
 
                     <div class="table-responsive">
-                        <table class="table table-sm table-bordered" ng-show="existsStatusCourses">
-                            <thead class="alert-primary text-center">
+                        <table class="table table-sm table-bordered" ng-show="existsStudentStatusCourses">
+                            <thead class="alert-primary">
                                 <tr>
                                     <th>
                                         Student
@@ -43,7 +43,7 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody class="text-center">
+                            <tbody>
                                 <tr ng-repeat="item in studentsStatus | filter:searchPattern">
                                     <td>
                                         {{item.student}}

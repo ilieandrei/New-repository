@@ -10,6 +10,7 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers.api
 {
+    [Authorize]
     public class UserController : ApiController
     {
         private readonly IGenericRepository<User, Guid> _userRepository;

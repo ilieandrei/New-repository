@@ -55,7 +55,8 @@
                                 data-target="#collapseEditCourse" aria-expanded="false" aria-controls="collapseEditCourse" ng-click="populateCourseField(course)">
                             Editează
                         </button>
-                        <button class="btn btn-link" ng-click="deleteTeacherCourse(course, '@User.Identity.Name')" ng-hide="course.questionsNumber>'0'">
+                        <button type="button" class="btn btn-link" data-toggle="modal"
+                                data-target="#deleteCourseModal" ng-click="navigateToDeleteCourseModal(course)" ng-hide="course.questionsNumber>'0'">
                             Șterge
                         </button>
                         <button type="button" class="btn btn-outline-primary" data-toggle="modal"
@@ -72,7 +73,7 @@
                             {{noQuestionsMessage}}
                         </p>
                         <table class="table table-sm table-bordered" ng-show="showQuestionTable">
-                            <thead class="alert-primary text-center">
+                            <thead class="alert-primary">
                                 <tr>
                                     <th>
                                         Întrebare
@@ -88,7 +89,7 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody class="text-center">
+                            <tbody>
                                 <tr ng-repeat="item in courseQuestions">
                                     <td>
                                         {{item.questionName}}
@@ -102,7 +103,10 @@
                                                     data-target="#editQuestionModal" ng-click="navigateToEditQuestionModal(item)">
                                                 Editează
                                             </button>
-                                            <button class="btn btn-link" ng-hide="item.answersNumber>'0'" ng-click="deleteCourseQuestion(item)">Șterge</button>
+                                            <button type="button" class="btn btn-link" data-toggle="modal"
+                                                    data-target="#deleteQuestionModal" ng-click="navigateToDeleteQuestionModal(item)">
+                                                Șterge
+                                            </button>
                                         </span>
                                     </td>
                                     <td>
@@ -111,7 +115,7 @@
                                         </span>
                                         <button class="btn btn-link" ng-click="navigateToAnswersPage(item)" ng-show="item.answersNumber>'0'">Vezi răspunsuri</button>
                                         <button class="btn btn-success float-right" ng-click="launchQuestion(item, '@User.Identity.Name')">
-                                            ->
+                                            Lansează
                                         </button>
                                     </td>
                                 </tr>
@@ -192,6 +196,50 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Închide</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="editCourseQuestion(thisCourseQuestion)">Salvează</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteQuestionModal" tabindex="-1" role="dialog" aria-labelledby="deleteQuestionModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger" id="deleteQuestionModalLabel">Confirmă</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card card-body text-secondary">
+                    Vrei să ștergi această întrebare?
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Închide</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteCourseQuestion(thisCourseQuestion)">Șterge</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteCourseModal" tabindex="-1" role="dialog" aria-labelledby="deleteCourseModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger" id="deleteCourseModalLabel">Confirmă</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card card-body text-secondary">
+                    Vrei să ștergi acest curs?
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Închide</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteTeacherCourse(thisTeacherCourse, '@User.Identity.Name')">Șterge</button>
             </div>
         </div>
     </div>

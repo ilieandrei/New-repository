@@ -53,9 +53,10 @@ function teacherController($scope, $http, $location, $timeout, myService) {
     $scope.teacherTimetableValue = function (username) {
         myService.getTeacherTimetable(username).then(function (response) {
             $scope.teacherTimetable = response.data.timetables;
-            //$scope.teacherTimetable[0].day = "Sambata";
             $scope.teacherDailyTimetable = [];
             var days = ["Duminica", "Luni", "Marti", "Miercuri", "Joi", "Vineri", "Sambata"];
+            /*$scope.teacherTimetable[0].day = "Luni";
+            $scope.teacherTimetable[1].day = "Luni";*/
             for (var i = 0; i < $scope.teacherTimetable.length; i++) {
                 if ($scope.teacherTimetable[i].day === days[new Date().getDay()]) {
                     $scope.teacherDailyTimetable.push($scope.teacherTimetable[i]);
@@ -161,13 +162,14 @@ function teacherController($scope, $http, $location, $timeout, myService) {
         });
     };
 
+    $scope.navigateToDeleteCourseModal = function (course) {
+        $scope.thisTeacherCourse = course;
+    };
+
     $scope.deleteTeacherCourse = function (teacherCourse, username) {
-        var r = confirm("Vrei să ștergi acest curs?");
-        if (r === true) {
-            myService.deleteTeacherCourse(teacherCourse.id).then(function (response) {
-                var myVar = $scope.teacherCourseDetails(username);
-            }, function (response) { });
-        }
+        myService.deleteTeacherCourse(teacherCourse.id).then(function (response) {
+            var myVar = $scope.teacherCourseDetails(username);
+        }, function (response) { });
     };
 
     $scope.navigateToEditQuestionModal = function (courseQuestion) {
@@ -186,13 +188,14 @@ function teacherController($scope, $http, $location, $timeout, myService) {
         }, function (response) { });
     };
 
+    $scope.navigateToDeleteQuestionModal = function (courseQuestion) {
+        $scope.thisCourseQuestion = courseQuestion;
+    };
+
     $scope.deleteCourseQuestion = function (courseQuestion) {
-        var r = confirm("Vrei să ștergi această întrebare?");
-        if (r === true) {
-            myService.deleteCourseQuestion(courseQuestion.id).then(function (response) {
-                var myVar = $scope.showCourseQuestions(courseQuestion.courseId);
-            }, function (response) { });
-        }
+        myService.deleteCourseQuestion(courseQuestion.id).then(function (response) {
+            var myVar = $scope.showCourseQuestions(courseQuestion.courseId);
+        }, function (response) { });
     };
 
     $scope.launchQuestion = function (question, username) {
@@ -248,34 +251,28 @@ function teacherController($scope, $http, $location, $timeout, myService) {
     };
 
     $scope.rateAnswer = function (answer, rating) {
-        var r = confirm("Vrei să modifici nota?");
-        if (r === true) {
-            myService.rateAnswer(answer.id, rating).then(function (response) { }, function (response) { });
-        }
-
+        myService.rateAnswer(answer.id, rating).then(function (response) { }, function (response) { });
     };
 
     $scope.resetRate = function (answer) {
-        var r = confirm("Vrei să anulezi nota?");
-        if (r === true) {
-            myService.rateAnswer(answer.id, 0).then(function (response) { }, function (response) { });
-        }
+        myService.rateAnswer(answer.id, 0).then(function (response) { }, function (response) { });
+    };
+
+    $scope.navigateToDeleteAnswerModal = function (answer) {
+        $scope.thisAnswer = answer;
     };
 
     $scope.deleteAnswer = function (answer) {
-        var r = confirm("Vrei să ștergi acest răspuns?");
-        if (r === true) {
-            myService.deleteAnswer(answer.id).then(function (response) {
-                myService.getCurrentCourseId("").then(function (response1) {
-                    if (response1.data !== "No content") {
-                        myService.getTeacherAnswers(response1.data).then(function (response2) {
-                            $scope.teacherAnswers = response2.data;
-                        }, function (response2) {
-                        });
-                    }
-                }, function (response1) { });
-            }, function (response) { });
-        }
+        myService.deleteAnswer(answer.id).then(function (response) {
+            myService.getCurrentCourseId("").then(function (response1) {
+                if (response1.data !== "No content") {
+                    myService.getTeacherAnswers(response1.data).then(function (response2) {
+                        $scope.teacherAnswers = response2.data;
+                    }, function (response2) {
+                    });
+                }
+            }, function (response1) { });
+        }, function (response) { });
     };
 
     $scope.backToTeacherCourses = function () {
@@ -288,7 +285,41 @@ function teacherController($scope, $http, $location, $timeout, myService) {
         }, function (response) { });
     };
 
-    $scope.showTimetableCourses = function (timetableId) {
+    $scope.timetableChanged = function (selectedTimetable) {
+        myService.getTeacherStatusCourse(selectedTimetable.id).then(function (response) {
+            if (response.data.length === 0) {
+                $scope.existsStatusCourses = false;
+                $scope.noStatusCourses = "Nu există cursuri";
+            }
+            else {
+                $scope.existsStatusCourses = true;
+                $scope.teacherStatusCourses = response.data;
+            }
+        }, function (response) {
+            $scope.existsStatusCourses = false;
+            $scope.noStatusCourses = "Nu există cursuri";
+        });
+    };
+
+    $scope.courseChanged = function (selectedCourse, username) {
+        myService.getTeacherStatus(username, selectedCourse.id).then(function (response) {
+            if (response.data.length === 0) {
+                $scope.existsStatus = false;
+                $scope.noStatus = "Nu există întrebări";
+            }
+            else {
+                $scope.existsStatus = true;
+                $scope.teacherStatus = response.data;
+            }
+        }, function (response) {
+            $scope.existsStatus = false;
+            $scope.noStatus = "Nu există întrebări";
+        });
+    };
+
+    $scope.showTimetableCourses = function (timetableId, index) {
+        $scope.tIndex = index;
+        console.log($scope.tIndex);
         myService.getTeacherStatusCourse(timetableId).then(function (response) {
             if (response.data.length === 0) {
                 $scope.existsStatusCourses = false;
@@ -304,7 +335,7 @@ function teacherController($scope, $http, $location, $timeout, myService) {
         });
     };
 
-    $scope.showCourseStatus = function (courseId, username) {
+    $scope.showCourseStatus = function (courseId, username, index) {
         myService.getTeacherStatus(username, courseId).then(function (response) {
             if (response.data.length === 0) {
                 $scope.existsStatus = false;
@@ -329,11 +360,16 @@ function teacherController($scope, $http, $location, $timeout, myService) {
     };
 
     $scope.showTimetableStudents = function (timetableId) {
+        $scope.noStudentsStatus="Această materie nu conține întrebări"
         myService.getStudentsStatus(timetableId).then(function (response) {
-            $scope.existsStatusCourses = true;
-            $scope.studentsStatus = response.data;
+            if (response.data.length !== 0) {
+                $scope.existsStudentStatusCourses = true;
+                $scope.studentsStatus = response.data;
+            }
+            else
+                $scope.existsStudentStatusCourses = false;
         }, function (response) {
-            $scope.existsStatusCourses = false;
+            $scope.existsStudentStatusCourses = false;
         });
     };
 }

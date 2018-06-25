@@ -13,6 +13,7 @@ using WebApplication1.Services;
 
 namespace WebApplication1.Controllers.api
 {
+    [Authorize]
     public class AdminController : ApiController
     {
         private readonly IGenericRepository<Timetable, Guid> _timetableRepository;

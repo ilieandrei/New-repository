@@ -1,7 +1,72 @@
 ﻿
 <div ng-init="studentStatusDetails('@User.Identity.Name')">
     <br />
-    <div class="accordion" id="accordionTimetable">
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Alege o materie</span>
+        </div>
+        <select class="custom-select" ng-model="selectedTimetable" ng-change="timetableChanged(selectedTimetable, '@User.Identity.Name')" ng-options="x.timetable for x in studentStatusTimetable"></select>
+    </div>
+    <p ng-hide="existsStatusCourses" class="text-danger">
+        {{noStatusCourses}}
+    </p>
+    <div ng-show="existsStatusCourses">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Alege un curs</span>
+            </div>
+            <select class="custom-select" ng-model="selectedCourse" ng-change="courseChanged(selectedCourse, '@User.Identity.Name')" ng-options="x.course for x in studentStatusCourses"></select>
+        </div>
+        <p ng-hide="existsStatus" class="text-danger">
+            {{noStatus}}
+        </p>
+        <div class="table-responsive">
+            <table class="table table-sm table-bordered" ng-show="existsStatus">
+                <thead class="alert-primary">
+                    <tr>
+                        <th>
+                            Întrebare
+                        </th>
+                        <th>
+                            Profesor
+                        </th>
+                        <th>
+                            Răpuns
+                        </th>
+                        <th>
+                            Puncte
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in studentStatus">
+                        <td>
+                            {{item.question}}
+                        </td>
+                        <td>
+                            {{item.teacher}}
+                        </td>
+                        <td>
+                            {{item.answer}}
+                        </td>
+                        <td>
+                            <ng-rate-it ng-model="item.rating" read-only="true"></ng-rate-it>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr />
+        <p ng-show="existsStatusCourses">
+            Puncte acumulate la materia "{{selectedTimetable.timetable}}": <strong class="text-success">{{selectedTimetable.points}}</strong>
+        </p>
+        <p ng-show="existsStatus">
+            Puncte acumulate la cursul "{{selectedCourse.course}}": <strong class="text-primary">{{selectedCourse.points}}</strong>
+        </p>
+    </div>
+
+    @*<div class="accordion" id="accordionTimetable">
         <div class="card" ng-repeat="timetable in studentStatusTimetable">
             <div class="card-header" id="headingT{{$index}}">
                 <h5 class="mb-0">
@@ -41,7 +106,7 @@
                                     </p>
                                     <div class="table-responsive">
                                         <table class="table table-sm table-bordered" ng-show="existsStatus">
-                                            <thead class="alert-primary text-center">
+                                            <thead class="alert-primary">
                                                 <tr>
                                                     <th>
                                                         Întrebare
@@ -57,7 +122,7 @@
                                                     </th>
                                                 </tr>
                                             </thead>
-                                            <tbody class="text-center">
+                                            <tbody>
                                                 <tr ng-repeat="item in studentStatus">
                                                     <td>
                                                         {{item.question}}
@@ -84,5 +149,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>*@
 </div>

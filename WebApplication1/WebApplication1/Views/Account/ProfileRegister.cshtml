@@ -42,6 +42,7 @@
 
                         <div ng-switch="choose">
                             <div ng-switch-when="student">
+                                <h6 class="text-primary">Student</h6>
                                 <form role="form" asp-controller="Account" asp-action="StudentRegister" method="post">
                                     <fieldset>
                                         <input type="text" name="username" value="@User.Identity.Name" hidden="hidden" />
@@ -62,6 +63,7 @@
                             </div>
 
                             <div ng-switch-when="teacher">
+                                <h6 class="text-primary">Profesor</h6>
                                 <form role="form" asp-controller="Account" asp-action="TeacherRegister" method="post">
                                     <fieldset>
                                         <input type="text" name="username" value="@User.Identity.Name" hidden="hidden" />

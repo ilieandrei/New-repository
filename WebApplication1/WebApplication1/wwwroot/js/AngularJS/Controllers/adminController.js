@@ -33,44 +33,38 @@ function adminController($scope, $http, $location, $timeout, myService) {
     $scope.updatingTimetableMessage = "";
     $scope.timetableUpdatedMessage = "";
     $scope.uptadeTimetable = function () {
-        var r = confirm("ATENȚIE! Vă recomandăm să actualizați orarul cât se poate de rar,"
-            + " deoarece presupune ștergerea acestuia și, implicit, ștergerea cursurilor, întrebărilor și răspunsurilor asociate!"
-            + " Dacă nu există schimbări majore (ex. schimbarea anului sau semestrului), folosiți funcția de reîmprospătare.\n"
-            + "Confirmați dacă doriți o actualizare riguroasă a orarului");
-        if (r === true) {
-            $scope.isInUpdate = true;
-            myService.deleteAnswers().then(function (response1) {
-                $scope.answersDeletedMessage = "Răspunsurile au fost șterse";
-                $scope.deletingQuestionsMessage = "Se șterg întrebările...";
-                myService.deleteQuestions().then(function (response2) {
-                    $scope.questionsDeletedMessage = "Întrebările au fost șterse";
-                    $scope.deletingCoursesMessage = "Se șterg cursurile...";
-                    myService.deleteCourses().then(function (response3) {
-                        $scope.coursesDeletedMessage = "Cursurile au fost șterse";
-                        $scope.deletingTimetablesMessage = "Se șterge orarul...";
-                        myService.deleteTimetables().then(function (response4) {
-                            $scope.timetablesDeletedMessage = "Orarul a fost șters";
-                            $scope.updatingTimetableMessage = "Se actualizează orarul...";
-                            myService.updateTimetable().then(function (response5) {
-                                $scope.time = 10000;
-                                var timer = function () {
-                                    if ($scope.time > 0) {
-                                        $scope.time -= 1000;
-                                        $timeout(timer, 1000);
-                                        $scope.timetableUpdatedMessage = "Orarul a fost actualizat. Veți fi redirecționat pe pagina orarului în " + $scope.time / 1000 + " secunde";
-                                    }
-                                    else {
-                                        $scope.timetable = response5.data;
-                                        $scope.isInUpdate = false;
-                                    }
+        $scope.isInUpdate = true;
+        myService.deleteAnswers().then(function (response1) {
+            $scope.answersDeletedMessage = "Răspunsurile au fost șterse";
+            $scope.deletingQuestionsMessage = "Se șterg întrebările...";
+            myService.deleteQuestions().then(function (response2) {
+                $scope.questionsDeletedMessage = "Întrebările au fost șterse";
+                $scope.deletingCoursesMessage = "Se șterg cursurile...";
+                myService.deleteCourses().then(function (response3) {
+                    $scope.coursesDeletedMessage = "Cursurile au fost șterse";
+                    $scope.deletingTimetablesMessage = "Se șterge orarul...";
+                    myService.deleteTimetables().then(function (response4) {
+                        $scope.timetablesDeletedMessage = "Orarul a fost șters";
+                        $scope.updatingTimetableMessage = "Se actualizează orarul...";
+                        myService.updateTimetable().then(function (response5) {
+                            $scope.time = 10000;
+                            var timer = function () {
+                                if ($scope.time > 0) {
+                                    $scope.time -= 1000;
+                                    $timeout(timer, 1000);
+                                    $scope.timetableUpdatedMessage = "Orarul a fost actualizat. Veți fi redirecționat pe pagina orarului în " + $scope.time / 1000 + " secunde";
                                 }
-                                $timeout(timer, 1000);
-                            })
-                        }, function (response) { });
+                                else {
+                                    $scope.timetable = response5.data;
+                                    $scope.isInUpdate = false;
+                                }
+                            }
+                            $timeout(timer, 1000);
+                        })
                     }, function (response) { });
                 }, function (response) { });
             }, function (response) { });
-        }
+        }, function (response) { });
     };
 
     $scope.getUsersValue = function () {

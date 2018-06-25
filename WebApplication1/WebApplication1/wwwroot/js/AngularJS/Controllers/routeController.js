@@ -56,7 +56,7 @@ function routeController($scope, $http, $md5, $location, $timeout, myService) {
             }
         //teacher daily timetable - setup startDate and endDate according to from-to from current course
         if ($scope.teacherDailyTimetable)
-            for (var i = 0; i < $scope.teacherDailyTimetable.length; i++) {
+            for (i = 0; i < $scope.teacherDailyTimetable.length; i++) {
                 //start setup teacher session original code
                 /*if (parseInt($scope.teacherDailyTimetable[i].from) < new Date().getHours()
                     && parseInt($scope.teacherDailyTimetable[i].to) > new Date().getHours()) {
@@ -110,7 +110,7 @@ function routeController($scope, $http, $md5, $location, $timeout, myService) {
         var response = myService.getMessages(data);
         var responseData = response.$$state.value;
         if (responseData !== undefined) {
-            for (var i = 0; i < responseData.chatModels.length; i++)
+            for (i = 0; i < responseData.chatModels.length; i++)
                 $scope.chatMessages.push(responseData.chatModels[i]);
         }
         /*$http.get('Chat/GetMessages?isEmpty=' + isEmpty + '&lastMessageTime=' + lastMessageTime + '&timetableId=' + $scope.timetableId)

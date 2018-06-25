@@ -5,7 +5,7 @@ function studentController($scope, $http, $location, $timeout, myService) {
 
     $scope.studentProfileValue = function (username) {
         $scope.studyYears = ["1", "2", "3"];
-        $scope.studyHalfyears = ["A", "B", "E"];
+        $scope.studyHalfyears = ["A", "B"];
         myService.getStudentProfile(username).then(function (response) {
             $scope.studentDetails = {
                 studentFullName: response.data.fullName,
@@ -49,11 +49,11 @@ function studentController($scope, $http, $location, $timeout, myService) {
     $scope.studentTimetableValue = function (username) {
         myService.getStudentTimetable(username).then(function (response) {
             $scope.studentTimetable = response.data.timetables;
-            //$scope.studentTimetable[0].day = "Sambata";
-            //$scope.studentTimetable[1].day = "Sambata";
-            //$scope.studentTimetable[2].day = "Sambata";
-            //$scope.studentTimetable[3].day = "Sambata";
-            //$scope.studentTimetable[4].day = "Sambata";
+            /*$scope.studentTimetable[0].day = "Duminica";
+            $scope.studentTimetable[1].day = "Duminica";
+            $scope.studentTimetable[2].day = "Duminica";
+            $scope.studentTimetable[3].day = "Duminica";
+            $scope.studentTimetable[4].day = "Duminica";*/
             for (let i = 0; i < $scope.studentTimetable.length; i++) {
                 $scope.studentTimetable[i].teacher = $scope.studentTimetable[i].teacher.split(';');//replace(/;/g, " | ");
                 $scope.studentTimetable[i].teacher.pop();
@@ -110,28 +110,37 @@ function studentController($scope, $http, $location, $timeout, myService) {
     };
 
     $scope.loadAnswerData = function () {
+        //mesajul de eroare
         $scope.noAnswers = "Nu există întrebări pentru acest curs";
+        //obtine ID-ul cursului curent
         myService.getCurrentCourseId("").then(function (response) {
+            //obtine intrebarea lansata in cursul curent
             myService.getStudentQuestion(response.data).then(function (response1) {
                 console.log(response1);
+                //afiseaza mesajul de eroare
                 if (response1.data === "") {
                     $scope.questionIsLaunched = false;
                 } else {
                     $scope.courseQuestion = response1.data;
+                    //calculeaza diferenta de timp scurs de la lansarea intrebarii pana in prezent
                     $scope.difTime = new Date().getTime() - new Date($scope.courseQuestion.launchTime).getTime();
                     $scope.time = $scope.courseQuestion.answerTime * 1000 * 60 - $scope.difTime;
+                    //porneste cronometrul
                     var timer = function () {
+                        //scade timpul secunda cu secunda
                         if ($scope.time > 0) {
                             $scope.questionIsLaunched = true;
                             $scope.time -= 1000;
                             console.log("time elapsed: ", $scope.time);
                             $timeout(timer, 1000);
                         }
+                        //s-a scurs timpul
                         else if ($scope.time <= 0) {
                             console.log("finished");
                             $scope.questionIsLaunched = false;
                         }
                     }
+                    //apeleaza functia timer() pana expira timpul
                     $timeout(timer, 1000);
                 }
             }, function (response1) {
@@ -154,6 +163,38 @@ function studentController($scope, $http, $location, $timeout, myService) {
                 $location.path('studentCourses');
             }
         }, function (response) { });
+    };
+
+    $scope.timetableChanged = function (selectedTimetable, username) {
+        myService.getStatusCourse(selectedTimetable.id, username).then(function (response) {
+            if (response.data.length === 0) {
+                $scope.existsStatusCourses = false;
+                $scope.noStatusCourses = "Nu există cursuri";
+            }
+            else {
+                $scope.existsStatusCourses = true;
+                $scope.studentStatusCourses = response.data;
+            }
+        }, function (response) {
+            $scope.existsStatusCourses = false;
+            $scope.noStatusCourses = "Nu există cursuri";
+        });
+    };
+
+    $scope.courseChanged = function (selectedCourse, username) {
+        myService.getStudentStatus(username, selectedCourse.id).then(function (response) {
+            if (response.data.length === 0) {
+                $scope.existsStatus = false;
+                $scope.noStatus = "Nu există întrebări";
+            }
+            else {
+                $scope.existsStatus = true;
+                $scope.studentStatus = response.data;
+            }
+        }, function (response) {
+            $scope.existsStatus = false;
+            $scope.noStatus = "Nu există întrebări";
+        });
     };
 
     $scope.studentStatusDetails = function (username) {

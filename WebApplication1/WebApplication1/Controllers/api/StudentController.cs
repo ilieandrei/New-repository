@@ -10,6 +10,7 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers.api
 {
+    [Authorize]
     public class StudentController : ApiController
     {
         private readonly IGenericRepository<Student, Guid> _studentRepository;
@@ -122,13 +123,6 @@ namespace WebApplication1.Controllers.api
             var user = _userRepository.GetAll().Where(x => x.Username == username).FirstOrDefault();
             var student = _studentRepository.GetAll().Include(x => x.User).FirstOrDefault(x => x.User == user);
             var course = _courseRepository.GetAll().FirstOrDefault(x => x.Id == Guid.Parse(courseId));
-            /*var result = _answerRepository.GetAll()
-                .Include(x => x.Question).ThenInclude(x => x.Course).ThenInclude(x => x.Timetable)
-                .Include(x => x.Question).ThenInclude(x => x.Course).ThenInclude(x => x.Teacher)
-                .Include(x => x.Question).ThenInclude(x => x.Course)
-                .Include(x => x.Question)
-                .Where(x => x.Student == student)
-                .ToLookup(x => x.Question).ToLookup(x => x.Key.Course).ToLookup(x => x.Key.Timetable);*/
             var result = _answerRepository.GetAll()
                 .Include(x => x.Question).ThenInclude(x => x.Course).ThenInclude(x => x.Teacher)
                 .Include(x => x.Question).ThenInclude(x => x.Course)

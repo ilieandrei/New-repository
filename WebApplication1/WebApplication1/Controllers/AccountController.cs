@@ -151,7 +151,7 @@ namespace WebApplication1.Controllers
             };
             var user = _userRepository.GetAll().FirstOrDefault(x => x.Username == username);
             if (user != null)
-                user.Role = "Teacher";
+                user.Role = "Profesor";
             _teacherRepository.Add(teacherProfile);
             _userRepository.Edit(user);
             _teacherRepository.Save();

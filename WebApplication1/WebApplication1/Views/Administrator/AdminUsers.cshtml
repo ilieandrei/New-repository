@@ -13,26 +13,26 @@
 
     <div class="table-responsive">
         <table class="table table-sm table-bordered">
-            <thead class="alert-primary text-center">
+            <thead class="alert-primary">
                 <tr>
                     <th>
                         Nume utilizator
                     </th>
                     <th>
-                        Nume complet
+                        Nume public
                     </th>
                     <th>
                         Tip utilizator
                     </th>
                     <th>
-                        Fără acces
+                        Acces
                     </th>
                     <th>
                         Blochează
                     </th>
                 </tr>
             </thead>
-            <tbody class="text-center">
+            <tbody>
                 <tr ng-repeat="item in users | filter:searchPattern">
                     <td>
                         {{item.username}}
@@ -44,7 +44,12 @@
                         {{item.role}}
                     </td>
                     <td>
-                        {{item.isBlocked}}
+                        <div ng-show="item.isBlocked===false">
+                            <span class="onlineDot"></span>
+                        </div>
+                        <div ng-hide="item.isBlocked===false">
+                            <span class="offlineDot"></span>
+                        </div>
                     </td>
                     <td>
                         <button class="btn btn-link" type="button" ng-show="item.isBlocked===false" ng-click="blockUser(item.username)">

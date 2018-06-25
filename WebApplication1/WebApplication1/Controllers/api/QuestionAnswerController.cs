@@ -12,6 +12,7 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers.api
 {
+    [Authorize]
     public class QuestionAnswerController : ApiController
     {
         private readonly IGenericRepository<User, Guid> _userRepository;

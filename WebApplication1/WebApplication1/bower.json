@@ -10,6 +10,7 @@
     "angularjs-md5": "0.1.0",
     "bootstrap": "v4.0.0",
     "components-font-awesome": "^5.0.6",
-    "angular-rateit": "^4.0.2"
+    "angular-rateit": "^4.0.2",
+    "angular-i18n": "^1.7.2"
   }
 }

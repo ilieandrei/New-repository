@@ -7,9 +7,10 @@
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/myStyleSheet.css" />
-        <script src="~/lib/angular/angular.min.js"></script>
+        <script src="~/lib/angular/angular.js"></script>
         <script src="~/lib/angular-route/angular-route.js"></script>
         <script src="~/lib/angularjs-md5/src/angularjs-md5.js"></script>
+        <script src="~/lib/angular-i18n/angular-locale_ro-ro.js"></script>
         <script src="~/js/AngularJS/routing.js"></script>
         <script src="~/js/AngularJS/services.js"></script>
         <script src="~/js/AngularJS/Controllers/userController.js"></script>
@@ -65,7 +66,7 @@
                         </li>
                     </ul>
                 </div>
-                <div ng-switch-when="Teacher">
+                <div ng-switch-when="Profesor">
                     <ul class="nav nav-tabs nav-fill w-100" data-toggle="buttons">
                         <li class="nav-item">
                             <a id="teacherProfileTabId" class="nav-link" href="#!teacherProfile" style="color:black" ng-click="teacherProfileTab()">Profil</a>

@@ -27,5 +27,29 @@
     }
 
 .courseTitle:hover {
-    background-color:darkslategray;
+    background-color:white;
+}
+
+.onlineDot {
+    height: 25px;
+    width: 25px;
+    background-color: #0f0;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.offlineDot {
+    height: 25px;
+    width: 25px;
+    background-color: red;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.title-div:focus {
+    outline: 0 !important;
+}
+.accordion-toggle:hover, .accordion-toggle:focus, .accordion-toggle:active {
+    text-decoration: none;
+    outline-style: none;
 }

@@ -1,12 +1,78 @@
 ﻿
 <div ng-init="teacherStatusDetails('@User.Identity.Name')">
     <br />
-    <div class="accordion" id="accordionTimetable">
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Alege o materie</span>
+        </div>
+        <select class="custom-select" ng-model="selectedTimetable" ng-change="timetableChanged(selectedTimetable)"
+                ng-options="x.timetable + ' [' + x.group + ']' for x in teacherStatusTimetable"></select>
+    </div>
+    <p ng-hide="existsStatusCourses" class="text-danger">
+        {{noStatusCourses}}
+    </p>
+    <div ng-show="existsStatusCourses">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Alege un curs</span>
+            </div>
+            <select class="custom-select" ng-model="selectedCourse" ng-change="courseChanged(selectedCourse, '@User.Identity.Name')" ng-options="x.course for x in teacherStatusCourses"></select>
+        </div>
+        <p ng-hide="existsStatus" class="text-danger">
+            {{noStatus}}
+        </p>
+        <div class="input-group mb-3" ng-show="existsStatus">
+            <input type="text" class="form-control" placeholder="Caută în tabel" ng-model="searchPattern"
+                   aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2">Caută</span>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-sm table-bordered" ng-show="existsStatus">
+                <thead class="alert-primary">
+                    <tr>
+                        <th>
+                            Întrebare
+                        </th>
+                        <th>
+                            Student
+                        </th>
+                        <th>
+                            Răpuns
+                        </th>
+                        <th>
+                            Puncte
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in teacherStatus | filter:searchPattern">
+                        <td>
+                            {{item.question}}
+                        </td>
+                        <td>
+                            {{item.student}}
+                        </td>
+                        <td>
+                            {{item.answer}}
+                        </td>
+                        <td>
+                            <ng-rate-it ng-model="item.rating" read-only="true"></ng-rate-it>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    @*<div class="accordion" id="accordionTimetable">
         <div class="card" ng-repeat="timetable in teacherStatusTimetable">
             <div class="card-header" id="headingT{{$index}}">
                 <h5 class="mb-0">
                     <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseT{{$index}}"
-                            aria-expanded="true" aria-controls="collapseT{{$index}}" ng-click="showTimetableCourses(timetable.id)">
+                            aria-expanded="true" aria-controls="collapseT{{$index}}" ng-click="showTimetableCourses(timetable.id, $index)">
                         {{timetable.timetable}}  [{{timetable.group}}]
                     </button>
                 </h5>
@@ -17,17 +83,19 @@
                     <p class="text-danger" ng-hide="existsStatusCourses">
                         {{noStatusCourses}}
                     </p>
-                    <div class="accordion" id="accordionCourses" ng-show="existsStatusCourses">
+                    <div class="accordion accordion-toggle" id="accordionCourses{{tIndex}}" ng-show="existsStatusCourses">
                         <div class="card" ng-repeat="course in teacherStatusCourses">
-                            <div class="card-header" id="headingC{{$index}}">
+
+                            {{(tIndex+1)*10+$index}}
+                            <div class="card-header" id="headingC{{(tIndex+1)*10+$index}}">
                                 <h5 class="mb-0">
-                                    <button class="btn btn-link text-success" type="button" data-toggle="collapse" data-target="#collapseC{{$index}}"
-                                            aria-expanded="true" aria-controls="collapseC{{$index}}" ng-click="showCourseStatus(course.id, '@User.Identity.Name')">
+                                    <button class="btn btn-link text-success" type="button" data-toggle="collapse" data-target="#collapseC{{(tIndex+1)*10+$index}}"
+                                            aria-expanded="true" aria-controls="collapseC{{(tIndex+1)*10+$index}}" ng-click="showCourseStatus(course.id, '@User.Identity.Name', $index)">
                                         {{course.course}}
                                     </button>
                                 </h5>
                             </div>
-                            <div id="collapseC{{$index}}" class="collapse" aria-labelledby="headingC{{$index}}" data-parent="#accordionCourses">
+                            <div id="collapseC{{(tIndex+1)*10+$index}}" class="collapse" aria-labelledby="headingC{{(tIndex+1)*10+$index}}" data-parent="#accordionCourses{{tIndex}}">
                                 <div class="card-body">
 
                                     <p class="text-danger" ng-hide="existsStatus">
@@ -46,7 +114,7 @@
 
                                     <div class="table-responsive">
                                         <table class="table table-sm table-bordered" ng-show="existsStatus">
-                                            <thead class="alert-primary text-center">
+                                            <thead class="alert-primary">
                                                 <tr>
                                                     <th>
                                                         Întrebare
@@ -62,7 +130,7 @@
                                                     </th>
                                                 </tr>
                                             </thead>
-                                            <tbody class="text-center">
+                                            <tbody>
                                                 <tr ng-repeat="item in teacherStatus | filter:searchPattern">
                                                     <td>
                                                         {{item.question}}
@@ -89,7 +157,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>*@
     <hr />
     <button class="btn btn-link text-secondary" ng-click="navigateToStudentsStatus()">
         Grupează după studenți

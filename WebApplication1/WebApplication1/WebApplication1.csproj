@@ -8,6 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\ThreadManager.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Properties\PublishProfiles\FolderProfile.pubxml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs" />
     <Compile Include="obj\Debug\netcoreapp2.0\WebApplication1.AssemblyInfo.cs" />
   </ItemGroup>
@@ -49,7 +57,7 @@
   <ItemGroup>
     <Folder Include="bin\Debug\netcoreapp2.0\x64\" />
     <Folder Include="bin\Debug\netcoreapp2.0\x86\" />
-    <Folder Include="Data\" />
+    <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 

@@ -11,6 +11,7 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers.api
 {
+    [Authorize]
     public class TeacherController : ApiController
     {
         private readonly IGenericRepository<Teacher, Guid> _teacherRepository;

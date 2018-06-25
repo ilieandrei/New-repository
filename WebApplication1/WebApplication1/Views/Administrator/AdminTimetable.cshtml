@@ -3,8 +3,9 @@
     <br />
     <input type="button" value="Reîmprospătează" class="btn btn-outline-primary" ng-click="refreshTimetable()"
            ng-hide="isInUpdate" />
-    <input type="button" value="Actualizează" class="btn btn-outline-primary" ng-click="uptadeTimetable()"
-           ng-hide="isInUpdate" />
+    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#updateModal" ng-hide="isInUpdate">
+        Actualizează
+    </button>
     <p class="text-danger">
         {{pleaseWait}}
     </p>
@@ -57,7 +58,7 @@
 
     <div class="table-responsive" ng-hide="isInUpdate">
         <table class="table table-sm table-bordered">
-            <thead class="alert-primary text-center">
+            <thead class="alert-primary">
                 <tr>
                     <th>
                         Ziua
@@ -79,7 +80,7 @@
                     </th>
                 </tr>
             </thead>
-            <tbody class="text-center">
+            <tbody>
                 <tr ng-repeat="item in timetable.timetableModels | filter:searchPattern">
                     <td>
                         {{item.day}}
@@ -102,5 +103,42 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+</div>
+
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger" id="updateModalLabel">
+                    ATENȚIE!
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card card-body">
+                    <div style="display:flex">
+                        <span class="fa fa-exclamation-triangle fa-3x text-warning"></span>
+                        <div>
+                            <p style="padding-left:20px">
+                                Vă recomandăm să actualizați orarul cât se poate de rar, deoarece presupune ștergerea acestuia și, implicit, ștergerea cursurilor, întrebărilor și răspunsurilor asociate!
+                            </p>
+                        </div>
+                    </div>
+                    <p>
+                        Dacă nu există schimbări majore (ex. schimbarea anului sau semestrului), folosiți funcția de reîmprospătare.
+                    </p>
+                    <p>
+                        Confirmați dacă doriți o actualizare riguroasă a orarului
+                    </p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Închide</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="uptadeTimetable()">Actualizează</button>
+            </div>
+        </div>
     </div>
 </div>

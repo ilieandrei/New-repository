@@ -16,12 +16,12 @@ namespace WebApplication1.Services
             string html = string.Empty;
             //string url = "https://profs.info.uaic.ro/~orar/participanti/orar_I3.html";
             HtmlWeb web = new HtmlWeb();
-            var doc = web.Load(url);
-            var cnt = doc.DocumentNode.SelectNodes("//table[1]//tr").Count;
+            HtmlDocument doc = web.Load(url);
+            int count = doc.DocumentNode.SelectNodes("//table[1]//tr").Count;
             string[,] timetable = new string[200, 10];
             int index = 0, timetableRow = 0, timetableCol = 0;
             string day = "Luni";
-            for (var ind = 1; ind <= cnt; ind++)
+            for (var ind = 1; ind <= count; ind++)
                 if (doc.DocumentNode.SelectNodes("//table[1]//tr[" + ind.ToString() + "]")
                     .FirstOrDefault(x => x.InnerText.Contains("Luni")) != null)
                 {
@@ -29,9 +29,9 @@ namespace WebApplication1.Services
                     break;
                 }
 
-            for (var i = index + 1; i <= cnt; i++)
+            for (var i = index + 1; i <= count; i++)
             {
-                var htmlRow = doc.DocumentNode.SelectNodes("//table[1]//tr[" + i.ToString() + "]");
+                HtmlNodeCollection htmlRow = doc.DocumentNode.SelectNodes("//table[1]//tr[" + i.ToString() + "]");
                 if (htmlRow.FirstOrDefault(x => x.InnerText.Contains("Marti")) != null)
                 {
                     day = "Marti";
@@ -116,24 +116,24 @@ namespace WebApplication1.Services
                 }
                 //Console.WriteLine("----------------------------------------------");
             }
-            int timetableListCount = 0;
-            for (int i = 0; i < timetableRow; i++)
-                if (timetable[i, 5] == "Curs" || timetable[i, 6] == "&nbsp;;")
-                    timetableListCount++;
-            string[] timetableList = new string[timetableListCount];
-            int timetableListIndex = 0;
-            for (int i = 0; i < timetableRow; i++)
-            {
-                if (timetable[i, 5] != "Curs" || timetable[i, 6] == "&nbsp;;")
-                    continue;
-                for (int j = 0; j < timetableCol; j++)
-                {
-                    //Console.Write(timetable[i, j] + " | ");
-                    timetableList[timetableListIndex] += timetable[i, j] + " | ";
-                }
-                timetableListIndex++;
-                //Console.Write("\n");
-            }
+            //int timetableListCount = 0;
+            //for (int i = 0; i < timetableRow; i++)
+            //    if (timetable[i, 5] == "Curs" || timetable[i, 6] == "&nbsp;;")
+            //        timetableListCount++;
+            //string[] timetableList = new string[timetableListCount];
+            //int timetableListIndex = 0;
+            //for (int i = 0; i < timetableRow; i++)
+            //{
+            //    if (timetable[i, 5] != "Curs" || timetable[i, 6] == "&nbsp;;")
+            //        continue;
+            //    for (int j = 0; j < timetableCol; j++)
+            //    {
+            //        //Console.Write(timetable[i, j] + " | ");
+            //        timetableList[timetableListIndex] += timetable[i, j] + " | ";
+            //    }
+            //    timetableListIndex++;
+            //    //Console.Write("\n");
+            //}
             return timetable;
         }
 
@@ -143,9 +143,9 @@ namespace WebApplication1.Services
             var timetable1 = GetTimetableByYear("https://profs.info.uaic.ro/~orar/participanti/orar_I1.html");
             var timetable2 = GetTimetableByYear("https://profs.info.uaic.ro/~orar/participanti/orar_I2.html");
             var timetable3 = GetTimetableByYear("https://profs.info.uaic.ro/~orar/participanti/orar_I3.html");
-            for(int i=0;i<timetable1.GetLength(0);i++)
+            for (int i = 0; i < timetable1.GetLength(0); i++)
             {
-                if (timetable1[i, 5] != "Curs" || timetable1[i, 6] == "&nbsp;;")
+                if (timetable1[i, 5] != "Curs" || timetable1[i, 6] == "&nbsp;;" || timetable1[i, 3].Contains("E"))
                     continue;
                 timetables.Add(new Timetable
                 {
@@ -162,7 +162,7 @@ namespace WebApplication1.Services
             }
             for (int i = 0; i < timetable2.GetLength(0); i++)
             {
-                if (timetable2[i, 5] != "Curs" || timetable2[i, 6] == "&nbsp;;")
+                if (timetable2[i, 5] != "Curs" || timetable2[i, 6] == "&nbsp;;" || timetable2[i, 3].Contains("E"))
                     continue;
                 timetables.Add(new Timetable
                 {
@@ -179,7 +179,7 @@ namespace WebApplication1.Services
             }
             for (int i = 0; i < timetable3.GetLength(0); i++)
             {
-                if (timetable3[i, 5] != "Curs" || timetable3[i, 6] == "&nbsp;;")
+                if (timetable3[i, 5] != "Curs" || timetable3[i, 6] == "&nbsp;;" || timetable3[i, 3].Contains("E"))
                     continue;
                 timetables.Add(new Timetable
                 {
